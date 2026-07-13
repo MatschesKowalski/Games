@@ -1,0 +1,594 @@
+{
+  "name": "Claude Code Automation v5 (mit Logs) - Games",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes"
+            }
+          ]
+        }
+      },
+      "id": "aa5914a6-f09b-4a4b-a221-db57fdc3c5a2",
+      "name": "Polling 5 Min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -352,
+        592
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh should-start"
+      },
+      "id": "46f792be-82d4-404c-af90-e18eb462c8bf",
+      "name": "SSH Should Start?",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        176,
+        400
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec openclaw-acns-openclaw-1 tail -20 /data/claude-games-session.log 2>/dev/null | sed 's/\\x1B\\[[0-9;]*[a-zA-Z]//g' || echo 'Kein Log verfügbar'"
+      },
+      "id": "8fea9ad4-d8e2-4610-b1d7-50d3703dc7af",
+      "name": "SSH Get Logs (Start Check)",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        256,
+        592
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('SSH Should Start?').item.json.stdout }}",
+              "operation": "contains",
+              "value2": "yes-"
+            }
+          ]
+        }
+      },
+      "id": "8242afb8-cb3e-486f-a6df-f273d838601d",
+      "name": "Starten?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        416,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('SSH Should Start?').item.json.stdout }}",
+              "operation": "contains",
+              "value2": "yes-neue-aufgabe"
+            }
+          ]
+        }
+      },
+      "id": "381f7457-132c-49d5-bc57-c20d25a48513",
+      "name": "Neue Aufgabe?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        656,
+        256
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh start neue-aufgabe"
+      },
+      "id": "13936bba-012b-420b-83be-e9bc962b8ff8",
+      "name": "SSH Start Neue Aufgabe",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        928,
+        176
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh start weiter"
+      },
+      "id": "b97613b1-a881-4864-acc4-bd10179e575d",
+      "name": "SSH Start Mach Weiter",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        928,
+        352
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('SSH Should Start?').item.json.stdout }}",
+              "operation": "contains",
+              "value2": "no-all-done"
+            }
+          ]
+        }
+      },
+      "id": "5e19c1c6-bf3d-4016-a36b-8b0bae15b37a",
+      "name": "Alles fertig?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        656,
+        576
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "8385248662",
+        "text": "=[Games] ✅ *Alle Aufgaben abgeschlossen!*\n\n⏰ {{ $now.toFormat('dd.MM.yyyy HH:mm:ss') }}\n\nClaude Code hat alle Tasks in tasks.md erledigt. 🎉",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "939467a6-8f0b-4add-b734-aa24ee7b8094",
+      "name": "Telegram Alles Fertig",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        928,
+        512
+      ],
+      "webhookId": "a599c850-a5dc-468e-a490-2469e74d44a9",
+      "credentials": {
+        "telegramApi": {
+          "id": "4T7WibiLo9fWW8zR",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('SSH Should Start?').item.json.stdout }}",
+              "operation": "contains",
+              "value2": "no-token-limit"
+            }
+          ]
+        }
+      },
+      "id": "b1b7c15c-54d0-4e29-beba-3a6c5517b78b",
+      "name": "Token Limit?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        928,
+        672
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "8385248662",
+        "text": "=[Games] ⚠️ Token-Limit erkannt\n⏰ {{ $now.toFormat('dd.MM.yyyy HH:mm:ss') }}\nStatus: {{ $('SSH Should Start?').item.json.stdout }}\n\nCC wartet auf naechstes 5h-Fenster.",
+        "additionalFields": {}
+      },
+      "id": "b4412837-7907-43da-ad26-fa8e83937d91",
+      "name": "Telegram Token Limit",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1184,
+        656
+      ],
+      "webhookId": "00dd2b63-bf48-4187-8203-697948aa71ce",
+      "credentials": {
+        "telegramApi": {
+          "id": "4T7WibiLo9fWW8zR",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh should-report"
+      },
+      "id": "bd552ed8-9e66-41e7-8834-2640b9600e15",
+      "name": "SSH Should Report?",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        128,
+        832
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.stdout }}",
+              "operation": "contains",
+              "value2": "yes"
+            }
+          ]
+        }
+      },
+      "id": "46e29605-c47f-48bf-888b-c84cccf535d4",
+      "name": "Bericht faellig?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        352,
+        832
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh status"
+      },
+      "id": "b2d640cc-7c37-449b-aaeb-9c49b50bd914",
+      "name": "SSH Get Status",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        656,
+        832
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8385248662",
+        "text": "=[Games] {{ $('SSH Get Status').item.json.stdout }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "c30e5861-766b-472b-a131-1282bd79e4a9",
+      "name": "Telegram 5h Bericht",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        928,
+        832
+      ],
+      "webhookId": "741eb9d9-d2d7-4c2e-a25e-2dd44711a675",
+      "credentials": {
+        "telegramApi": {
+          "id": "4T7WibiLo9fWW8zR",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "privateKey",
+        "command": "docker exec -u node openclaw-acns-openclaw-1 /data/.openclaw/workspace/projects/Games/scripts/cc-start.sh mark-reported"
+      },
+      "id": "34714b59-e625-4097-a65b-1a40d50ad7de",
+      "name": "SSH Mark Reported",
+      "type": "n8n-nodes-base.ssh",
+      "typeVersion": 1,
+      "position": [
+        1184,
+        832
+      ],
+      "credentials": {
+        "sshPrivateKey": {
+          "id": "LXslp5tcPHb5uO2s",
+          "name": "SSH Private Key account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Claude Code Automation v5\n\n**Mit detaillierten Logs:**\n\nAlle 5 Min Polling mit:\n\n1. Should-Start Pfad:\n   CC starten/ignorieren\n   + Log-Ausgabe\n\n2. Should-Report Pfad:\n   5h-Bericht senden\n   + Session Logs\n\n**Logs zeigen:**\n- Letzte 20 Zeilen\n- Erkennung von Hängern\n- Debugging-Info",
+        "height": 380,
+        "width": 300,
+        "color": 4
+      },
+      "id": "5d077eeb-4fe5-4e1f-ad83-fdade79ae5f4",
+      "name": "Info",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -640,
+        -96
+      ]
+    },
+    {
+      "parameters": {
+        "chatId": "8385248662",
+        "text": "=[Games] 🚀 *CC gestartet - Neue Aufgabe*\n\n📋 *Task:* {{ $('SSH Should Start?').item.json.stdout.includes('::') ? $('SSH Should Start?').item.json.stdout.split('::').slice(1).join('::').trim() : 'N/A' }}\n\n⏰ {{ $now.toFormat('dd.MM.yyyy HH:mm:ss') }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "fbad811e-1e21-42c1-af87-bc7e559f470a",
+      "name": "Telegram Start",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1184,
+        176
+      ],
+      "webhookId": "a599c850-a5dc-468e-a490-2469e74d44a9",
+      "credentials": {
+        "telegramApi": {
+          "id": "4T7WibiLo9fWW8zR",
+          "name": "Telegram account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "8385248662",
+        "text": "=[Games] ▶️ *CC macht weiter*\n\n📋 *Task:* {{ $('SSH Should Start?').item.json.stdout.includes('::') ? $('SSH Should Start?').item.json.stdout.split('::').slice(1).join('::').trim() : 'N/A' }}\n\n⏰ {{ $now.toFormat('dd.MM.yyyy HH:mm:ss') }}",
+        "additionalFields": {
+          "parse_mode": "Markdown"
+        }
+      },
+      "id": "ad08d455-140e-4cfd-8d09-dbed99ed0055",
+      "name": "Telegram Macht weiter",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        1184,
+        352
+      ],
+      "webhookId": "a599c850-a5dc-468e-a490-2469e74d44a9",
+      "credentials": {
+        "telegramApi": {
+          "id": "4T7WibiLo9fWW8zR",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Polling 5 Min": {
+      "main": [
+        [
+          {
+            "node": "SSH Should Start?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SSH Get Logs (Start Check)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "SSH Should Report?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Should Start?": {
+      "main": [
+        [
+          {
+            "node": "Starten?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Starten?": {
+      "main": [
+        [
+          {
+            "node": "Neue Aufgabe?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Alles fertig?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Neue Aufgabe?": {
+      "main": [
+        [
+          {
+            "node": "SSH Start Neue Aufgabe",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "SSH Start Mach Weiter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Start Neue Aufgabe": {
+      "main": [
+        [
+          {
+            "node": "Telegram Start",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Start Mach Weiter": {
+      "main": [
+        [
+          {
+            "node": "Telegram Macht weiter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Alles fertig?": {
+      "main": [
+        [
+          {
+            "node": "Telegram Alles Fertig",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Token Limit?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Token Limit?": {
+      "main": [
+        [
+          {
+            "node": "Telegram Token Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Should Report?": {
+      "main": [
+        [
+          {
+            "node": "Bericht faellig?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Bericht faellig?": {
+      "main": [
+        [
+          {
+            "node": "SSH Get Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "SSH Get Status": {
+      "main": [
+        [
+          {
+            "node": "Telegram 5h Bericht",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram 5h Bericht": {
+      "main": [
+        [
+          {
+            "node": "SSH Mark Reported",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "124709b7-0112-44fc-b545-0ba90ea114fe",
+  "meta": {
+    "instanceId": "807e5a551ff76eb4bf907e98f398a32b93b30b46845a76e8aa453cc9b69edae8"
+  },
+  "id": "0c17302f-d27d-49a1-9011-7ca221d71190",
+  "tags": [
+    {
+      "updatedAt": "2026-02-10T21:51:50.308Z",
+      "createdAt": "2026-02-10T21:51:50.308Z",
+      "id": "i3nhOsOQ7NwfbUom",
+      "name": "claude-code"
+    },
+    {
+      "updatedAt": "2026-02-10T21:51:50.304Z",
+      "createdAt": "2026-02-10T21:51:50.304Z",
+      "id": "kmQznypnXXtV2mKH",
+      "name": "automation"
+    }
+  ]
+}
