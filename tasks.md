@@ -25,7 +25,7 @@
 
 ### Task 1: Projekt-Setup — TypeScript + PixiJS + Vite-Grundgerüst
 - **prio:** 1
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Leeres Repo (nur `spielkonzept.md`, `README.md`) in ein lauffähiges TypeScript/
     PixiJS-Projekt verwandeln. Build-Tool: Vite (schnelles Dev-Setup, Standard für
