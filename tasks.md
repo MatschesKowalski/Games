@@ -225,7 +225,7 @@
 
 ### Task 6: Ressourcenwirtschaft (Typen, Produktion, Lagerung)
 - **prio:** 6
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Erste echte Spiellogik im Kern: Ressourcen, die durch Gebäude produziert und
     verbraucht werden. Vorschlag für Basis-Ressourcen (Low-Fantasy-Siedlung):
