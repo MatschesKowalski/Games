@@ -334,7 +334,7 @@
 
 ### Task 9: Platzhalter-Asset-Pipeline
 - **prio:** 9
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Laut `spielkonzept.md` ist eine KI-Asset-Pipeline angestrebt, aber noch nicht
     umgesetzt — bis dahin mit Platzhaltern arbeiten, damit der Aufbau-Loop nicht

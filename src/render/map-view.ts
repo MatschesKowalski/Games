@@ -1,18 +1,11 @@
 import { Container, Graphics } from 'pixi.js'
 import { gridToScreen, TILE_WIDTH, TILE_HEIGHT } from './iso'
+import { createBuildingSprite } from './placeholder-sprites'
 import type { Building } from '../sim/state'
 
 const TILE_COLOR = 0x4a7c59
 const HOVER_COLOR = 0x72b583
 const OUTLINE_COLOR = 0x2a4a35
-
-const BUILDING_COLORS: Record<string, number> = {
-  townhall: 0xcc4444,
-  lumbermill: 0x44aa44,
-  quarry: 0x888888,
-  farm: 0xddaa22,
-}
-const BUILDING_FALLBACK_COLOR = 0x6666cc
 
 function drawDiamond(g: Graphics, col: number, row: number, fillColor: number): void {
   const { x, y } = gridToScreen(col, row)
@@ -28,7 +21,7 @@ function drawDiamond(g: Graphics, col: number, row: number, fillColor: number): 
 export class MapView {
   readonly container: Container
   private readonly baseGraphics: Graphics
-  private readonly buildingGraphics: Graphics
+  private readonly buildingLayer: Container
   private readonly hoverGraphics: Graphics
   private readonly cols: number
   private readonly rows: number
@@ -40,11 +33,11 @@ export class MapView {
     this.rows = rows
     this.container = new Container()
     this.baseGraphics = new Graphics()
-    this.buildingGraphics = new Graphics()
+    this.buildingLayer = new Container()
     this.hoverGraphics = new Graphics()
 
     this.container.addChild(this.baseGraphics)
-    this.container.addChild(this.buildingGraphics)
+    this.container.addChild(this.buildingLayer)
     this.container.addChild(this.hoverGraphics)
 
     this.buildBaseMap()
@@ -59,10 +52,10 @@ export class MapView {
   }
 
   updateBuildings(buildings: Building[]): void {
-    this.buildingGraphics.clear()
+    this.buildingLayer.removeChildren()
     for (const b of buildings) {
-      const color = BUILDING_COLORS[b.buildingId] ?? BUILDING_FALLBACK_COLOR
-      drawDiamond(this.buildingGraphics, b.col, b.row, color)
+      const sprite = createBuildingSprite(b.buildingId, b.col, b.row)
+      this.buildingLayer.addChild(sprite)
     }
   }
 
@@ -83,7 +76,7 @@ export class MapView {
 
   destroy(): void {
     this.baseGraphics.destroy()
-    this.buildingGraphics.destroy()
+    this.buildingLayer.destroy({ children: true })
     this.hoverGraphics.destroy()
     this.container.destroy()
   }
