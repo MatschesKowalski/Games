@@ -1,12 +1,14 @@
-## Task 2: i18n-Grundgerüst (Sprachdateien)
+## Task 3: Simulationskern-Grundgerüst (Tick-Loop, Commands, seeded RNG)
 **Status:** in_progress
 **Start:** 2026-07-13
 
 ### Plan
-1. src/i18n/de.json — flache dot-notation Keys mit verschachtelter JSON-Struktur
-2. src/i18n/index.ts — t(key)-Funktion mit loadLanguage() für spätere Erweiterung
-3. src/i18n/index.test.ts — Vitest-Tests für t()
+1. src/sim/state.ts — GameState Typ (tick, resources, buildings)
+2. src/sim/rng.ts — seeded RNG (Mulberry32)
+3. src/sim/commands.ts — Command discriminated union + applyCommand()
+4. src/sim/tick.ts — tick()-Funktion
+5. Tests: rng.test.ts, tick.test.ts (inkl. Determinismus-Test)
 
 ### Entscheidungen
-- Nested JSON-Struktur ({"ui": {"resources": {"wood": "Holz"}}}), Zugriff via dot-notation
-- Fehlt Key: Key selbst zurückgeben + console.warn (kein Crash)
+- Reine Funktionen, kein DOM/pixi.js Import in src/sim/
+- applyCommand gibt neuen State zurück (immutabel)

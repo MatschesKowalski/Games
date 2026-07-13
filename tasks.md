@@ -108,7 +108,7 @@
 
 ### Task 3: Simulationskern-Grundgerüst (Tick-Loop, Commands, seeded RNG)
 - **prio:** 3
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Deterministischen Kern anlegen: reine Funktionen, kein PixiJS/DOM-Import,
     lauffähig headless in Node (Voraussetzung für spätere Multiplayer-Server-Nutzung,

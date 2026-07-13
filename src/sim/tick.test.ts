@@ -1,0 +1,70 @@
+import { describe, it, expect } from 'vitest'
+import { tick } from './tick'
+import type { GameState } from './state'
+import type { Command } from './commands'
+
+// Hinweis: Math.random() darf in src/sim/ NIRGENDWO außerhalb von rng.ts verwendet werden.
+// Diese Regel wird im Code-Review und per Architektur-Konvention durchgesetzt.
+
+function makeState(tickNum = 0): GameState {
+  return {
+    tick: tickNum,
+    resources: { wood: 10, stone: 5 },
+    buildings: [],
+  }
+}
+
+describe('tick', () => {
+  it('mutiert den übergebenen State NICHT', () => {
+    const state = makeState(3)
+    const before = JSON.stringify(state)
+
+    tick(state, [])
+
+    expect(JSON.stringify(state)).toBe(before)
+  })
+
+  it('gibt ein neues Objekt zurück, nicht dasselbe', () => {
+    const state = makeState()
+    const next = tick(state, [])
+    expect(next).not.toBe(state)
+  })
+
+  it('erhöht den tick-Zähler um 1', () => {
+    const state = makeState(5)
+    const next = tick(state, [])
+    expect(next.tick).toBe(6)
+  })
+
+  it('erhöht den tick-Zähler über mehrere Ticks korrekt', () => {
+    let state = makeState(0)
+    for (let i = 0; i < 10; i++) {
+      state = tick(state, [])
+    }
+    expect(state.tick).toBe(10)
+  })
+
+  it('verarbeitet noop-Befehle ohne State-Änderung (außer tick)', () => {
+    const state = makeState(0)
+    const commands: Command[] = [{ type: 'noop' }, { type: 'noop' }]
+    const next = tick(state, commands)
+    expect(next.tick).toBe(1)
+    expect(next.resources).toEqual(state.resources)
+    expect(next.buildings).toEqual(state.buildings)
+  })
+
+  it('Determinismus: identischer Start + identische Befehle → identischer End-State', () => {
+    const N = 50
+    const commands: Command[] = [{ type: 'noop' }]
+
+    let state1 = makeState(0)
+    let state2 = makeState(0)
+
+    for (let i = 0; i < N; i++) {
+      state1 = tick(state1, commands)
+      state2 = tick(state2, commands)
+    }
+
+    expect(JSON.stringify(state1)).toBe(JSON.stringify(state2))
+  })
+})
