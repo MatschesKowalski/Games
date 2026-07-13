@@ -263,7 +263,7 @@
 
 ### Task 7: Bau-System (Gebäude platzieren, Kosten, Gebäude-Katalog)
 - **prio:** 7
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Spieler kann Gebäude auf der Karte platzieren, die Ressourcen kosten und ab
     dann die Ressourcenproduktion (Task 6) beeinflussen.

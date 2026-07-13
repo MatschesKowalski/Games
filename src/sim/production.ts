@@ -1,25 +1,20 @@
 import type { GameState } from './state'
 import { RESOURCES } from '../content/resources'
+import { getBuildingDef } from '../content/buildings'
 
 /**
- * Placeholder production rates per tick.
- * Real per-building rates will be introduced in Task 7.
- *
- * wood  +1.0  (lumberjack placeholder)
- * stone +0.5  (quarry placeholder)
- * food  -0.2  (population consumption)
- * gold  +0.1  (trade placeholder)
+ * Base rates that apply regardless of buildings.
+ * food: -0.2  (population consumption — not produced by any building)
  */
-const PRODUCTION_RATES: Record<string, number> = {
-  wood: 1.0,
-  stone: 0.5,
+const BASE_RATES: Record<string, number> = {
   food: -0.2,
-  gold: 0.1,
 }
 
 /**
  * Pure function: applies one tick of production to the given state.
  * Returns a new GameState with updated resources.
+ *
+ * Production = base rates (e.g. food consumption) + sum of building effects.
  *
  * Invariants:
  *   - resources are never below 0
@@ -32,10 +27,20 @@ export function applyProduction(state: GameState): GameState {
     capacityMap[def.id] = def.capacity
   }
 
+  // Accumulate total rates: base rates + effects from all placed buildings
+  const totalRates: Record<string, number> = { ...BASE_RATES }
+  for (const building of state.buildings) {
+    const def = getBuildingDef(building.buildingId)
+    if (!def) continue
+    for (const effect of def.effects) {
+      totalRates[effect.resourceId] = (totalRates[effect.resourceId] ?? 0) + effect.ratePerTick
+    }
+  }
+
   const nextResources: Record<string, number> = { ...state.resources }
 
   for (const def of RESOURCES) {
-    const rate = PRODUCTION_RATES[def.id] ?? 0
+    const rate = totalRates[def.id] ?? 0
     if (rate === 0) continue
 
     const current = nextResources[def.id] ?? 0

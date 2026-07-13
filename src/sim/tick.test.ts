@@ -45,15 +45,23 @@ describe('tick', () => {
   })
 
   it('verarbeitet noop-Befehle ohne Gebäude-Änderung (Ressourcen ändern sich durch Produktion)', () => {
-    const state = makeState(0)
+    // Lumbermill und Quarry geben Holz/Stein, Basisrate verbraucht Nahrung
+    const state: GameState = {
+      tick: 0,
+      resources: { wood: 10, stone: 5, food: 20, gold: 0 },
+      buildings: [
+        { id: 'lumbermill-0-0', buildingId: 'lumbermill', col: 0, row: 0 },
+        { id: 'quarry-1-0', buildingId: 'quarry', col: 1, row: 0 },
+      ],
+    }
     const commands: Command[] = [{ type: 'noop' }, { type: 'noop' }]
     const next = tick(state, commands)
     expect(next.tick).toBe(1)
     // noop-Befehle dürfen keine Gebäude verändern
     expect(next.buildings).toEqual(state.buildings)
     // Ressourcen ändern sich durch passive Produktion (applyProduction läuft jeden Tick)
-    expect(next.resources['wood']).toBe(11)   // 10 + 1.0
-    expect(next.resources['stone']).toBe(5.5) // 5 + 0.5
+    expect(next.resources['wood']).toBe(12)    // 10 + 2.0 (lumbermill)
+    expect(next.resources['stone']).toBe(6.5)  // 5 + 1.5 (quarry)
   })
 
   it('Determinismus: identischer Start + identische Befehle → identischer End-State', () => {

@@ -1,14 +1,16 @@
-## Task 6: Ressourcenwirtschaft (Typen, Produktion, Lagerung)
+## Task 7: Bau-System (Gebäude platzieren, Kosten, Gebäude-Katalog)
 **Status:** in_progress
 **Start:** 2026-07-13
 
 ### Plan
-1. src/content/resources.ts — Ressourcentypen (Holz, Stein, Nahrung, Gold)
-2. GameState.resources erweitern mit Startwerten
-3. src/sim/production.ts — Produktionsfunktion pro Tick
-4. src/sim/production.test.ts — Tests Kappung, Negativschutz, Akkumulation
-5. src/i18n/de.json — Ressourcennamen prüfen (sollten schon vorhanden sein)
+1. src/content/buildings.ts — Gebäude-Katalog (Rathaus, Holzfäller, Steinbruch, Bauernhof)
+2. src/sim/commands.ts erweitern — build-Befehl hinzufügen
+3. applyCommand: Kollision, Ressourcen prüfen, Kosten abziehen
+4. src/sim/production.ts: echte Gebäude statt Platzhalter
+5. src/render/map-view.ts: Gebäude auf Karte darstellen
+6. src/sim/build.test.ts — Kollision, Kosten, Determinismus
+7. src/i18n/de.json: building-Keys prüfen (bereits vorhanden)
 
 ### Entscheidungen
-- Platzhalter-Produktionsraten (ohne echte Gebäude) — in Task 7 durch Gebäude ersetzt
-- Lagerkapazität als Konstante pro Ressourcentyp
+- Gebäude-Katalog als TypeScript-Datei (nicht JSON) für bessere Typsicherheit
+- Rendering: einfache farbige Rechtecke über den Kacheln (Task 9 baut darauf auf)
