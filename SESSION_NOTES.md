@@ -1,16 +1,13 @@
-## Task 7: Bau-System (Gebäude platzieren, Kosten, Gebäude-Katalog)
+## Task 8: Tag/Nacht-Zyklus
 **Status:** in_progress
 **Start:** 2026-07-13
 
 ### Plan
-1. src/content/buildings.ts — Gebäude-Katalog (Rathaus, Holzfäller, Steinbruch, Bauernhof)
-2. src/sim/commands.ts erweitern — build-Befehl hinzufügen
-3. applyCommand: Kollision, Ressourcen prüfen, Kosten abziehen
-4. src/sim/production.ts: echte Gebäude statt Platzhalter
-5. src/render/map-view.ts: Gebäude auf Karte darstellen
-6. src/sim/build.test.ts — Kollision, Kosten, Determinismus
-7. src/i18n/de.json: building-Keys prüfen (bereits vorhanden)
+1. src/sim/time.ts — getTimeOfDay(tick), Konstante TICKS_PER_DAY
+2. src/sim/time.test.ts — Zyklus-Test
+3. src/render/day-night-overlay.ts — visuelles Overlay mit weichem Übergang
+4. src/main.ts erweitern — Overlay einbinden, Ticker-Update
 
 ### Entscheidungen
-- Gebäude-Katalog als TypeScript-Datei (nicht JSON) für bessere Typsicherheit
-- Rendering: einfache farbige Rechtecke über den Kacheln (Task 9 baut darauf auf)
+- TICKS_PER_DAY = 240 (120 Tag, 120 Nacht)
+- Weicher Übergang: alpha-Interpolation eines dunklen Overlays

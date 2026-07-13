@@ -1,12 +1,16 @@
 import { Application } from 'pixi.js'
 import { MapView } from './render/map-view'
 import { Camera } from './render/camera'
+import { DayNightOverlay } from './render/day-night-overlay'
 import { screenToGrid } from './render/iso'
 import { createInitialState } from './sim/state'
 import { applyCommand } from './sim/commands'
+import { tick } from './sim/tick'
+import { getTimeOfDay } from './sim/time'
 
 const MAP_SIZE = 40
 const DRAG_THRESHOLD = 5
+const MS_PER_TICK = 500
 
 async function main() {
   const app = new Application()
@@ -19,14 +23,18 @@ async function main() {
   document.body.appendChild(app.canvas)
 
   let gameState = createInitialState()
-  // Rathaus beim Start platzieren (kostet nichts)
   gameState = applyCommand(gameState, { type: 'build', buildingId: 'townhall', col: 5, row: 5 })
 
   const selectedBuildingId: string | null = 'lumbermill'
 
   const mapView = new MapView(MAP_SIZE, MAP_SIZE)
+  const overlay = new DayNightOverlay(window.innerWidth, window.innerHeight)
+
   app.stage.addChild(mapView.container)
+  app.stage.addChild(overlay.container)
+
   mapView.updateBuildings(gameState.buildings)
+  overlay.update(getTimeOfDay(gameState.tick))
 
   const camera = new Camera()
   camera.attachTo(app.stage, mapView.container, window.innerWidth, window.innerHeight)
@@ -77,11 +85,19 @@ async function main() {
     }
   })
 
-  // Render-Loop
+  // Simulations-Tick: alle MS_PER_TICK Millisekunden
+  let lastTickTime = performance.now()
   app.ticker.add(() => {
     mapView.container.x = camera.x
     mapView.container.y = camera.y
     mapView.container.scale.set(camera.zoom)
+
+    const now = performance.now()
+    if (now - lastTickTime >= MS_PER_TICK) {
+      gameState = tick(gameState, [])
+      overlay.update(getTimeOfDay(gameState.tick))
+      lastTickTime = now
+    }
   })
 }
 

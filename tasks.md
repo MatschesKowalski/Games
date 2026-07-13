@@ -304,7 +304,7 @@
 
 ### Task 8: Tag/Nacht-Zyklus
 - **prio:** 8
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Zeit-System: das Spiel läuft in einem wiederkehrenden Tag/Nacht-Zyklus (Kern-Loop
     laut `spielkonzept.md`), der später Grundlage für Verteidigungs-Ereignisse
