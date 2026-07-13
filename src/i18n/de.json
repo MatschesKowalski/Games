@@ -1,0 +1,123 @@
+{
+  "app": {
+    "title": "Aufbau-Spiel",
+    "version": "Version {version}"
+  },
+  "ui": {
+    "loading": "Wird geladen...",
+    "saving": "Wird gespeichert...",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen",
+    "ok": "OK",
+    "back": "Zurück",
+    "close": "Schließen",
+    "resources": {
+      "label": "Ressourcen",
+      "wood": "Holz",
+      "stone": "Stein",
+      "food": "Nahrung",
+      "gold": "Gold",
+      "iron": "Eisen",
+      "population": "Bevölkerung"
+    },
+    "menu": {
+      "new_game": "Neues Spiel",
+      "save_game": "Spiel speichern",
+      "load_game": "Spiel laden",
+      "settings": "Einstellungen",
+      "quit": "Beenden"
+    },
+    "hud": {
+      "population": "Einwohner",
+      "season": "Jahreszeit",
+      "year": "Jahr",
+      "day": "Tag"
+    }
+  },
+  "season": {
+    "spring": "Frühling",
+    "summer": "Sommer",
+    "autumn": "Herbst",
+    "winter": "Winter"
+  },
+  "building": {
+    "townhall": {
+      "name": "Rathaus",
+      "description": "Verwaltungszentrum der Siedlung."
+    },
+    "lumbermill": {
+      "name": "Sägewerk",
+      "description": "Produziert Holz aus dem umliegenden Wald."
+    },
+    "quarry": {
+      "name": "Steinbruch",
+      "description": "Gewinnt Stein aus dem Fels."
+    },
+    "farm": {
+      "name": "Gehöft",
+      "description": "Versorgt die Bevölkerung mit Nahrung."
+    },
+    "barracks": {
+      "name": "Kaserne",
+      "description": "Bildet Soldaten für die Verteidigung aus."
+    },
+    "wall": {
+      "name": "Mauer",
+      "description": "Schützt die Siedlung vor Angriffen."
+    },
+    "tower": {
+      "name": "Wachturm",
+      "description": "Erhöht die Verteidigungsreichweite."
+    }
+  },
+  "faction": {
+    "nordfeste": {
+      "name": "Nordfeste",
+      "crest": "Eisenbär auf weißem Grund",
+      "agenda": "Überleben in der Kälte und Expansion gen Süden"
+    },
+    "eisenschleier": {
+      "name": "Eisenschleier",
+      "crest": "Schwarze Kette auf grauem Grund",
+      "agenda": "Kontrolle der Handelsrouten und Informationsnetzwerke"
+    },
+    "glutdorn": {
+      "name": "Glutdorn",
+      "crest": "Dornenranke im Feuer auf rotem Grund",
+      "agenda": "Religiöser Einfluss und moralische Führerschaft"
+    }
+  },
+  "event": {
+    "drought": {
+      "title": "Große Dürre",
+      "description": "Wochenlanger Regen blieb aus. Die Felder verdorren, das Volk murrt.",
+      "option": {
+        "ration": "Rationen einführen",
+        "ration_consequence": "Nahrungsverbrauch halbiert, aber Zufriedenheit sinkt.",
+        "trade": "Nahrung einkaufen",
+        "trade_consequence": "Kostet 50 Gold, Nahrungsvorräte stabilisiert."
+      }
+    },
+    "wandering_merchant": {
+      "title": "Wanderhändler",
+      "description": "Ein Händler bietet seltene Waren an. Er bleibt nur kurze Zeit.",
+      "option": {
+        "buy": "Handel annehmen",
+        "buy_consequence": "Kostet 30 Gold, erhält 20 Eisen.",
+        "decline": "Ablehnen",
+        "decline_consequence": "Der Händler zieht weiter."
+      }
+    }
+  },
+  "errors": {
+    "save": {
+      "invalid": "Ungültige Speicherdatei",
+      "not_found": "Speicherdatei nicht gefunden",
+      "write_failed": "Speichern fehlgeschlagen"
+    },
+    "load": {
+      "failed": "Laden fehlgeschlagen",
+      "version_mismatch": "Speicherstand-Version nicht kompatibel"
+    }
+  }
+}

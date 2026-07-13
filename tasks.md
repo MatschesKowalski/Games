@@ -74,7 +74,7 @@
 
 ### Task 2: i18n-Grundgerüst (Sprachdateien)
 - **prio:** 2
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Sprachdatei-System aufbauen, BEVOR weitere Features Texte brauchen — Vorgabe aus
     `spielkonzept.md`: "alle Texte ab Tag 1 in Sprachdateien (de zuerst), keine
