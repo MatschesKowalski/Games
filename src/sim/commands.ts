@@ -16,8 +16,8 @@ export function applyCommand(state: GameState, command: Command): GameState {
       return state
     default: {
       // Exhaustiveness guard — TypeScript will catch unhandled command types here.
-      const unhandled: never = command
-      throw new Error(`Unbekannter Befehlstyp: ${JSON.stringify(unhandled)}`)
+      const unhandled: never = command.type
+      throw new Error(`Unbekannter Befehlstyp: ${String(unhandled)}`)
     }
   }
 }

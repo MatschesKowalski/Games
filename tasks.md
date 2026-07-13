@@ -187,7 +187,7 @@
 
 ### Task 5: Isometrische Karten-Darstellung (Tile-Rendering, Kamera)
 - **prio:** 5
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Erste sichtbare Spielwelt: eine isometrische Kachel-Karte, über die man per
     Maus/Touch schwenken (pannen) und zoomen kann.

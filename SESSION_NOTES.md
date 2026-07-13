@@ -1,14 +1,14 @@
-## Task 4: Speichersystem (Serialisierung, Versionierung, lokaler Export/Import)
+## Task 5: Isometrische Karten-Darstellung (Tile-Rendering, Kamera)
 **Status:** in_progress
 **Start:** 2026-07-13
 
 ### Plan
-1. src/save/schema.ts — SaveFile-Typ mit version, savedAt, state
-2. src/save/serialize.ts — serialize/deserialize + migrate()-Stub
-3. src/save/local-file.ts — downloadSave/readSaveFile (Browser-APIs)
-4. src/save/serialize.test.ts — Roundtrip-Test, Fehlerfall
-5. src/i18n/de.json erweitern mit errors.save.* Keys
+1. src/render/iso.ts — gridToScreen/screenToGrid Transformationen
+2. src/render/map-view.ts — 40×40 Kacheln mit PixiJS-Graphics
+3. src/render/camera.ts — Pan (Drag) + Zoom (Mausrad), Grenzbeschränkung
+4. src/render/iso.test.ts — Inverse Transformation testen
+5. src/main.ts erweitern — Karte + Kamera einbinden, Hover-Highlight
 
 ### Entscheidungen
-- local-file.ts darf Browser-APIs nutzen (liegt in src/save/, nicht src/sim/)
-- Validierung beim Laden: klarer Fehler über t(), kein Crash
+- Platzhalter-Kacheln als einfache PixiJS Graphics (Rauten)
+- Kamera-Grenzen: Spieler kann nicht über Kartenrand hinausscrollen
