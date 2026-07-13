@@ -149,7 +149,7 @@
 
 ### Task 4: Speichersystem (Serialisierung, Versionierung, lokaler Export/Import)
 - **prio:** 4
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Speicherstände-Format anlegen: "DB-ready, versioniert" laut `spielkonzept.md`,
     damit spätere Server-Accounts ohne Formatbruch möglich sind. Zunächst nur

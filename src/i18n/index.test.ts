@@ -45,7 +45,7 @@ describe('i18n', () => {
   });
 
   it('errors.save.invalid liefert die Fehlermeldung', () => {
-    expect(t('errors.save.invalid')).toBe('Ungültige Speicherdatei');
+    expect(t('errors.save.invalid')).toBe('Ungültige Speicherdatei. Bitte prüfe die Datei und versuche es erneut.');
   });
 
   it('loadLanguage mit unbekannter Sprache fällt auf de zurück', () => {

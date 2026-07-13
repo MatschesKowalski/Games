@@ -111,7 +111,7 @@
   },
   "errors": {
     "save": {
-      "invalid": "Ungültige Speicherdatei",
+      "invalid": "Ungültige Speicherdatei. Bitte prüfe die Datei und versuche es erneut.",
       "not_found": "Speicherdatei nicht gefunden",
       "write_failed": "Speichern fehlgeschlagen"
     },
