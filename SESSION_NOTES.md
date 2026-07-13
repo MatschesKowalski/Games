@@ -1,3 +1,3 @@
 # Session Notes
 
-Neues Projekt eingerichtet. Nächste Aufgabe aus tasks.md.
+Warte auf neue Aufgabe.
