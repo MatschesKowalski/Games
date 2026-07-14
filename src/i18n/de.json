@@ -27,11 +27,16 @@
       "settings": "Einstellungen",
       "quit": "Beenden"
     },
+    "buildMenu": {
+      "title": "Gebäude bauen",
+      "free": "Kostenlos"
+    },
     "hud": {
       "population": "Einwohner",
       "season": "Jahreszeit",
       "year": "Jahr",
-      "day": "Tag"
+      "day": "Tag",
+      "night": "Nacht"
     }
   },
   "season": {

@@ -367,7 +367,7 @@
 
 ### Task 10: HUD/UI-Grundgerüst
 - **prio:** 10
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Sichtbare Oberfläche über der Karte: Ressourcenanzeige, Bau-Menü, Zeit-Anzeige.
 
@@ -398,7 +398,7 @@
 
 ### Task 11: Save/Load-UI
 - **prio:** 11
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Sichtbare Bedienung für das Speichersystem aus Task 4: Speichern-Button
     (löst Datei-Download aus) und Laden-Button (öffnet Datei-Auswahl, lädt
@@ -428,7 +428,7 @@
 
 ### Task 12: Integrationstest MVP-Loop
 - **prio:** 12
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Abschluss der MVP-Phase: Prüfen, dass der komplette Aufbau-Loop end-to-end
     funktioniert und zusammenspielt — Abnahme für "der Aufbau-Loop macht allein

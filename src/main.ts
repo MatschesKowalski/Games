@@ -7,6 +7,10 @@ import { createInitialState } from './sim/state'
 import { applyCommand } from './sim/commands'
 import { tick } from './sim/tick'
 import { getTimeOfDay } from './sim/time'
+import { Hud } from './ui/hud'
+import { BuildMenu } from './ui/build-menu'
+import { TimeDisplay } from './ui/time-display'
+import { SaveLoadMenu } from './ui/save-load-menu'
 
 const MAP_SIZE = 40
 const DRAG_THRESHOLD = 5
@@ -25,16 +29,43 @@ async function main() {
   let gameState = createInitialState()
   gameState = applyCommand(gameState, { type: 'build', buildingId: 'townhall', col: 5, row: 5 })
 
-  const selectedBuildingId: string | null = 'lumbermill'
+  // selectedBuildingId wird vom BuildMenu über den Callback gesetzt.
+  // Der Wert wird im pointerup-Handler gelesen (Closure über die Variable).
+  let selectedBuildingId: string | null = null
+
+  // UI-Komponenten: DOM-Ebene über dem PixiJS-Canvas
+  const hud = new Hud()
+  const timeDisplay = new TimeDisplay()
+  // BuildMenu braucht keine lokale Referenz nach der Konstruktion —
+  // der Callback schreibt in selectedBuildingId, die DOM-Elemente bleiben
+  // im document.body und halten die Event-Listener am Leben.
+  new BuildMenu((id) => {
+    selectedBuildingId = id
+  })
 
   const mapView = new MapView(MAP_SIZE, MAP_SIZE)
   const overlay = new DayNightOverlay(window.innerWidth, window.innerHeight)
 
+  new SaveLoadMenu(
+    () => gameState,
+    (loadedState) => {
+      gameState = loadedState
+      mapView.updateBuildings(gameState.buildings)
+      const timeInfo = getTimeOfDay(gameState.tick)
+      overlay.update(timeInfo)
+      hud.update(gameState.resources)
+      timeDisplay.update(timeInfo)
+    },
+  )
+
   app.stage.addChild(mapView.container)
   app.stage.addChild(overlay.container)
 
+  // Initialer Render
   mapView.updateBuildings(gameState.buildings)
   overlay.update(getTimeOfDay(gameState.tick))
+  hud.update(gameState.resources)
+  timeDisplay.update(getTimeOfDay(gameState.tick))
 
   const camera = new Camera()
   camera.attachTo(app.stage, mapView.container, window.innerWidth, window.innerHeight)
@@ -95,7 +126,10 @@ async function main() {
     const now = performance.now()
     if (now - lastTickTime >= MS_PER_TICK) {
       gameState = tick(gameState, [])
-      overlay.update(getTimeOfDay(gameState.tick))
+      const timeInfo = getTimeOfDay(gameState.tick)
+      overlay.update(timeInfo)
+      hud.update(gameState.resources)
+      timeDisplay.update(timeInfo)
       lastTickTime = now
     }
   })
