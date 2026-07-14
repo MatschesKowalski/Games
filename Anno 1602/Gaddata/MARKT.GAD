@@ -1,0 +1,183 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOL  =   0
+  
+    COL_WHT =     255
+    COL_RED =     249
+    COL_BLK =     0
+
+    ZEINR =       0
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 45001
+    IDNIX       = 45201
+
+    GFXTAFEL    = 0
+    GFXPFEIL    = GFXTAFEL+1
+    GFXPLUS     = GFXPFEIL+4
+    GFXMAIN     = GFXPLUS+4
+		GFXMAP			= GFXMAIN+8
+		GFXHAUS     = GFXMAP+1
+    GFXPFEIL    = GFXHAUS+18
+    GFXBAUMAT   = GFXPFEIL+6
+    GFXMENU     = GFXBAUMAT+10
+    GFXOVERHEAD = GFXMENU+3
+    GFXPFEILV   = GFXOVERHEAD+3
+    GFXMENGE    = GFXPFEILV+4
+    GFXWARELEER = GFXMENGE+8
+    GFXWARE     = GFXWARELEER+4
+    GFXKONT     = GFXWARE+45
+		GFXLEISTE   = GFXKONT+18
+		GFXSIED     = GFXLEISTE+2
+		GFXSIEDFACE	= GFXSIED+9
+		GFXSIEDINFR	= GFXSIEDFACE+4
+		GFXSIEDNAHR = GFXSIEDINFR+12
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name der Kontorstadt---;
+    @Nummer:    0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+  
+  ;---Warengrafiken Markt (nicht wählbar)---;
+    @Nummer:    +1
+    X =         27
+    Y =         569
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       1, 1
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+  ;---Lagermenge Markt (nicht wählbar)---;
+    @Nummer:    +1
+    X =         69
+    Y =         570
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       6, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+  ;---Warengadgets Markt---;
+    @Nummer:    +1
+    X =         25
+    Y =         567
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_GFX
+		Reiheflg:   1
+    Basenr:     BASE
+    Gfxnr:      GFXSIED+0
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       53, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+EndObj;

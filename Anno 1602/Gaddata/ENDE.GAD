@@ -1,0 +1,241 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOLS =   0
+    BLK_START =   1
+
+    ZEINR =       0
+    ZEILITTLE =   1
+    ZEILARGE =    2
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_START
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 36001
+    IDNIX      = 36901
+
+    GFXBASE     = 0
+    GFXMISSION  = GFXBASE+30
+    GFXCLIENT   = GFXMISSION+23
+    GFXFARB     = GFXCLIENT+4
+    GFXENDE     = GFXFARB+14
+    GFXWAPPEN   = GFXENDE+7
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets, die nur zur Zirde dienen---;
+    @Nummer:    0
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXENDE+0
+    Pos:        0, 0
+    Size:       1, 1
+
+  ;---Beenden, bzw. Spiel fortsetzen---*/
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Gfxnr:      GFXENDE+1
+    Pressoff:   3
+    Pos:        61, 693
+    Size:       302, 63
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXENDE+2
+    Pressoff:   3
+    Pos:        679, 693
+    Size:       308, 57
+
+ ;   @Nummer:    +1
+ ;   Id:         IDHAUPT+2
+ ;   Kind:       GAD_GFX
+ ;   Gfxnr:      GFXENDE+3
+ ;   Pressoff:   3
+ ;   Pos:        667, 690
+ ;   Size:       337, 60
+
+  ;---Gesamtpunkteanzahl---;
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEILARGE
+    Color:      0, 0
+    Noselflg:   1
+    Pos:        891, 645
+    Posoffs:    0, 30
+
+  ;---Wappen des aktuellen Spielers---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWAPPEN+0
+    Pos:        492, 42
+    Size:       32, 40
+
+  ;---Name des aktuellen Spielers---;
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Noselflg:   1
+    Pos:        512, 130
+    Posoffs:    0, 30
+
+  ;---Ausgaben Städte, Untertanen, Zufriedenheit, Vermögen, Inselanzahl---;
+    @Nummer:    +1
+		BASE =			Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Noselflg:   1
+    Pos:        676, 201
+    Posoffs:    0, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +38
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +32
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +40
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +31
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+    Posoffs:    21, 30
+
+  ;---Punkteanzahl Städte, Untertanen, Zufriedenheit, Vermögen, Inselanzahl---;
+    @Nummer:    +1
+		BASE =			Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Noselflg:   1
+    Pos:        891, 201
+    Posoffs:    0, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +52
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +72
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +58
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +41
+
+  ;---Wappen für Spielerauswahl---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWAPPEN+4
+    Pressoff:   4
+    Reiheflg:   1
+    Basenr:     BASE
+    Pos:        416, 686
+    Size:       40, 52
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +51, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +50, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +51, +0
+
+  EndObj;

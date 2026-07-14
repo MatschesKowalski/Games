@@ -1,0 +1,57 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOLS =   0
+    BLK_START =   1
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_START
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 33001
+    IDNIX      = 33101
+
+    GFXBASE     = 0
+    GFXMISSION  = GFXBASE+30
+    GFXCLIENT   = GFXMISSION+23
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets, die nur zur Zirde dienen---;
+    @Nummer:    0
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBASE
+    Pos:        0, 0
+    Size:       1, 1
+
+  ;---Warten bis Spiel ausgewählt wurde---;
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXCLIENT+3
+    Pos:        102, 386
+    Size:       851, 142
+
+  ;---Connection wieder abbrechen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Gfxnr:      GFXCLIENT+0
+    Pressoff:   1
+    Pos:        121, 656 
+    Size:       313, 66
+    
+  EndObj;

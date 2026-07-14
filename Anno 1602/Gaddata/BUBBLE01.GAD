@@ -1,0 +1,302 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOL  =   0
+  
+    COL_WHT =     255
+    COL_RED =     249
+    COL_BLK =     0
+
+    ZEINR =       0
+		ZEILITTLE =		1
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 111001
+		IDNIX				= 111901
+
+    GFXTAFEL    = 0
+    GFXPFEIL    = GFXTAFEL+1
+    GFXPLUS     = GFXPFEIL+4
+    GFXMAIN     = GFXPLUS+4
+	  GFXMAP			= GFXMAIN+8
+    GFXHAUS     = GFXMAP+5
+    GFXPFEIL    = GFXHAUS+18
+    GFXBAUMAT   = GFXPFEIL+6
+    GFXBAUHAUS  = GFXBAUMAT+21
+    GFXMENU     = GFXBAUHAUS+86
+    GFXOVERHEAD = GFXMENU+3
+    GFXPFEILV   = GFXOVERHEAD+5
+    GFXMENGE    = GFXPFEILV+4
+    GFXWARELEER = GFXMENGE+8
+    GFXWARE =     GFXWARELEER+4
+    GFXKONT =     GFXWARE+41
+    GFXLEISTE   = GFXKONT+18
+	  GFXSIED     = GFXLEISTE+55
+	  GFXSIEDFACE	=	GFXSIED+9
+	  GFXSIEDINFR	= GFXSIEDFACE+4
+	  GFXSIEDNAHR = GFXSIEDINFR+16
+	  GFXPROD     = GFXSIEDNAHR+2
+	  GFXSHIP			= GFXPROD+6
+	  GFXWERFT		= GFXSHIP+39
+	  GFXMILIT		= GFXWERFT+15
+	  GFXSTADT		= GFXMILIT+18
+	  GFXTRANS		= GFXSTADT+14
+    GFXOPTION   = GFXTRANS+12
+    GFXKAMPF    = GFXOPTION+37
+    GFXPIRAT    = GFXKAMPF+26
+    GFXVERTRAG  = GFXPIRAT+19
+    GFXINFO     = GFXVERTRAG+34
+    GFXROUTE    = GFXINFO+8
+    GFXTRADER   = GFXROUTE+11
+    GFXSHIPLIST = GFXTRADER+4
+    GFXLAGER    = GFXSHIPLIST+14
+    GFXTUTOR    = GFXLAGER+11
+    GFXBUBBLE    = GFXTUTOR+7
+
+;================HAUPT-GADGETS==================;
+
+  ;---Weltkarte---;
+    X = 670
+    Y = 32
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+5
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Landschaft rotieren---;
+    X = 670
+    Y = 141
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+10
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+2
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+3
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Landschaft zoomen---;
+    X = 692
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+4
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+30
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+4
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Kampfmodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+40
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+5
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Infomodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+50
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+6
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Insel erkunden---;
+    X = 677
+    Y = 441
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+50
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+2
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Kontor bauen---;
+    X = 674
+    Y = 531
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+60
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+2
+    Size:       168, 34
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    Pos:        X+0, Y+0
+    Posoffs:    5, 22
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  EndObj;

@@ -1,0 +1,2267 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 111001
+		IDNIX				= 119001
+
+;================HAUPT-GADGETS==================;
+
+  ;---Weltkarte---;
+    X = 670
+    Y = 32
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+34
+    Size:       168, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +79, +0
+    Posoffs:    5, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+5
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Landschaft zoomen---;
+    X = 670
+    Y = 141
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+10
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +79, +0
+    Posoffs:    5, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+3
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Landschaft rotieren---;
+    X = 692
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-70, Y+34
+    Size:       118, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +54, +0
+    Posoffs:    5, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+4
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+30
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-190, Y+34
+    Size:       238, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+4
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Kampfmodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+40
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-160, Y+34
+    Size:       208, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    99, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+5
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Infomodus einschalten---;
+    X = 685
+    Y = 315
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+50
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-160, Y+34
+    Size:       208, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    99, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+6
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Insel erkunden---;
+    X = 677
+    Y = 441
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+60
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Kontor bauen---;
+    X = 674
+    Y = 531
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+70
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Warentransfer---;
+    X = 674
+    Y = 531
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+80
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Militär---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+90
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Strassen---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+100
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+9
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Bergwerke---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+110
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+10
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Abreissen---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+120
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+11
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Handwerk---;
+    X = 676
+    Y = 534
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+130
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Farmen---;
+    X = 676
+    Y = 534
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+140
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+9
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Hafen---;
+    X = 676
+    Y = 534
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+150
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+10
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Divers---;
+    X = 676
+    Y = 534
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+160
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+11
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Schiff aktivieren---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+170
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       184, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    95, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+12
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Zur einer Insel fahren---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+180
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       214, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+13
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Kein Erz also weiter---;
+    X = 270
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+190
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Transfermenü - Waren in Kontor geben---;
+    X = 670
+    Y = 508
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+200
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+3
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Transfermenü - Waren auf Schiff laden---;
+    X = 687
+    Y = 475
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+210
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Rechte Maustaste drücken---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+220
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       214, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+13
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Försterhaus---;
+    X = 670
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+230
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+9
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Fischer---;
+    X = 658
+    Y = 532
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+240
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Feldweg---;
+    X = 658
+    Y = 532
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+250
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Wohnhaus---;
+    X = 658
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+260
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Wohnhaus anklicken---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+270
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       184, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    95, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+12
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Schaffarm---;
+    X = 666
+    Y = 532
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+280
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+2
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Infomodus - Need Stoffe---;
+    X = 668
+    Y = 532
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+290
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    64, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Försterhaus---;
+    X = 670
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+300
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumenü - Marktplatz---;
+    X = 666
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+310
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+9
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Haus deaktivieren---;
+    X = 170
+    Y = 160
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+320
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumaterial - Zuwenig Holz---;
+    X = 366
+    Y = 21
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+330
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+50
+    Size:       168, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+15
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumaterial - Zuwenig Werkzeug---;
+    X = 255
+    Y = 21
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+340
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+50
+    Size:       168, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+15
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumaterial - Zuwenig Ziegel---;
+    X = 467
+    Y = 21
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+350
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y+50
+    Size:       168, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+15
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Baumaterial - Zuwenig Geld---;
+    X = 467
+    Y = 21
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+360
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+32, Y+50
+    Size:       168, 34
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+16
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Zum Kontor fahren---;
+    X = 252
+    Y = 270
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+370
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Tutorialfenster - Schließen---;
+    X = 12
+    Y = 520
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+380
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+32, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+17
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Statusleisten - Erklärungspfeil---;
+    X = 736
+    Y = 480
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+390
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-100, Y-1
+    Size:       148, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    69, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+18
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Info - Diplomatiemenü auswählen---;
+    X = 684
+    Y = 530
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+400
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+11
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Kontor anklicken---;
+    X = 252
+    Y = 270
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+410
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Diplomatie - 1. Handelsvertrag anbieten---;
+    X = 677
+    Y = 380
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+420
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Transfer - Warentyp Stoffe wählen---;
+    X = 687
+    Y = 434
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+430
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-140, Y-5
+    Size:       188, 41
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    89, 21
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+2
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Transfer - Rechter Scrollpfeil---;
+    X = 720
+    Y = 334
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+440
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+19
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Zum Gegnerkontor fahren---;
+    X = 252
+    Y = 270
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+450
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipinfo - Warenhandel---;
+    X = 674
+    Y = 531
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+460
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Wieder heim fahren---;
+    X = 252
+    Y = 270
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+470
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Trademenü - Waren an Kontor verkaufen---;
+    X = 670
+    Y = 508
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+480
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+3
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Trademenü - Waren für Schiff einkaufen---;
+    X = 687
+    Y = 475
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+490
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+0
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Angriff mit großem Schiff---;
+    X = 270
+    Y = 110
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+500
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Angriff beiden kleinen Schiffen---;
+    X = 270
+    Y = 110
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+510
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Kleines Schiff aktivieren---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+520
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       214, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+13
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Shipkampf - Patroille festlegen---;
+    X = 662
+    Y = 530
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+530
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+2
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Zielpunkt Patroille---;
+    X = 270
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+540
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - An Küste fahren---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+550
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       214, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+13
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Schiffkampf - Soldaten ausladen---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+560
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-120, Y-1
+    Size:       168, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    79, 27
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Alle Soldaten aktivieren---;
+    X = 270
+    Y = 130
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+570
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---MultiSoldat-Kampf - Kavalerie auswählen---;
+    X = 688
+    Y = 567
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+580
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-150, Y-1
+    Size:       198, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    95, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+1
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Mit Kavalerie angreifen---;
+    X = 270
+    Y = 130
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+590
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Mit Rest angreifen---;
+    X = 270
+    Y = 130
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+600
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       264, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    135, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+14
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Hinweistafel - Großes Schiff aktivieren---;
+    X = 310
+    Y = 230
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+610
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X+10, Y+9
+    Size:       214, 45
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    110, 23
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+13
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Schiffkampf - Kanonen bestücken---;
+    X = 676
+    Y = 472
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+620
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-140, Y-1
+    Size:       188, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    89, 19
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+8
+    Pos:        X, Y
+    Size:       1, 1
+
+  ;---Tutorialfenster - Vorblättern---;
+    X = 736
+    Y = 450
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+630
+    Kind:       GAD_FILL
+    Noselflg:   1
+    Alphaflg:   1
+    Pos:        X-70, Y-1
+    Size:       118, 37
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEILITTLE
+    Noselflg:   1
+    @Pos:       +0, +0
+    Posoffs:    54, 25
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +18
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBUBBLE+18
+    Pos:        X, Y
+    Size:       1, 1
+
+  EndObj;

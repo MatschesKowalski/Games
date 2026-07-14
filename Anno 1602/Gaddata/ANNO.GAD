@@ -1,0 +1,225 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 66001
+    IDNIX       = 66201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Überschrift für Spracheinstellungen---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOPTION+6
+    Pos:        15, 403
+    Size:       226, 301
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 1
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+38
+    Pressoff:   2
+    Flipflg:    1
+    Pos:        16, 713 
+    Size:       47, 45
+
+  ;---Überschrift für Videoeinstellungen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOPTION+37
+    Pos:        15, 577
+    Size:       226, 129
+
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 582
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+6
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 1
+    Pos:        6, 586
+    Size:       244, 30
+    Posoffs:    124, 29
+
+    @Nummer:    +1
+    Id:         IDHAUPT+7
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+39
+    Pressoff:   2
+    Flipflg:    1
+    Pos:        82, 710 
+    Size:       53, 54
+  
+  ;---Sprachmeldungen-Select-Buttons---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+13
+    Pressoff:   1
+    Flipflg:    1
+    Pos:        15, 404
+    Posoffs:    9, 4
+    Size:       33, 25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+  ;---Sprachmeldungen Namen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        15, 404
+    Size:       226, 25
+    Posoffs:    33, 27
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+  ;---Videosequenzen-Select-Buttons---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+13
+    Pressoff:   1
+    Flipflg:    1
+    Pos:        15, 630
+    Posoffs:    9, 4
+    Size:       33, 25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+  ;---Videosequenzen Namen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        15, 630
+    Size:       226, 25
+    Posoffs:    33, 27
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+  EndObj;

@@ -1,0 +1,119 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 52001
+    IDNIX       = 52201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Überschrift für Schiffsflotte---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 1
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+  ;---Formationsbefehle---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_GFX
+    Gfxnr:      GFXKAMPF+0
+    Pressoff:   4
+    Pos:        35, 415
+    Size:       57, 64
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +68, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +67, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        24, 485
+    Size:       68, 63
+
+  ;---Stoppen der Einheit---;
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+24
+		Pressoff:		1
+    Pos:        33, 697
+    Size:       42, 59
+
+  ;---Einheiten-Subselektier-Befehle---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Gfxnr:      GFXKAMPF+14
+    Pressoff:   5
+    Pos:        15, 614
+    Size:       56, 79
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +56, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +56, +0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +56, +0
+    Size:       62, 79
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        180, 554
+    Size:       64, 63
+
+  EndObj;

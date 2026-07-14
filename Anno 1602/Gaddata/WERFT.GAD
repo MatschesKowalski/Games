@@ -1,0 +1,205 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 39001
+    IDNIX       = 39901
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name der Stadt---;
+    @Nummer:    +0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+0
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+
+	;---Betriebskosten für Gebäude---;
+    @Nummer:    +1
+		BASE =			Nummer
+    Id:         IDHAUPT+2
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        25, 490
+    Size:       206, 25
+    Posoffs:    0, 29
+
+		@Nummer:		+1
+		ObjFill:		BASE
+		@Id:				+1
+		Kind:				GAD_TEXTR
+    Noselflg:   1
+		Posoffs:		186, 29
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        209, 490
+    Size:       30, 30
+
+	;---Gebäudebezeichnung---:
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_TEXTZ
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0
+    Pos:        25, 405
+    Size:       206, 25
+    Posoffs:    103, 25
+
+  ;---Fertigstellungsbalken---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWERFT+8
+    Pos:        207, 530
+    Size:       21, 148
+
+    @Nummer:    +1
+    Id:         IDHAUPT+11
+    Kind:       GAD_BALKEN
+    Slidverflg: 1
+    Noselflg:   1
+    Color:      COL_RED
+    Pos:        210, 532
+    Size:       15, 144
+
+    @Nummer:    +1
+    Id:         IDHAUPT+12
+    Kind:       GAD_NIX
+    Pos:        207, 530
+    Size:       21, 148
+
+  ;---Aktuelles Schiffgadget---;
+    @Nummer:    +1
+    Id:         IDHAUPT+13
+    Kind:       GAD_GFXRAST
+    Blocknr:    BLK_BAUSHIP
+    Noselflg:   1
+    Pos:        25, 533
+    Size:       162, 140
+
+    @Nummer:    +1
+    Id:         IDHAUPT+14
+    Kind:       GAD_GFX
+    Blocknr:    BLK_BAUSHIP
+    Pos:        25, 522
+    Size:       162, 140
+
+  ;---Schiffsbau starten bzw. stoppen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+15
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWERFT+9
+    Pressoff:   2
+    Pos:        175, 690
+    Size:       54, 57
+
+    @Nummer:    +1
+    Id:         IDHAUPT+16
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWERFT+10
+    Pressoff:   2
+    Pos:        180, 687
+    Size:       34, 68
+
+	;---Werft stilllegen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+17
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPROD+1
+		Flipflg:		1
+		Pressoff:		1
+		Pos:		    23, 683
+		Size:			  47, 57
+
+	;---Produktionskette Warengrafik---;
+    X =         70
+    Y =         429
+
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE					; Warengrafik
+    Pos:        X, Y
+    Posoffs:		2, 1
+    Size:       48, 46
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +60, +0
+
+	;---Produktionskette Warenmenge---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEILITTLE				; Warenmenge
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        X, Y
+    Posoffs:    47, 47
+  
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +60, +0
+
+	;---Produktionskette Warenitem---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWARELEER+2		; Warenitem
+    Pos:        X, Y
+    Size:       48, 46
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +60, +0
+
+EndObj;

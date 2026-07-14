@@ -1,0 +1,170 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 56001
+    IDNIX       = 56901
+
+;================HAUPT-GADGETS==================;
+
+  ;---Tafeln für Spielernamen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       250, 40
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Texte für Spielernamen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Schatten für Schilder---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFXRAST
+    Noselflg:   1
+    Gfxnr:      GFXPIRAT+5
+    Pos:        210, 354
+    Posoffs:    7, 7
+    Size:       32, 40
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Schilder mit Spielerfarben---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPIRAT+5
+    Pos:        210, 354
+    Size:       32, 40
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Handelsverträge---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Gfxnr:      GFXVERTRAG+0
+    Pressoff:   4
+    Pos:        14, 400
+    Size:       77, 85
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Friedensverträge---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Gfxnr:      GFXVERTRAG+8
+    Pressoff:   4
+    Pos:        96, 400
+    Size:       103, 85
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  ;---Stimmung zum Spieler---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+60
+    Kind:       GAD_GFX
+    Gfxnr:      GFXVERTRAG+16
+    Pos:        190, 403
+    Pressoff:   1
+    Posoffs:    -7, 0
+    Size:       66, 78
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +127
+
+  EndObj;

@@ -1,0 +1,300 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 63001
+    IDNIX       = 63901
+
+;================HAUPT-GADGETS==================;
+
+  ;---Tafel mit Überschrift---;
+    @Nummer:    0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  ;---Schatten und eigentliches Spielerschild---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFXRAST
+    Noselflg:   1
+    Gfxnr:      GFXPIRAT+5
+    Pos:        210, 354
+    Posoffs:    7, 7
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPIRAT+5
+    Pos:        210, 354
+    Size:       32, 40
+  
+  ;---Rahmen für Schiffsliste---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSHIPLIST+0
+		Pos:        16, 403
+		Size:       225, 334
+
+  ;---Scrollpfeile oben+unten---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIPLIST+10
+    Pressoff:   2
+		Pos:        157, 738
+		Size:       29, 24
+
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIPLIST+11
+    Pressoff:   2
+		Pos:        198, 737
+		Size:       29, 24
+
+  ;---Tafeln für Schiffsnamen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSHIPLIST+1
+    Pos:        21, 408
+    Size:       215, 25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+  ;---Texte für Schiffsnamen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Clipflg:    1
+    Pos:        57, 408
+    Size:       180, 25
+    Posoffs:    0, 27
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+  ;---Icons für Bewegungsstatus---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSHIPLIST+2
+    Pos:        19, 409
+    Size:       36, 25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+
+  EndObj;

@@ -1,0 +1,83 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOLS =   0
+    BLK_START =   1
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_START
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 30001
+    IDNIX      = 30101
+
+    GFXBASE     = 0
+
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets, die nur zur Zirde dienen---;
+    @Nummer:    0
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBASE
+    Pos:        0, 0
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBASE+12
+    Pos:        500, 359
+    Size:       1, 1
+
+  ;---Spielmodi zur Auswahl---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXBASE+2
+    Pressoff:   5
+    Pos:        113, 382
+    Size:       332, 53
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +0, +52
+    Size:       332, 54
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +0, +54
+    Size:       332, 53
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +0, +52
+    Size:       332, 58
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +0, +57
+    Size:       332, 71
+
+  EndObj;
