@@ -113,9 +113,9 @@ export class MapView {
     this.hoverGraphics = new Graphics()
 
     this.container.addChild(this.tileLayer)
+    this.container.addChild(this.hoverGraphics)
     this.container.addChild(this.buildingLayer)
     this.container.addChild(this.unitLayer)
-    this.container.addChild(this.hoverGraphics)
 
     this.buildBaseMap()
   }

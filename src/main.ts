@@ -1,4 +1,4 @@
-import { Application } from 'pixi.js'
+import { Application, TextureStyle } from 'pixi.js'
 import { MapView } from './render/map-view'
 import { Camera } from './render/camera'
 import { initSpriteAtlas } from './render/sprite-atlas'
@@ -20,11 +20,15 @@ const DRAG_THRESHOLD = 5
 const MS_PER_TICK = 500
 
 async function main() {
+  // Pixel-Art-Sprites scharf skalieren statt weichzeichnen
+  TextureStyle.defaultOptions.scaleMode = 'nearest'
+
   const app = new Application()
 
   await app.init({
     background: '#1a1a2e',
     resizeTo: window,
+    roundPixels: true,
   })
 
   document.body.appendChild(app.canvas)
