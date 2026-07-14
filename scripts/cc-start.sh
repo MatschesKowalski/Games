@@ -1,7 +1,8 @@
 #!/bin/bash
-# cc-start.sh v4.1 — Zentrales Script für Claude Code Automation
+# cc-start.sh v4.2 — Zentrales Script für Claude Code Automation
 # v4:   script TTY + echo pipe für Pro-Abo + pgrep statt PID-Check
 # v4.1: setsid statt nohup — CC überlebt SSH-Session-Ende
+# v4.2: Token-Limit-Erkennung für smashed Text (ANSI-Cursor-Codes entfernen Leerzeichen)
 #
 # Modi:
 #   check          - Prüft ob CC läuft
@@ -25,7 +26,8 @@ LAST_START="/data/cc-games-last-start.txt"
 FAILED_STARTS="/data/cc-games-failed-starts.txt"
 
 # Token-Limit Suchbegriffe (case-insensitive)
-TOKEN_LIMIT_PATTERNS="hit your limit|you've hit your limit|resets.*UTC|rate limit|rate_limit|usage limit|token limit|session limit|100%.*limit|over_quota|resource_exhausted|plan limit|Credit balance|limit to reset|Switch to extra usage|rate-limit-options"
+# Normale Schreibweise + smashed (ANSI-Cursor-Codes entfernen Leerzeichen im Log)
+TOKEN_LIMIT_PATTERNS="hit your limit|hityourlimit|you've hit your limit|youvehityour|resets.*UTC|resets.*[0-9].*[ap]m|rate limit|ratelimit|rate_limit|usage limit|usagelimit|token limit|tokenlimit|session limit|sessionlimit|100%.*limit|over_quota|resource_exhausted|plan limit|planlimit|Credit balance|limit to reset|Switch to extra usage|rate-limit-options"
 
 # ============================================================
 check_token_limit() {
