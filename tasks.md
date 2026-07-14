@@ -193,7 +193,7 @@
 
 ### Task 16: Audio-Integration
 - **prio:** 16
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Die WAV-Dateien aus Anno 1602 als Spielsounds einbinden. Anno 1602 hat
     Sounds für jedes Gebäude, Kampfgeräusche und Umgebungssounds.

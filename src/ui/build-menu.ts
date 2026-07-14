@@ -1,6 +1,7 @@
 import { t } from '../i18n/index'
 import { BUILDINGS } from '../content/buildings'
 import { RESOURCES } from '../content/resources'
+import { soundManager } from '../render/sound-manager'
 
 const STYLE_BTN_DEFAULT = 'rgba(255,255,255,0.1)'
 const STYLE_BTN_SELECTED = 'rgba(114,181,131,0.35)'
@@ -96,6 +97,7 @@ export class BuildMenu {
 
       const buildingId = building.id
       btn.addEventListener('click', () => {
+        soundManager.playSound('ui.click')
         const next = buildingId === this.selectedId ? null : buildingId
         this.applySelection(next)
         this.onSelect(this.selectedId)

@@ -4,10 +4,12 @@ import { Camera } from './render/camera'
 import { initSpriteAtlas } from './render/sprite-atlas'
 import { DayNightOverlay } from './render/day-night-overlay'
 import { screenToGrid } from './render/iso'
+import { soundManager } from './render/sound-manager'
 import { createInitialState } from './sim/state'
 import { applyCommand } from './sim/commands'
 import { tick } from './sim/tick'
 import { getTimeOfDay } from './sim/time'
+import type { TimeOfDay } from './sim/time'
 import { Hud } from './ui/hud'
 import { BuildMenu } from './ui/build-menu'
 import { TimeDisplay } from './ui/time-display'
@@ -33,6 +35,10 @@ async function main() {
   // selectedBuildingId wird vom BuildMenu über den Callback gesetzt.
   // Der Wert wird im pointerup-Handler gelesen (Closure über die Variable).
   let selectedBuildingId: string | null = null
+
+  // Letzter bekannter Tages-Abschnitt für Ambient-Sound-Wechsel.
+  // null = noch kein Tick gelaufen, damit der erste Tick den Ambient startet.
+  let prevPhase: TimeOfDay | null = null
 
   // UI-Komponenten: DOM-Ebene über dem PixiJS-Canvas
   const hud = new Hud()
@@ -120,7 +126,11 @@ async function main() {
     const worldY = (e.clientY - camera.y) / camera.zoom
     const { col, row } = screenToGrid(worldX, worldY)
     if (col >= 0 && col < MAP_SIZE && row >= 0 && row < MAP_SIZE) {
+      const prevCount = gameState.buildings.length
       gameState = applyCommand(gameState, { type: 'build', buildingId: selectedBuildingId, col, row })
+      if (gameState.buildings.length > prevCount) {
+        soundManager.playSound('building.built')
+      }
       mapView.updateBuildings(gameState.buildings)
     }
   })
@@ -140,6 +150,12 @@ async function main() {
       hud.update(gameState.resources)
       timeDisplay.update(timeInfo)
       lastTickTime = now
+
+      // Ambient-Sound bei Tag/Nacht-Wechsel (oder beim ersten Tick).
+      if (timeInfo.phase !== prevPhase) {
+        prevPhase = timeInfo.phase
+        soundManager.playAmbient(timeInfo.phase === 'day' ? 'ambient.day' : 'ambient.night')
+      }
     }
   })
 }

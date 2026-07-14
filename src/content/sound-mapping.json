@@ -1,0 +1,8 @@
+{
+  "building.built": "Select.wav",
+  "ambient.day": "Vogel1.wav",
+  "ambient.night": "Wellen.wav",
+  "ui.click": "Select.wav",
+  "building.bakery.ambient": "Backer.wav",
+  "building.smithy.ambient": "Schmied.wav"
+}
