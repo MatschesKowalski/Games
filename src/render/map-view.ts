@@ -1,7 +1,14 @@
-import { Container, Graphics } from 'pixi.js'
+import { Container, Graphics, Sprite } from 'pixi.js'
 import { gridToScreen, TILE_WIDTH, TILE_HEIGHT } from './iso'
 import { createBuildingSprite } from './placeholder-sprites'
+import { getSprite, isAtlasReady, SPRITE_SCALE } from './sprite-atlas'
 import type { Building } from '../sim/state'
+import spriteMapping from '../content/sprite-mapping.json'
+
+type SpriteRef = { sheet: string; index: number }
+
+const TERRAIN = spriteMapping.terrain as Record<string, SpriteRef>
+const BUILDINGS = spriteMapping.buildings as Record<string, SpriteRef>
 
 const TILE_COLOR = 0x4a7c59
 const HOVER_COLOR = 0x72b583
@@ -20,23 +27,23 @@ function drawDiamond(g: Graphics, col: number, row: number, fillColor: number): 
 
 export class MapView {
   readonly container: Container
-  private readonly baseGraphics: Graphics
+  private readonly tileLayer: Container
   private readonly buildingLayer: Container
   private readonly hoverGraphics: Graphics
   private readonly cols: number
   private readonly rows: number
-  private hoveredCol: number = -1
-  private hoveredRow: number = -1
+  private hoveredCol = -1
+  private hoveredRow = -1
 
   constructor(cols: number, rows: number) {
     this.cols = cols
     this.rows = rows
     this.container = new Container()
-    this.baseGraphics = new Graphics()
+    this.tileLayer = new Container()
     this.buildingLayer = new Container()
     this.hoverGraphics = new Graphics()
 
-    this.container.addChild(this.baseGraphics)
+    this.container.addChild(this.tileLayer)
     this.container.addChild(this.buildingLayer)
     this.container.addChild(this.hoverGraphics)
 
@@ -44,18 +51,53 @@ export class MapView {
   }
 
   private buildBaseMap(): void {
-    for (let row = 0; row < this.rows; row++) {
-      for (let col = 0; col < this.cols; col++) {
-        drawDiamond(this.baseGraphics, col, row, TILE_COLOR)
+    this.tileLayer.removeChildren()
+    const grassRef = TERRAIN['grass']
+    const useSprites = grassRef != null && isAtlasReady(grassRef.sheet)
+
+    if (useSprites) {
+      for (let row = 0; row < this.rows; row++) {
+        for (let col = 0; col < this.cols; col++) {
+          const { x, y } = gridToScreen(col, row)
+          const sprite = new Sprite(getSprite(grassRef.sheet, grassRef.index))
+          sprite.scale.set(SPRITE_SCALE)
+          sprite.anchor.set(0.5, 0.5)
+          sprite.x = x
+          sprite.y = y
+          this.tileLayer.addChild(sprite)
+        }
       }
+    } else {
+      const g = new Graphics()
+      for (let row = 0; row < this.rows; row++) {
+        for (let col = 0; col < this.cols; col++) {
+          drawDiamond(g, col, row, TILE_COLOR)
+        }
+      }
+      this.tileLayer.addChild(g)
     }
+  }
+
+  /** Call once sprite atlas has finished loading to switch to real tiles. */
+  enableRealSprites(): void {
+    this.buildBaseMap()
   }
 
   updateBuildings(buildings: Building[]): void {
     this.buildingLayer.removeChildren()
     for (const b of buildings) {
-      const sprite = createBuildingSprite(b.buildingId, b.col, b.row)
-      this.buildingLayer.addChild(sprite)
+      const ref = BUILDINGS[b.buildingId]
+      if (ref != null && isAtlasReady(ref.sheet)) {
+        const { x, y } = gridToScreen(b.col, b.row)
+        const sprite = new Sprite(getSprite(ref.sheet, ref.index))
+        sprite.scale.set(SPRITE_SCALE)
+        sprite.anchor.set(0.5, 1.0)
+        sprite.x = x
+        sprite.y = y + TILE_HEIGHT / 2
+        this.buildingLayer.addChild(sprite)
+      } else {
+        this.buildingLayer.addChild(createBuildingSprite(b.buildingId, b.col, b.row))
+      }
     }
   }
 
@@ -75,7 +117,7 @@ export class MapView {
   }
 
   destroy(): void {
-    this.baseGraphics.destroy()
+    this.tileLayer.destroy({ children: true })
     this.buildingLayer.destroy({ children: true })
     this.hoverGraphics.destroy()
     this.container.destroy()

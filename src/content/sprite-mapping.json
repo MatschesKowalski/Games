@@ -1,0 +1,18 @@
+{
+  "terrain": {
+    "grass": { "sheet": "stadtfld", "index": 0 },
+    "water": { "sheet": "stadtfld", "index": 800 }
+  },
+  "buildings": {
+    "townhall":     { "sheet": "stadtfld", "index": 1332 },
+    "lumbermill":   { "sheet": "stadtfld", "index": 1350 },
+    "quarry":       { "sheet": "stadtfld", "index": 1160 },
+    "farm":         { "sheet": "stadtfld", "index": 1200 },
+    "hunters_hut":  { "sheet": "stadtfld", "index": 1148 },
+    "bakery":       { "sheet": "stadtfld", "index": 1420 },
+    "watchtower":   { "sheet": "stadtfld", "index": 1430 },
+    "wall":         { "sheet": "stadtfld", "index": 1310 },
+    "stone_wall":   { "sheet": "stadtfld", "index": 1340 },
+    "barracks":     { "sheet": "stadtfld", "index": 1400 }
+  }
+}

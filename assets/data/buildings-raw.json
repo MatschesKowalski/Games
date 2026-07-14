@@ -1,0 +1,194 @@
+[
+  {
+    "annoId": "IDFORST+0",
+    "name": "Försterhaus",
+    "kind": "GEBAEUDE",
+    "size": [2, 2],
+    "production": {
+      "ware": "HOLZ",
+      "rohstoff": "BAUM",
+      "interval": 8,
+      "rohmenge": 1,
+      "radius": 3,
+      "maxlager": 10
+    },
+    "baukost": {
+      "Werkzeug": 2,
+      "Money": 50
+    }
+  },
+  {
+    "annoId": "IDMINE+6",
+    "name": "Steinbruch",
+    "kind": "MINE",
+    "size": [1, 2],
+    "production": {
+      "ware": "STEINE",
+      "rohstoff": null,
+      "interval": 0,
+      "rohmenge": 1,
+      "radius": 0,
+      "maxlager": 4
+    },
+    "baukost": {
+      "Werkzeug": 6,
+      "Holz": 2,
+      "Money": 150
+    }
+  },
+  {
+    "annoId": "IDFARM+2",
+    "name": "Getreide-Farm",
+    "kind": "GEBAEUDE",
+    "size": [2, 2],
+    "production": {
+      "ware": "KORN",
+      "rohstoff": "GETREIDE",
+      "interval": 8,
+      "rohmenge": 1,
+      "radius": 1,
+      "maxlager": 6
+    },
+    "baukost": {
+      "Werkzeug": 2,
+      "Holz": 5,
+      "Money": 100
+    }
+  },
+  {
+    "annoId": "IDFORST+2",
+    "name": "Jagdhütte",
+    "kind": "GEBAEUDE",
+    "size": [1, 1],
+    "production": {
+      "ware": "NAHRUNG",
+      "rohstoff": "WILD",
+      "interval": 15,
+      "rohmenge": 1,
+      "radius": 8,
+      "maxlager": 3
+    },
+    "baukost": {
+      "Werkzeug": 2,
+      "Holz": 2,
+      "Money": 50
+    }
+  },
+  {
+    "annoId": "IDHANDW+2",
+    "name": "Bäckerei",
+    "kind": "GEBAEUDE",
+    "size": [2, 2],
+    "production": {
+      "ware": "NAHRUNG",
+      "rohstoff": "MEHL",
+      "interval": 19,
+      "rohmenge": 2,
+      "radius": 15,
+      "maxlager": 4
+    },
+    "baukost": {
+      "Werkzeug": 2,
+      "Holz": 6,
+      "Money": 150
+    }
+  },
+  {
+    "annoId": "IDHANDW+14",
+    "name": "Werkzeug-Schmiede",
+    "kind": "GEBAEUDE",
+    "size": [2, 2],
+    "production": {
+      "ware": "WERKZEUG",
+      "rohstoff": "EISEN",
+      "interval": 35,
+      "rohmenge": 0.5,
+      "radius": 15,
+      "maxlager": 4
+    },
+    "baukost": {
+      "Werkzeug": 3,
+      "Holz": 2,
+      "Ziegel": 5,
+      "Money": 150
+    }
+  },
+  {
+    "annoId": "IDMIL+4",
+    "name": "Wachturm",
+    "kind": "TURM",
+    "size": [1, 1],
+    "production": {
+      "ware": null,
+      "rohstoff": null,
+      "interval": 0,
+      "rohmenge": 0,
+      "radius": 8,
+      "maxlager": 1
+    },
+    "baukost": {
+      "Werkzeug": 2,
+      "Holz": 1,
+      "Ziegel": 6,
+      "Kanon": 2,
+      "Money": 300
+    }
+  },
+  {
+    "annoId": "IDMIL+10",
+    "name": "Festung",
+    "kind": "GEBAEUDE",
+    "size": [2, 2],
+    "production": {
+      "ware": null,
+      "rohstoff": null,
+      "interval": 10,
+      "rohmenge": 0.5,
+      "radius": 15,
+      "maxlager": 2,
+      "maxware": 3
+    },
+    "baukost": {
+      "Werkzeug": 4,
+      "Holz": 3,
+      "Ziegel": 10,
+      "Money": 600
+    }
+  },
+  {
+    "annoId": "IDMAUER+20",
+    "name": "Holzmauer",
+    "kind": "MAUER",
+    "size": [1, 1],
+    "production": {
+      "ware": null,
+      "rohstoff": null,
+      "interval": 0,
+      "rohmenge": 0,
+      "radius": 0,
+      "maxlager": 0
+    },
+    "baukost": {
+      "Holz": 2,
+      "Money": 10
+    }
+  },
+  {
+    "annoId": "IDMAUER+0",
+    "name": "Steinmauer",
+    "kind": "MAUER",
+    "size": [1, 1],
+    "production": {
+      "ware": null,
+      "rohstoff": null,
+      "interval": 0,
+      "rohmenge": 0,
+      "radius": 0,
+      "maxlager": 0
+    },
+    "baukost": {
+      "Ziegel": 2,
+      "Money": 18
+    }
+  }
+]

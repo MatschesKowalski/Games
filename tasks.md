@@ -155,7 +155,7 @@
 
 ### Task 15: Sprite-Integration (Kacheln & Gebäude)
 - **prio:** 15
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Die in Task 13 extrahierten PNG-Sprite-Sheets in das laufende Spiel einbinden —
     echte Grafiken ersetzen die programmatischen Platzhalter aus Task 9.

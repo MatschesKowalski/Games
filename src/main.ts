@@ -1,6 +1,7 @@
 import { Application } from 'pixi.js'
 import { MapView } from './render/map-view'
 import { Camera } from './render/camera'
+import { initSpriteAtlas } from './render/sprite-atlas'
 import { DayNightOverlay } from './render/day-night-overlay'
 import { screenToGrid } from './render/iso'
 import { createInitialState } from './sim/state'
@@ -61,11 +62,19 @@ async function main() {
   app.stage.addChild(mapView.container)
   app.stage.addChild(overlay.container)
 
-  // Initialer Render
+  // Initialer Render (Platzhalter, bis Atlas geladen)
   mapView.updateBuildings(gameState.buildings)
   overlay.update(getTimeOfDay(gameState.tick))
   hud.update(gameState.resources)
   timeDisplay.update(getTimeOfDay(gameState.tick))
+
+  // Anno 1602 Sprites asynchron laden; bei Erfolg auf echte Kacheln umschalten
+  initSpriteAtlas(['stadtfld']).then(() => {
+    mapView.enableRealSprites()
+    mapView.updateBuildings(gameState.buildings)
+  }).catch((err: unknown) => {
+    console.warn('Sprite-Atlas konnte nicht geladen werden, Platzhalter bleiben aktiv:', err)
+  })
 
   const camera = new Camera()
   camera.attachTo(app.stage, mapView.container, window.innerWidth, window.innerHeight)
