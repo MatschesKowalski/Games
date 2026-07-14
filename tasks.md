@@ -234,252 +234,105 @@
 
 ---
 
-## Welle 3: Phase 2 — Verteidigung
-
----
-
-### Task 17: Einheiten-System (Truppen-Typen, Rekrutierung)
-- **prio:** 17
+### Task 17–18: Einheiten-System & Defensive Gebäude (abgeschlossen)
+- **prio:** 17–18
 - **status:** done
 - **beschreibung:** |
-    Grundlage für das Kampfsystem: Truppen, die der Spieler rekrutieren und
-    positionieren kann. Einheitenwerte aus Task 14 (COD-Parser).
-
-    1. `src/sim/state.ts` erweitern: `units: Unit[]` pro Spieler;
-       `Unit`: `id, typeId, col, row, hp, maxHp, side: "player" | "enemy"`
-    2. `src/content/units.ts`: Einheitentypen mit `id`, i18n-Key, HP, Schaden,
-       Reichweite (Nahkampf/Fernkampf), Bewegungsgeschwindigkeit (Ticks/Feld),
-       Rekrutierungskosten. Start-Set: Soldat (Nahkampf), Bogenschütze (Fernkampf),
-       Ritter (Nahkampf, stark). Werte aus `assets/data/units-raw.json` (Task 14).
-    3. Neue Befehle in `src/sim/commands.ts`:
-       - `{ type: "recruit", unitTypeId, col, row }` — rekrutiert Einheit,
-         kostet Ressourcen, platziert auf Karte
-    4. Neues Gebäude `Kaserne` in `src/content/buildings.ts` — Voraussetzung
-       für Rekrutierung (nur wenn Kaserne vorhanden)
-    5. UI: Kaserne-Gebäude auswählen → Einheiten-Menü zeigt verfügbare Typen
-       mit Kosten; Klick auf Feld platziert Einheit
-- **akzeptanzkriterien:** |
-    - [ ] Mindestens 3 Einheitentypen mit unterschiedlichen Werten
-    - [ ] Rekrutierung schlägt fehl ohne Kaserne (State unverändert)
-    - [ ] Rekrutierung schlägt fehl ohne Ressourcen (State unverändert)
-    - [ ] Einheiten-Sprites aus Soldat.bsh (Task 13/15) auf der Karte sichtbar
-    - [ ] Determinismus-Test weiterhin grün
-    - [ ] Einheitenwerte aus `src/content/units.ts`, nichts hartkodiert im Handler
-- **kontext:** |
-    Baut auf Task 3 (Commands/State), Task 6 (Ressourcen), Task 7 (Bausystem),
-    Task 14 (Einheitendaten), Task 15 (Sprites) auf. Kampflogik kommt erst
-    in Task 20/21 — hier nur Rekrutierung und Platzierung.
-- **dateien:** |
-    - ÄNDERN: `src/sim/state.ts`, `src/sim/commands.ts`, `src/content/buildings.ts`
-    - ÄNDERN: `src/content/units.ts` (aus Task 14 ergänzt)
-    - NEU: `src/sim/units.test.ts`
-    - ÄNDERN: `src/ui/hud.ts`, `src/ui/build-menu.ts`, `src/i18n/de.json`
+    Task 17: Einheiten (Rekrutierung, Kaserne, 4 Typen: Schwertkämpfer,
+    Kavallerie, Musketier, Kanonier). Task 18: Mauern, Wachturm, Burgtor
+    mit visueller Verbindungslogik (16 Mauer-Varianten).
+    Details in Git-History (Commits a8909b0, 53edfee).
 
 ---
 
-### Task 18: Defensive Gebäude (Mauern, Türme, Tore)
-- **prio:** 18
-- **status:** done
-- **beschreibung:** |
-    Verteidigungsinfrastruktur: der Spieler kann Mauern, Türme und Tore bauen,
-    die feindliche Einheiten aufhalten oder verlangsamen.
+## Aktuelle Bugfixes — Visuelle Qualität
 
-    1. Neue Gebäudetypen in `src/content/buildings.ts`:
-       - `Stadtmauer` (1×1, kettenfähig — verbindet sich visuell mit Nachbar-
-         Mauern auf angrenzenden Feldern)
-       - `Wachturm` (1×1, gibt Bogenschützen-Reichweite im Autobattle)
-       - `Burgtor` (2×1, Durchlass für eigene Einheiten, blockiert Feinde)
-    2. Mauer-Rendering: `src/render/map-view.ts` prüft, welche Nachbarfelder
-       ebenfalls Mauer haben und wählt den passenden Mauer-Sprite
-       (Anno 1602 Stadtfld.bsh enthält Mauer-Segmente für alle Richtungen)
-    3. Im Kampfsystem (Task 21): Mauer erhöht Verteidigungswert, Türme feuern
-       automatisch auf Feinde in Reichweite. Hier nur: Gebäude existieren im State.
-    4. Neue Befehlstypen nicht nötig — `build`-Befehl aus Task 7 reicht.
-- **akzeptanzkriterien:** |
-    - [ ] Stadtmauer, Wachturm, Burgtor sind im Bau-Menü verfügbar
-    - [ ] Mauern verbinden sich visuell mit benachbarten Mauern
-    - [ ] Mauern blockieren das Feld (Einheiten können nicht dort platziert werden)
-    - [ ] Alle bestehenden Tests weiterhin grün
-- **kontext:** |
-    Baut auf Task 7 (Bausystem) und Task 15 (Sprites) auf. Das Kampfverhalten
-    der Mauern/Türme folgt in Task 21 (Autobattle). Hier nur Bau und Darstellung.
-- **dateien:** |
-    - ÄNDERN: `src/content/buildings.ts`, `src/render/map-view.ts`
-    - ÄNDERN: `src/content/sprite-mapping.json`, `src/i18n/de.json`
+<!--
+  Weitere Tasks (Terrain, Angriffswellen, Kampf etc.) sind parkiert in tasks-backlog.md.
+  Erst dort rausholen wenn diese Fixes abgeschlossen sind.
+-->
 
 ---
 
-### Task 19: Angriffs-Ereignisse
+### Task 19: Sprite-Mapping korrigieren — richtige Anno 1602 Gebäude-Sprites
 - **prio:** 19
 - **status:** todo
 - **beschreibung:** |
-    Feindliche Angriffswellen als Kern-Spielereignis: Nach einer konfigurierten
-    Anzahl Spieltage kündigt sich ein Angriff an; bei Nacht beginnt das Gefecht.
+    Die aktuellen Gebäude-Sprites passen nicht zu den Gebäude-Typen:
+    z. B. zeigt "Holzmauer" das Fischerei-Häuschen. Die Sprite-Indizes in
+    sprite-mapping.json wurden geschätzt und sind falsch.
 
-    1. `src/sim/events.ts`: Event-System — `GameEvent` Union-Type mit mindestens:
-       - `{ type: "attack-warning", waveTick: number, strength: number }`
-         (erscheint N Ticks vor dem Angriff)
-       - `{ type: "attack-start", enemies: EnemyGroup[] }` (Angriff beginnt)
-       - `{ type: "attack-result", won: boolean, losses: number }`
-    2. `GameState` um `pendingEvents: GameEvent[]` und `attackWave: number`
-       (Angriffswellen-Zähler) erweitern
-    3. `src/sim/tick.ts`: nach X Tagen (Konstante `TICKS_PER_ATTACK_CYCLE`)
-       `attack-warning` erzeugen, nach weiteren Y Ticks `attack-start`
-    4. Angriffs-Stärke skaliert mit `attackWave` (jede Welle stärker)
-    5. Gegnergruppen: Typen aus `units.ts`, aber mit `side: "enemy"`
-    6. UI: Event-Anzeige als Modal oder HUD-Banner ("Angriff in X Tagen!",
-       "Die Feinde kommen!"), Text über i18n
+    1. Systematische Sichtprüfung der extrahierten Sprites:
+       Der Agent öffnet dist/sprites/stadtfld/sprite_N.png für relevante
+       Bereiche (z. B. 1100–1500 in 10er-Schritten) und identifiziert, welcher
+       Index zu welchem Gebäude gehört. Anno 1602 hat erkennbare Gebäude:
+       Rathaus (großes repräsentatives Gebäude), Sägewerk (mit Sägeblatt/Holz),
+       Steinbruch (Fels/Steine), Gehöft/Farm (Scheune), Jägerhütte (kleines
+       Waldhaus), Bäckerei (Ofen sichtbar), Kaserne (Militärgebäude), Wachturm
+       (Turm mit Aussichtsplattform), Mauern/Tore (Steinmauer-Segmente).
+
+    2. Für jedes Gebäude den visuell passenden Sprite-Index notieren und
+       src/content/sprite-mapping.json aktualisieren.
+
+    3. Besonders wichtig: Mauer-Varianten (wallVariants in sprite-mapping.json)
+       — die 16 Verbindungs-Varianten (4-Bit-Mask) müssen ebenfalls alle
+       auf die richtigen Mauer-Segment-Sprites zeigen.
+
+    4. Kurzen Test-Screenshot-Kommentar in SESSION_NOTES.md: welcher Index
+       für welches Gebäude gefunden wurde.
+
 - **akzeptanzkriterien:** |
-    - [ ] Nach konfigurierten Ticks erscheint `attack-warning` im State
-    - [ ] Warnung wird sichtbar in der UI angezeigt (Text, kein roher JSON-Dump)
-    - [ ] `attack-start` folgt nach weiterem Ablauf, enthält Gegnergruppe
-    - [ ] Angriffsstärke steigt mit `attackWave`
-    - [ ] Determinismus bleibt erhalten (Angriff-Timing rein aus `tick` abgeleitet)
-    - [ ] Vitest-Test: nach N Ticks sind erwartete Events im State
+    - [ ] Jedes Gebäude zeigt seinen optisch passenden Anno 1602 Sprite
+    - [ ] Keine offensichtlichen Verwechslungen mehr (kein Fischerei-Sprite
+          für Mauer usw.)
+    - [ ] Mauer-Segmente verbinden sich visuell korrekt (alle 16 Varianten geprüft)
+    - [ ] npm run build fehlerfrei
+    - [ ] Alle bestehenden Tests weiterhin grün
 - **kontext:** |
-    Reine Sim-Kern-Erweiterung. Kampfauflösung folgt in Task 20/21.
-    Events sind im State — kein Seiteneffekt, keine Callbacks.
+    Die Sprites liegen fertig extrahiert unter dist/sprites/stadtfld/sprite_N.png.
+    Der Agent muss nicht neu extrahieren — nur sichten und die JSON-Datei
+    aktualisieren. Rendering-Agent-Aufgabe.
 - **dateien:** |
-    - NEU: `src/sim/events.ts`, `src/sim/events.test.ts`
-    - ÄNDERN: `src/sim/state.ts`, `src/sim/tick.ts`
-    - ÄNDERN: `src/ui/hud.ts`, `src/i18n/de.json`
+    - ÄNDERN: src/content/sprite-mapping.json
+    - ÄNDERN: SESSION_NOTES.md (Fundstellen dokumentieren)
 
 ---
 
-### Task 20: Aufstellungs-Phase
+### Task 20: Pixel-Schärfe und Zoom-Tiefe reparieren
 - **prio:** 20
 - **status:** todo
 - **beschreibung:** |
-    Nach `attack-warning` hat der Spieler Zeit, Truppen auf Verteidigungspos-
-    itionen zu platzieren. Ein separater Modus (Phase) trennt Aufbau und Kampf.
+    Zwei Rendering-Probleme in einem Task:
 
-    1. Neuer State: `GameState.phase: "build" | "deployment" | "combat" | "result"`
-    2. Bei `attack-warning`: automatisch in `"deployment"` wechseln
-    3. Im Deployment-Modus:
-       - Spieler kann Einheiten aus der Kaserne auf Felder hinter der Mauerlinie
-         verschieben (neuer Befehl: `{ type: "move-unit", unitId, col, row }`)
-       - Bau neuer Gebäude/Einheiten weiterhin möglich
-       - Keine Ressourcenproduktion in dieser Phase (Kampfvorbereitung pausiert
-         den normalen Tick — oder Tick läuft weiter, beide Varianten akzeptabel,
-         in SESSION_NOTES.md begründen)
-    4. UI: visueller Hinweis auf Deployment-Phase; Bestätigen-Button ("Bereit!")
-       → Befehl `{ type: "deployment-ready" }` → Phase wechselt zu `"combat"`
-    5. Zeitlimit (optional): nach X Ticks automatisch zu Combat wechseln
+    A) UNSCHÄRFE: PixiJS verwendet standardmäßig "lineare" Textur-Filterung,
+       die beim Hochskalieren von Pixel-Art weichzeichnet. Anno 1602 Sprites
+       sind Pixel-Art und müssen pixel-genau scharf bleiben.
+       Fix in src/render/sprite-atlas.ts: Nach dem Laden jedes Sheet-Textur
+       die Quelle auf Nearest-Neighbor-Filterung umstellen:
+         texture.source.scaleMode = 'nearest'
+       Das muss direkt nach Assets.load() gesetzt werden, bevor Subtexturen
+       daraus ausgeschnitten werden (da alle Subtexturen dieselbe Quelle teilen).
+
+    B) ZOOM-LIMIT: Der maximale Zoom-Faktor liegt bei 3.0 (src/render/camera.ts,
+       Konstante MAX_ZOOM). Das ist zu wenig — der Spieler kann nicht nah genug
+       heranzoomen.
+       Fix: MAX_ZOOM auf 8.0 erhöhen.
+       Zusätzlich: ZOOM_FACTOR_IN von 1.1 auf 1.15 erhöhen, damit ein Scroll-
+       Schritt subjektiv mehr Wirkung hat.
+
 - **akzeptanzkriterien:** |
-    - [ ] Phase wechselt korrekt: build → deployment → combat
-    - [ ] Im Deployment-Modus können Einheiten umpositioniert werden
-    - [ ] "Bereit!"-Button löst Combat-Phase aus
-    - [ ] Phasenwechsel wird im HUD sichtbar angezeigt
-    - [ ] Determinismus: Phasenwechsel rein aus State/Commands ableitbar
-- **kontext:** |
-    Baut auf Task 17 (Einheiten), Task 19 (Events) auf. Die eigentliche
-    Kampfauflösung folgt in Task 21. Rendering-seitig: evtl. Einfärbung des
-    Deployment-Bereichs (grün = erlaubte Zone).
-- **dateien:** |
-    - ÄNDERN: `src/sim/state.ts`, `src/sim/commands.ts`, `src/sim/tick.ts`
-    - ÄNDERN: `src/ui/hud.ts`, `src/main.ts`, `src/i18n/de.json`
-    - NEU: `src/sim/phase.test.ts`
-
----
-
-### Task 21: Autobattle-Kern
-- **prio:** 21
-- **status:** todo
-- **beschreibung:** |
-    Das Herzstück von Phase 2: deterministisches Kampfsystem, das pro Tick
-    automatisch abläuft, sobald die Combat-Phase beginnt.
-
-    1. `src/sim/combat.ts`: Funktion `resolveCombatTick(state: GameState):
-       GameState` — reiner State-In/State-Out, kein Seiteneffekt
-       Logik pro Tick:
-       a. Feinde bewegen sich auf nächste Spieler-Einheit oder Mauer zu
-          (einfacher A*-Pfadfinder oder Manhattan-Greedy reicht)
-       b. Einheiten in Reichweite greifen an (Schaden = Einheitenwert ± kleine
-          RNG-Variation via `rng.ts`)
-       c. Türme (Wachturm-Gebäude) feuern automatisch auf Feinde in Reichweite
-       d. HP ≤ 0 → Einheit aus State entfernen
-       e. Feinde erreichen Basis-Gebäude (Rathaus) → Schaden an Gebäude-HP
-       f. Alle Feinde tot → `attack-result` mit `won: true`
-       g. Rathaus-HP = 0 → `attack-result` mit `won: false` (Game-Over-Zustand)
-    2. `tick()` ruft in Combat-Phase `resolveCombatTick()` statt normaler
-       Ressourcen-Produktion auf
-    3. Einheiten-HP wird im State getrackt (bereits in Task 17 vorbereitet)
-    4. Nach Kampfende → Phase wechselt zu `"result"`, dann zurück zu `"build"`
-- **akzeptanzkriterien:** |
-    - [ ] Feinde bewegen sich pro Tick auf die Spieler-Basis zu
-    - [ ] Kampf endet mit Sieg wenn alle Feinde besiegt
-    - [ ] Kampf endet mit Niederlage wenn Rathaus-HP auf 0 fällt
-    - [ ] Türme greifen Feinde in Reichweite automatisch an
-    - [ ] Determinismus: gleicher Start-State + Seed → gleicher Kampfverlauf
-    - [ ] Vitest-Test: kleines Szenario (5 Feinde vs. 3 Soldaten) → erwartetes
-          Ergebnis nach N Ticks
-- **kontext:** |
-    Baut auf Task 3 (RNG, Determinismus), Task 17 (Einheiten), Task 18 (Türme/Mauern),
-    Task 19 (Events), Task 20 (Phasen) auf. Rendering des Kampfes folgt in Task 22.
-- **dateien:** |
-    - NEU: `src/sim/combat.ts`, `src/sim/combat.test.ts`
-    - ÄNDERN: `src/sim/tick.ts`, `src/sim/state.ts`
-
----
-
-### Task 22: Kampf-Rendering & Audio
-- **prio:** 22
-- **status:** todo
-- **beschreibung:** |
-    Den in Task 21 berechneten Kampf sichtbar und hörbar machen.
-
-    1. Einheiten-Sprites auf der Karte: Soldat-Sprites aus `Soldat.bsh`
-       (Task 13/15), die sich je nach Bewegungsrichtung drehen (Anno 1602
-       Sprites haben 8 Richtungen × Animation-Frames)
-    2. Bewegungs-Animation: Einheiten gleiten flüssig zwischen Grid-Feldern
-       (Interpolation zwischen zwei Positionen über mehrere Render-Frames,
-       unabhängig vom Sim-Tick)
-    3. Angriffs-Animation: kurzer Ausschlag in Angriffsrichtung, dann zurück
-    4. Tod-Effekt: `Effekte.bsh` oder einfaches Ausblenden
-    5. Kampf-Sounds (Task 16): `sdtattk1-6.wav` bei Soldat-Angriff,
-       `Schwert1-5.wav` oder `Muskete1-3.wav` je Einheitentyp,
-       `Kanone5-8.wav` bei Turm-Beschuss
-    6. Ergebnis-Screen: nach Kampfende Modal mit Sieg/Niederlage-Text,
-       Verluste-Übersicht, "Weiter"-Button zurück in Build-Phase
-       (`Triumph.wav` bei Sieg)
-- **akzeptanzkriterien:** |
-    - [ ] Einheiten sind als Sprites sichtbar auf der Karte
-    - [ ] Bewegung zwischen Feldern ist animiert (kein Teleportieren)
-    - [ ] Kampfgeräusche ertönen bei Angriffen
-    - [ ] Nach Kampf erscheint Ergebnis-Screen
+    - [ ] Gebäude-Sprites sind scharf und pixelig (keine Weichzeichnung)
+    - [ ] Gras-Kacheln sind scharf (Kachelmuster klar erkennbar)
+    - [ ] Zoom reicht bis mindestens Faktor 8 heran
+    - [ ] Kein visueller Bruch beim Zoomen (Sprites bleiben scharf auf allen Zoom-Stufen)
+    - [ ] npm run build fehlerfrei
     - [ ] Alle bestehenden Tests weiterhin grün
 - **kontext:** |
-    Reine Render-/Audio-Aufgabe über den Kern aus Task 21. Die Kampf-Animation
-    liest nur den State (Snapshots pro Tick) — schreibt nie in den Kern.
+    sprite-atlas.ts lädt Texturen via PixiJS Assets.load(). Die scaleMode-
+    Eigenschaft muss auf der texture.source (nicht auf der Texture selbst) gesetzt
+    werden, da alle ausgeschnittenen Frame-Texturen dieselbe GPU-Textur-Quelle teilen.
+    camera.ts enthält MIN_ZOOM, MAX_ZOOM, ZOOM_FACTOR_IN, ZOOM_FACTOR_OUT als
+    Konstanten ganz oben in der Datei.
 - **dateien:** |
-    - ÄNDERN: `src/render/map-view.ts`, `src/render/sound-manager.ts`
-    - NEU: `src/render/unit-sprites.ts`, `src/ui/combat-result.ts`
-    - ÄNDERN: `src/main.ts`, `src/i18n/de.json`
-
----
-
-### Task 23: Integrationstest Phase 2
-- **prio:** 23
-- **status:** todo
-- **beschreibung:** |
-    Abschluss der Verteidigungs-Phase: vollständiger Loop end-to-end getestet.
-
-    1. Vitest-Integrationstest: Aufbau-Phase → Kaserne bauen → Truppen rekrutieren
-       → Mauern bauen → Angriffswelle ausgelöst → Deployment → Kampf → Sieg/
-       Niederlage → Phase zurück auf Build → Speichern → Laden → State konsistent
-    2. Alle Phase-1-Tests (Task 12) weiterhin grün
-    3. Manueller Testbericht in SESSION_NOTES.md: was funktioniert, was ist
-       bekanntes WIP (z. B. Balancing nicht final, Animation-Timing)
-    4. Vorbereitung Phase 3 (Welt/Fog of War): kurze Notiz in SESSION_NOTES.md
-       welche State-Felder Phase 3 brauchen wird (Erkundungs-Grid, Nachbar-Fraktionen)
-- **akzeptanzkriterien:** |
-    - [ ] Integrationstest deckt den vollen Phase-2-Loop ab
-    - [ ] Alle Vitest-Tests (Tasks 1–22) laufen grün
-    - [ ] `npm run build` erzeugt fehlerfreies Bundle
-    - [ ] SESSION_NOTES.md enthält Abnahme-Bericht Phase 2
-- **kontext:** |
-    Entspricht Task 12 für Phase 2. Nach `done` ist Phase 2 aus `spielkonzept.md`
-    abgeschlossen — Phase 3 (Fog of War, Erkundung) folgt in Welle 4.
-- **dateien:** |
-    - NEU: `src/sim/phase2-loop.test.ts`
-    - ÄNDERN: `SESSION_NOTES.md`
+    - ÄNDERN: src/render/sprite-atlas.ts (scaleMode = 'nearest' nach Assets.load)
+    - ÄNDERN: src/render/camera.ts (MAX_ZOOM = 8.0, ZOOM_FACTOR_IN = 1.15)
