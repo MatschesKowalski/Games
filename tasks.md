@@ -1,4 +1,4 @@
-# Tasks — Welle 1: MVP (Aufbau-Loop)
+# Tasks — Aufbau/Defense-Endlosspiel
 
 ## Anleitung
 <!--
@@ -14,446 +14,472 @@
   Der Agent braucht KEINEN Kontext vorheriger Tasks (außer dem, was vorherige
   Tasks tatsächlich im Code angelegt haben).
 
-  Quelle: spielkonzept.md (Repo-Root) — Phase 1 (MVP) dieser Liste.
-  Konkrete Namen für Ressourcen/Gebäude sind Vorschläge — der bearbeitende Agent
-  darf sie sinnvoll anpassen, sofern die Struktur (Datenfile, i18n-Key, Typ) erhalten bleibt.
+  Quelle: spielkonzept.md (Repo-Root)
+  Anno 1602 Assets liegen lokal unter `Anno 1602/` (nicht im Repo, lokal verfügbar).
 -->
 
 ## Aufgaben
 
 ---
 
-### Task 1: Projekt-Setup — TypeScript + PixiJS + Vite-Grundgerüst
-- **prio:** 1
+### Task 1–12: MVP-Phase (abgeschlossen)
+- **prio:** 1–12
 - **status:** done
 - **beschreibung:** |
-    Leeres Repo (nur `spielkonzept.md`, `README.md`) in ein lauffähiges TypeScript/
-    PixiJS-Projekt verwandeln. Build-Tool: Vite (schnelles Dev-Setup, Standard für
-    PixiJS-Browser-Projekte, kein zusätzlicher Server nötig).
-
-    Ordnerstruktur anlegen (leer, mit `.gitkeep` oder erstem Platzhalter-File):
-    - `src/sim/` — Simulationskern (später: State, Tick, Commands)
-    - `src/render/` — PixiJS-Rendering
-    - `src/ui/` — HUD/Menüs
-    - `src/i18n/` — Sprachdateien
-    - `src/content/` — Daten (Gebäude, Fraktionen, Events, Ressourcen)
-    - `src/save/` — Speicherstand-Serialisierung
-    - `tests/` — für spätere Playwright-Specs (falls gebraucht)
-
-    Basis-Setup:
-    1. `npm create vite@latest . -- --template vanilla-ts` (oder gleichwertig manuell)
-    2. `pixi.js` als Dependency installieren
-    3. `vitest` als Dev-Dependency installieren, `vitest.config.ts` anlegen
-    4. Minimaler Entry-Point (`src/main.ts`): PixiJS-Application erzeugen, leeren
-       Canvas ins DOM einhängen, `npm run dev` startet ohne Fehler
-    5. TypeScript strict mode aktivieren (`tsconfig.json`: `"strict": true`)
-    6. `package.json` Scripts: `dev`, `build`, `test` (vitest run)
-
-    Kein Spiel-Feature in diesem Task — nur die Grundlage, auf der alle folgenden
-    Tasks aufbauen.
-- **akzeptanzkriterien:** |
-    - [ ] `npm install && npm run dev` startet lokalen Dev-Server ohne Fehler
-    - [ ] Browser zeigt leeren PixiJS-Canvas (schwarzer oder farbiger Hintergrund reicht)
-    - [ ] `npm run build` erzeugt ein `dist/`-Bundle ohne TypeScript-Fehler
-    - [ ] `npm test` (vitest) läuft durch (auch wenn noch keine echten Tests existieren)
-    - [ ] Ordnerstruktur `src/sim`, `src/render`, `src/ui`, `src/i18n`, `src/content`,
-          `src/save` existiert
-    - [ ] `tsconfig.json` hat `"strict": true`
-- **kontext:** |
-    Stack-Entscheidung aus `spielkonzept.md`: TypeScript im Browser, PixiJS, Vite
-    ist die naheliegende Build-Tool-Wahl dafür (nicht explizit im Konzept genannt,
-    aber Standardkombination — bei Bedarf im SESSION_NOTES.md begründen falls anders
-    entschieden wird).
-- **dateien:** |
-    - NEU: `package.json`, `tsconfig.json`, `vite.config.ts`, `vitest.config.ts`
-    - NEU: `src/main.ts`
-    - NEU: `src/sim/.gitkeep`, `src/render/.gitkeep`, `src/ui/.gitkeep`,
-      `src/i18n/.gitkeep`, `src/content/.gitkeep`, `src/save/.gitkeep`
+    Vollständiger MVP-Loop: Projekt-Setup, i18n, Simulationskern, Speichersystem,
+    isometrische Karte, Ressourcenwirtschaft, Bausystem, Tag/Nacht-Zyklus,
+    Platzhalter-Assets, HUD/UI, Save/Load-UI, Integrationstest.
+    Details in Git-History (Commits ee64de5 bis 6c60310).
 
 ---
 
-### Task 2: i18n-Grundgerüst (Sprachdateien)
-- **prio:** 2
-- **status:** done
-- **beschreibung:** |
-    Sprachdatei-System aufbauen, BEVOR weitere Features Texte brauchen — Vorgabe aus
-    `spielkonzept.md`: "alle Texte ab Tag 1 in Sprachdateien (de zuerst), keine
-    Strings im Code."
-
-    1. `src/i18n/de.json`: flache oder verschachtelte Struktur mit `dot.notation`-Keys,
-       z. B. `{"ui": {"resources": {"wood": "Holz"}}}` oder `"ui.resources.wood"`
-    2. `src/i18n/index.ts`: Funktion `t(key: string): string`, die einen Key aus der
-       aktuell geladenen Sprachdatei auflöst. Fehlt ein Key: Key selbst zurückgeben
-       UND in der Konsole warnen (kein Crash)
-    3. Sprache aktuell fest auf `de` — Struktur muss aber weitere Sprachen später
-       ohne Umbau zulassen (z. B. `loadLanguage(lang: string)`)
-    4. Ein paar Beispiel-Keys anlegen (z. B. `app.title`, `ui.loading`), die in
-       Task 1's `main.ts` oder einem einfachen Test genutzt werden, um das System
-       zu verifizieren
-- **akzeptanzkriterien:** |
-    - [ ] `t("app.title")` liefert den Text aus `de.json`
-    - [ ] `t("nicht.vorhanden")` liefert den Key zurück statt zu crashen, loggt Warnung
-    - [ ] Kein Text ist direkt im Code hartkodiert, wo `t()` zum Einsatz kommt
-    - [ ] Vitest-Test für `t()`: gefundener Key, fehlender Key, verschachtelter Key
-- **kontext:** |
-    Architekturregel (`.claude/context/arch.md`): Kern und Rendering referenzieren
-    nur i18n-Keys, nie Klartext. Dieses Grundgerüst ist Voraussetzung für Task 6, 7,
-    8, 10 (alle brauchen sichtbaren Text).
-- **dateien:** |
-    - NEU: `src/i18n/de.json`
-    - NEU: `src/i18n/index.ts`
-    - NEU: `src/i18n/index.test.ts`
+## Welle 2: Anno 1602 Asset-Integration
 
 ---
 
-### Task 3: Simulationskern-Grundgerüst (Tick-Loop, Commands, seeded RNG)
-- **prio:** 3
-- **status:** done
+### Task 13: BSH+SCP-Parser — Sprite-Extraktion
+- **prio:** 13
+- **status:** todo
 - **beschreibung:** |
-    Deterministischen Kern anlegen: reine Funktionen, kein PixiJS/DOM-Import,
-    lauffähig headless in Node (Voraussetzung für spätere Multiplayer-Server-Nutzung,
-    siehe `.claude/context/history.md`).
+    Anno 1602 speichert alle Spiel-Grafiken in `.bsh`-Dateien (proprietäres
+    Sprite-Format) mit zugehörigen `.scp`-Paletten-Dateien (Farbtabellen).
+    Dieses Task schreibt ein Node.js-Script in TypeScript, das beide kombiniert
+    und PNG-Sprite-Sheets ausgibt.
 
-    1. `src/sim/state.ts`: TypeScript-Typ `GameState` (zunächst minimal: `tick: number`,
-       `resources: Record<string, number>`, `buildings: Building[]` — wird in
-       späteren Tasks erweitert)
-    2. `src/sim/rng.ts`: seeded RNG (z. B. einfacher Mulberry32- oder xorshift-
-       Algorithmus, kein externes Package nötig). Signatur: `createRng(seed: number)
-       => () => number`
-    3. `src/sim/commands.ts`: Command-Typ (discriminated union, z. B.
-       `{ type: "noop" }` als Platzhalter — echte Befehle wie `build` kommen in
-       Task 7) und Funktion `applyCommand(state: GameState, command: Command):
-       GameState` (reine Funktion, gibt NEUEN State zurück, mutiert nicht)
-    4. `src/sim/tick.ts`: Funktion `tick(state: GameState, commands: Command[]):
-       GameState` — verarbeitet alle Befehle eines Ticks, erhöht `state.tick`
-    5. Determinismus-Test: gleicher Start-State + gleiche Seed + gleiche Befehlsfolge
-       über N Ticks → exakt gleicher End-State (per `JSON.stringify`-Vergleich oder
-       einfachem Hash)
+    Ziel-Dateien (liegen unter `Anno 1602/` bzw. `Anno 1602/GFX/`):
+    - `Stadtfld.bsh` — alle isometrischen Terrain- und Gebäude-Kacheln
+    - `Soldat.bsh` — Soldaten-Animationen (alle Richtungen)
+    - `Traeger.bsh` — Träger/Arbeiter-Sprites
+    - `Ship.bsh` — Schiffs-Sprites
+    - `Tiere.bsh` — Tier-Sprites (Schafe, Kühe)
+    - `Effekte.bsh` — Effekte (Rauch, Feuer)
+    - `Schatten.bsh` — Schatten
+
+    Paletten (Farbzuordnung je Zoom-Stufe):
+    - `big.scp` / `big00.scp`…`big66.scp` — Großansicht
+    - `med.scp` / `med00.scp`… — mittlere Ansicht
+    - `mit.scp`, `lit.scp`, `lar.scp` — weitere Stufen
+
+    BSH-Format (community-dokumentiert, reverse-engineered):
+    - Header: 4 Bytes Anzahl Sprites, dann Offset-Tabelle (je 4 Bytes)
+    - Pro Sprite: Breite (2 Bytes), Höhe (2 Bytes), X-Offset (2 Bytes),
+      Y-Offset (2 Bytes), dann Pixel-Daten als Palette-Indizes (1 Byte = 1 Pixel,
+      0 = transparent)
+    - SCP: 256 × RGB-Tripel (768 Bytes = eine Farbpalette)
+
+    Aufgaben:
+    1. `scripts/extract-bsh.ts`: liest BSH-Datei + SCP-Palette, gibt für jeden
+       Sprite ein PNG-Buffer aus (Node `sharp` oder `pngjs` für PNG-Erzeugung)
+    2. `scripts/run-extract.ts`: Batch-Script, das alle relevanten BSH-Dateien
+       durchläuft und PNGs nach `assets/sprites/<dateiname>/sprite_<idx>.png`
+       schreibt
+    3. Zusätzlich: ein kombiniertes Sprite-Sheet pro BSH-Datei
+       (`assets/sprites/<dateiname>/sheet.png`) mit zugehöriger JSON-Metadaten-
+       Datei (`sheet.json`: Array von `{x, y, w, h}` pro Sprite)
+    4. Script läuft mit `npx ts-node scripts/run-extract.ts` oder
+       `node --loader ts-node/esm scripts/run-extract.ts`
+
+    Alle Pfade relativ zu Repo-Root konfigurierbar (keine hardcodierten absoluten
+    Pfade außer Basis-Pfad per Env-Variable `ANNO_PATH`, Default: `./Anno 1602`).
 - **akzeptanzkriterien:** |
-    - [ ] `src/sim/**` importiert nichts aus `pixi.js`, kein `window`/`document`
-    - [ ] `tick()` mutiert den übergebenen State NICHT (Referenzvergleich vorher/nachher
-          unterschiedlich, altes Objekt unverändert)
-    - [ ] Determinismus-Test: zwei Läufe mit identischem Seed + identischen Befehlen
-          liefern identischen End-State
-    - [ ] Kein `Math.random()`/`Date.now()` in `src/sim/` außerhalb von `rng.ts`
-    - [ ] `npx vitest run src/sim` läuft fehlerfrei
+    - [ ] `npx ts-node scripts/run-extract.ts` läuft ohne Crash durch
+    - [ ] Für Stadtfld.bsh entstehen sichtbar korrekte isometrische Kachel-PNGs
+          (visuell prüfen: Rauten-Form erkennbar, keine Farb-Artefakte)
+    - [ ] sheet.json enthält korrekte x/y/w/h-Koordinaten (Roundtrip: Sprite
+          aus Sheet ausschneiden = Original-Sprite)
+    - [ ] Transparenz (Index 0) wird korrekt als Alpha=0 übernommen
+    - [ ] Kein Import aus `pixi.js` in den Scripts (Node-only)
 - **kontext:** |
-    Architekturregel: Zustand ändert sich NUR über Befehle pro Tick. Dieser Task
-    legt das Muster fest, das Task 6 (Ressourcen), 7 (Bauen), 8 (Tag/Nacht) mit
-    echten Befehlen füllen.
+    Das BSH-Format ist von der Anno 1602 Community vollständig reverse-engineered
+    und gut dokumentiert (z.B. im "anno-toolkit" GitHub-Projekt und
+    anno1602.de-Modding-Wiki). Der bearbeitende Agent soll NICHT das Internet
+    aufrufen — das Format reicht, wie es hier beschrieben ist.
+    pngjs ist bevorzugt (pure JS, keine native Abhängigkeiten).
 - **dateien:** |
-    - NEU: `src/sim/state.ts`, `src/sim/rng.ts`, `src/sim/commands.ts`, `src/sim/tick.ts`
-    - NEU: `src/sim/rng.test.ts`, `src/sim/tick.test.ts`
+    - NEU: `scripts/extract-bsh.ts`, `scripts/run-extract.ts`
+    - NEU: `assets/sprites/` (Ordner, wird vom Script befüllt)
+    - ÄNDERN: `package.json` (pngjs als dev-dependency)
 
 ---
 
-### Task 4: Speichersystem (Serialisierung, Versionierung, lokaler Export/Import)
-- **prio:** 4
-- **status:** done
+### Task 14: COD-Parser — Gebäude- & Einheitendaten extrahieren
+- **prio:** 14
+- **status:** todo
 - **beschreibung:** |
-    Speicherstände-Format anlegen: "DB-ready, versioniert" laut `spielkonzept.md`,
-    damit spätere Server-Accounts ohne Formatbruch möglich sind. Zunächst nur
-    lokal (Datei-Export/Import im Browser), kein Server.
+    Anno 1602 speichert alle Spielbalance-Daten in `.cod`-Dateien. Die wichtigsten
+    für unser Spiel sind `haeuser.cod` (Gebäude: Kosten, Produktion, Bevölkerungsbedarf)
+    und `figuren.cod` (Einheiten: HP, Schaden, Geschwindigkeit).
 
-    1. `src/save/schema.ts`: Typ `SaveFile` mit Feldern `version: number`,
-       `savedAt: string` (ISO-Datum), `state: GameState`
-    2. `src/save/serialize.ts`: `serialize(state: GameState): SaveFile` und
-       `deserialize(save: SaveFile): GameState`. Bei unbekannter/älterer `version`:
-       einfache Migrationsfunktion vorbereiten (auch wenn aktuell nur Version 1
-       existiert — Stub-Funktion `migrate(save: SaveFile): SaveFile` die bei
-       `version === CURRENT_VERSION` einfach durchreicht)
-    3. `src/save/local-file.ts`: `downloadSave(save: SaveFile): void` (erzeugt Blob,
-       triggert Browser-Download als `.json`) und `readSaveFile(file: File):
-       Promise<SaveFile>` (liest hochgeladene Datei)
-    4. Validierung beim Laden: fehlerhafte/fremde JSON-Datei → klare Fehlermeldung
-       (über i18n-Key), kein Crash der App
+    Das COD-Format (community-dokumentiert):
+    - Datei beginnt mit einem 2-Byte-Header (0x01 0x30 = komprimiert mit
+      eigenem RLE-Schema, oder unkomprimiert)
+    - Bei komprimierten Dateien: dekomprimieren, dann strukturierte Records lesen
+    - Records sind sequentielle Daten-Blöcke mit fixer Größe je Typ
+    - haeuser.cod: je Gebäude ca. 60–80 Bytes (ID, Baukosten Holz/Stein/Gold,
+      Produktionsrate, benötigte Bevölkerung, Größe)
+    - figuren.cod: je Einheit ca. 20–30 Bytes (ID, HP, Schaden, Geschwindigkeit,
+      Typ: Soldat/Schütze/Schiff)
+
+    Da das exakte Byte-Layout komplex ist, pragmatischer Ansatz:
+    1. Datei als Hex lesen, bekannte Konstantwerte (z.B. Holzkosten von Anno 1602
+       Holzfällerhütte = 2 Holz, 0 Stein) als Anker nutzen um Offset zu finden
+    2. Dann strukturiert die nächsten Gebäude lesen
+    3. Ergebnis als lesbares JSON abspeichern (`assets/data/buildings-raw.json`,
+       `assets/data/units-raw.json`)
+    4. Separates Mapping-Script `scripts/map-to-game.ts` übersetzt die Anno-IDs
+       und -Werte auf unser Spielsystem (unsere Ressourcen-IDs, unsere Gebäude-IDs)
+
+    Falls COD-Parsing zu aufwendig (Format undokumentiert): Fallback — die
+    bekannten Anno 1602 Balance-Werte aus der Community-Dokumentation manuell
+    als JSON erfassen (in SESSION_NOTES.md begründen).
 - **akzeptanzkriterien:** |
-    - [ ] `serialize()` → `deserialize()` liefert einen zum Original äquivalenten
-          `GameState` (Roundtrip-Test)
-    - [ ] Speicherdatei enthält `version`-Feld
-    - [ ] Ungültige Datei beim Laden: definierter Fehler (kein unbehandelter Crash),
-          Fehlertext über `t()`
-    - [ ] Vitest-Test für Serialisierung/Deserialisierung inkl. Roundtrip
+    - [ ] `assets/data/buildings-raw.json` enthält mind. 8 Gebäudetypen mit
+          je Baukosten und Produktionsdaten (Werte plausibel prüfen gegen bekannte
+          Anno 1602 Werte)
+    - [ ] `assets/data/units-raw.json` enthält mind. 3 Einheitentypen mit HP/Schaden
+    - [ ] `scripts/map-to-game.ts` gibt ein für unser Spiel passendes JSON aus
+    - [ ] Werte werden in `src/content/buildings.ts` und einem neuen
+          `src/content/units.ts` übernommen (alte Platzhalter-Werte ersetzt)
+    - [ ] Alle bestehenden Vitest-Tests weiterhin grün
 - **kontext:** |
-    Baut auf `src/sim/state.ts` (Task 3) auf. `local-file.ts` nutzt Browser-APIs
-    (Blob, File) — das ist zulässig, da es in `src/save/`, nicht in `src/sim/`
-    liegt (Kern bleibt headless-fähig).
+    Baut nicht direkt auf vorherige Tasks auf (eigenständiges Script), aber die
+    Ergebnis-Werte ersetzen die bisherigen Platzhalter in `src/content/buildings.ts`
+    (Task 7). Einheitendaten werden in Task 17 (Einheiten-System) weiter genutzt.
 - **dateien:** |
-    - NEU: `src/save/schema.ts`, `src/save/serialize.ts`, `src/save/local-file.ts`
-    - NEU: `src/save/serialize.test.ts`
-    - ÄNDERN: `src/i18n/de.json` (Fehlertexte für ungültige Speicherdatei)
+    - NEU: `scripts/parse-cod.ts`, `scripts/map-to-game.ts`
+    - NEU: `assets/data/buildings-raw.json`, `assets/data/units-raw.json`
+    - ÄNDERN: `src/content/buildings.ts`, `src/i18n/de.json`
+    - NEU: `src/content/units.ts`
 
 ---
 
-### Task 5: Isometrische Karten-Darstellung (Tile-Rendering, Kamera)
-- **prio:** 5
-- **status:** done
+### Task 15: Sprite-Integration (Kacheln & Gebäude)
+- **prio:** 15
+- **status:** todo
 - **beschreibung:** |
-    Erste sichtbare Spielwelt: eine isometrische Kachel-Karte, über die man per
-    Maus/Touch schwenken (pannen) und zoomen kann.
+    Die in Task 13 extrahierten PNG-Sprite-Sheets in das laufende Spiel einbinden —
+    echte Grafiken ersetzen die programmatischen Platzhalter aus Task 9.
 
-    1. `src/render/iso.ts`: zentrale Koordinatentransformation zwischen Gitter-
-       Koordinaten (Spalte/Zeile) und Bildschirm-Pixeln für isometrische
-       Darstellung (`gridToScreen(col, row): {x, y}` und `screenToGrid(x, y):
-       {col, row}`)
-    2. `src/render/map-view.ts`: rendert ein Grid aus Platzhalter-Kacheln (z. B.
-       einfarbige Rauten/Rechtecke, siehe Task 9 für echte Platzhalter-Assets) für
-       eine konfigurierbare Kartengröße (z. B. 40×40 Kacheln zum Start)
-    3. `src/render/camera.ts`: Kamera-Objekt mit Pan (Drag mit Maus/Touch) und Zoom
-       (Mausrad/Pinch), begrenzt auf sinnvolle Min/Max-Zoomstufen und Kartengrenzen
-       (nicht endlos rausscrollen)
-    4. Karte und Kamera werden in `src/main.ts` eingebunden, Kachel unter dem
-       Mauszeiger wird optisch hervorgehoben (Hover-Feedback, Grundlage für Task 7)
+    1. `src/render/sprite-atlas.ts`: lädt die Sheet-JSONs und Sheet-PNGs aus
+       `assets/sprites/` als PixiJS-Textures; bietet `getSprite(sheetName,
+       spriteIndex): Texture` an
+    2. Stadtfld.bsh-Kacheln als Map-Tiles:
+       - Die isometrischen Terrain-Kacheln (Gras, Wasser, Weg, Sand) aus
+         Stadtfld.bsh identifizieren (bekannte Indizes aus Anno-Dokumentation)
+         und als Tile-Texturen einsetzen
+       - `src/render/map-view.ts` auf echte Texturen umstellen statt
+         programmatischer Grafik
+    3. Gebäude-Sprites: je Gebäudetyp aus dem Katalog (buildings.ts) den
+       passenden BSH-Sprite-Index hinterlegen (Mapping in einer JSON-Datei
+       `src/content/sprite-mapping.json`)
+    4. Platzhalter-Sprites aus `placeholder-sprites.ts` werden nur noch als
+       Fallback verwendet (kein Aufruf wenn echter Sprite vorhanden)
 - **akzeptanzkriterien:** |
-    - [ ] Karte aus mind. 40×40 Kacheln wird isometrisch dargestellt
-    - [ ] Drag mit gedrückter Maustaste verschiebt die Kamera (Pan)
-    - [ ] Mausrad zoomt rein/raus, innerhalb definierter Grenzen
-    - [ ] Kamera lässt sich nicht beliebig weit über den Kartenrand hinausschieben
-    - [ ] `gridToScreen`/`screenToGrid` sind zueinander invers (Test: Rundung
-          tolerieren, aber Grid-Zelle muss übereinstimmen)
-    - [ ] Kachel unter Mauszeiger wird optisch markiert
+    - [ ] Karte zeigt echte Anno 1602 Terrain-Kacheln statt einfarbige Rauten
+    - [ ] Mindestens 3 Gebäudetypen zeigen ihre echten Sprites auf der Karte
+    - [ ] Fehlender Sprite → Platzhalter als Fallback (kein Crash)
+    - [ ] `npm run build` erzeugt fehlerfrei ein Bundle
+    - [ ] Alle bestehenden Tests weiterhin grün
 - **kontext:** |
-    Reine Rendering-Aufgabe, kein Bezug zu `src/sim/` außer später über die
-    Snapshot-Schicht. `iso.ts` ist DIE zentrale Stelle für die Transformation
-    (Architekturregel: nicht duplizieren).
+    Setzt Task 13 (extrahierte Assets) und Task 9 (Platzhalter-System) voraus.
+    sprite-atlas.ts ist DIE zentrale Stelle für Sprite-Zugriff — nicht in
+    anderen Render-Dateien direkt aus dem assets/-Ordner laden.
 - **dateien:** |
-    - NEU: `src/render/iso.ts`, `src/render/map-view.ts`, `src/render/camera.ts`
-    - NEU: `src/render/iso.test.ts`
-    - ÄNDERN: `src/main.ts`
+    - NEU: `src/render/sprite-atlas.ts`, `src/content/sprite-mapping.json`
+    - ÄNDERN: `src/render/map-view.ts`, `src/render/placeholder-sprites.ts`
+    - ÄNDERN: `package.json` (vite asset-handling für assets/-Ordner prüfen)
 
 ---
 
-### Task 6: Ressourcenwirtschaft (Typen, Produktion, Lagerung)
-- **prio:** 6
-- **status:** done
+### Task 16: Audio-Integration
+- **prio:** 16
+- **status:** todo
 - **beschreibung:** |
-    Erste echte Spiellogik im Kern: Ressourcen, die durch Gebäude produziert und
-    verbraucht werden. Vorschlag für Basis-Ressourcen (Low-Fantasy-Siedlung):
-    Holz, Stein, Nahrung, Gold — Agent darf Namen/Anzahl anpassen, Struktur
-    (Datenfile + i18n-Key) muss aber erhalten bleiben.
+    Die WAV-Dateien aus Anno 1602 als Spielsounds einbinden. Anno 1602 hat
+    Sounds für jedes Gebäude, Kampfgeräusche und Umgebungssounds.
 
-    1. `src/content/resources.ts` (oder `.json`): Liste der Ressourcentypen mit
-       `id`, i18n-Key für Anzeigename, optional Icon-Platzhalter-Referenz
-    2. `GameState.resources` (aus Task 3) um alle Ressourcentypen erweitern,
-       Startwerte definieren
-    3. `src/sim/production.ts`: Funktion, die pro Tick basierend auf vorhandenen
-       Produktionsgebäuden (Platzhalter-Liste, echte Gebäude kommen in Task 7)
-       Ressourcen erzeugt bzw. verbraucht (z. B. Nahrung sinkt kontinuierlich durch
-       Bevölkerung — auch Bevölkerung ist hier nur ein einfacher Platzhalterwert)
-    4. Lagerkapazität: Ressourcen dürfen ein Maximum nicht überschreiten
-       (Kappung im Tick), niemals negativ werden
-    5. `tick()` (Task 3) ruft die Produktionslogik pro Durchlauf auf
+    Relevante WAV-Dateien (unter `Anno 1602/`):
+    - Umgebung: `Wellen.wav`, `Vogel1-6.wav`, `Baum.wav`
+    - Gebäude: `Backer.wav`, `Schmied.wav`, `Kirche.wav`, `Markt.wav`,
+      `Muhle.wav`, `Schule.wav`, `Theater.wav`, `Wirtshs.wav` u.v.m.
+    - Kampf: `Schwert1-5.wav`, `Muskete1-3.wav`, `Kanone5-8.wav`,
+      `sdtattk1-6.wav` (Soldat-Angriff), `shpattk1-4.wav` (Schiff-Angriff)
+    - UI: `Select.wav`, `Scroll.wav`
+    - Siegjingle: `Triumph.wav`
+
+    1. `src/render/sound-manager.ts`: Web-Audio-API basierter Sound-Manager.
+       `playSound(id: string): void`, `playAmbient(id: string): void` (looped),
+       `stopAmbient(): void`, Lautstärke-Steuerung, kein Abspielen doppelter
+       Ambient-Tracks
+    2. Sound-Mapping: `src/content/sound-mapping.json` — ordnet Spielereignisse
+       (`building.built`, `building.bakery.ambient`, `combat.sword`, usw.) den
+       WAV-Dateinamen zu
+    3. WAV-Dateien werden aus `Anno 1602/` zur Build-Zeit nach `public/sounds/`
+       kopiert (Vite-Config oder kurzes Copy-Script)
+    4. Integration: Gebäude-Bau → Bau-Sound; Tagzyklus → Ambient-Sound (Vögel
+       tagsüber, Wellen nachts); UI-Klicks → Select.wav
 - **akzeptanzkriterien:** |
-    - [ ] Mind. 3 Ressourcentypen mit Startwert, Produktionsrate, Lagerkapazität
-    - [ ] Ressourcen werden über mehrere Ticks korrekt akkumuliert/verbraucht
-    - [ ] Ressourcen werden nie negativ (Test mit hohem Verbrauch, niedrigem Start)
-    - [ ] Ressourcen überschreiten nie die Lagerkapazität (Test mit hoher Produktion)
-    - [ ] Anzeigenamen der Ressourcen kommen aus i18n, nicht hartkodiert
-    - [ ] Determinismus bleibt erhalten (Test aus Task 3 weiterhin grün)
+    - [ ] Beim Platzieren eines Gebäudes ist ein Sound hörbar
+    - [ ] Umgebungssound wechselt bei Tag/Nacht-Übergang
+    - [ ] UI-Klicks haben Klick-Sound
+    - [ ] Kein Sound-Crash wenn Datei fehlt (graceful fallback, Konsolen-Warnung)
+    - [ ] `npm run build` erzeugt fehlerfrei ein Bundle
 - **kontext:** |
-    Baut auf Task 3 (Tick/Command-Pattern) und Task 2 (i18n) auf. Gebäude, die
-    Ressourcen produzieren, kommen erst in Task 7 — hier reicht ein einfacher
-    Platzhaltermechanismus (z. B. feste Basis-Produktionsrate ohne Gebäudebezug),
-    der in Task 7 durch echte Gebäude ersetzt/erweitert wird.
+    Baut auf Task 7 (Bausystem) und Task 8 (Tag/Nacht) auf. sound-manager.ts
+    gehört zu `src/render/` (Browser-API, nicht im Kern). Kern bleibt headless.
 - **dateien:** |
-    - NEU: `src/content/resources.ts`, `src/sim/production.ts`, `src/sim/production.test.ts`
-    - ÄNDERN: `src/sim/state.ts`, `src/sim/tick.ts`, `src/i18n/de.json`
+    - NEU: `src/render/sound-manager.ts`, `src/content/sound-mapping.json`
+    - NEU: `scripts/copy-sounds.ts` (oder vite.config.ts anpassen)
+    - ÄNDERN: `src/main.ts`, `src/render/map-view.ts`, `src/i18n/de.json`
 
 ---
 
-### Task 7: Bau-System (Gebäude platzieren, Kosten, Gebäude-Katalog)
-- **prio:** 7
-- **status:** done
-- **beschreibung:** |
-    Spieler kann Gebäude auf der Karte platzieren, die Ressourcen kosten und ab
-    dann die Ressourcenproduktion (Task 6) beeinflussen.
-
-    1. `src/content/buildings.ts` (oder `.json`): Gebäude-Katalog — je Gebäude:
-       `id`, i18n-Key Name, Baukosten (Ressourcen-Mengen), Größe auf dem Grid
-       (z. B. 1×1, 2×2), Produktions-/Verbrauchseffekt. Vorschlag für Start-Set:
-       Rathaus (Startgebäude, bereits platziert), Holzfäller-Hütte, Steinbruch,
-       Bauernhof — Agent darf anpassen
-    2. `src/sim/commands.ts` (Task 3) erweitern: neuer Befehlstyp
-       `{ type: "build", buildingId: string, col: number, row: number }`
-    3. `applyCommand`: prüft Kollision (Feld schon belegt?), prüft ausreichende
-       Ressourcen, zieht Kosten ab, fügt Gebäude zum State hinzu. Bei Fehlschlag:
-       State unverändert zurückgeben (kein Crash, kein Teil-Effekt)
-    4. `src/sim/production.ts` (Task 6): Produktionslogik liest jetzt echte
-       platzierte Gebäude statt Platzhalterwert
-    5. Rendering: Bau-Menü (Task 10 baut UI weiter aus, hier reicht Klick-Platzierung)
-       — Klick auf Kachel + ausgewähltes Gebäude löst `build`-Befehl aus
-- **akzeptanzkriterien:** |
-    - [ ] Gebäude lässt sich nur auf freiem Feld platzieren (Kollision verhindert
-          Überlappung)
-    - [ ] Bau schlägt fehl (State unverändert) wenn Ressourcen nicht ausreichen
-    - [ ] Bau zieht exakt die definierten Kosten ab bei Erfolg
-    - [ ] Platziertes Gebäude beeinflusst ab dem nächsten Tick die Produktion
-          (Task 6 Logik)
-    - [ ] Gebäude-Katalog ist ein Datenfile, keine Werte im Command-Handler
-          hartkodiert
-    - [ ] Determinismus-Test weiterhin grün mit `build`-Befehlen in der Sequenz
-- **kontext:** |
-    Erweitert Task 3 (Commands) und Task 6 (Produktion). Rendering-seitig
-    verbindet sich das mit Task 5 (Karte, `screenToGrid` für Klick-Zielfeld).
-- **dateien:** |
-    - NEU: `src/content/buildings.ts`, `src/sim/build.test.ts`
-    - ÄNDERN: `src/sim/commands.ts`, `src/sim/state.ts`, `src/sim/production.ts`,
-      `src/render/map-view.ts`, `src/i18n/de.json`
+## Welle 3: Phase 2 — Verteidigung
 
 ---
 
-### Task 8: Tag/Nacht-Zyklus
-- **prio:** 8
-- **status:** done
+### Task 17: Einheiten-System (Truppen-Typen, Rekrutierung)
+- **prio:** 17
+- **status:** todo
 - **beschreibung:** |
-    Zeit-System: das Spiel läuft in einem wiederkehrenden Tag/Nacht-Zyklus (Kern-Loop
-    laut `spielkonzept.md`), der später Grundlage für Verteidigungs-Ereignisse
-    (Phase 2, NICHT Teil dieses Tasks) ist.
+    Grundlage für das Kampfsystem: Truppen, die der Spieler rekrutieren und
+    positionieren kann. Einheitenwerte aus Task 14 (COD-Parser).
 
-    1. `src/sim/time.ts`: Funktion, die aus `state.tick` die aktuelle Tageszeit
-       ableitet (z. B. `getTimeOfDay(tick): "day" | "night"` plus Fortschritt
-       0–1 innerhalb der aktuellen Phase), Ticks-pro-Tag als Konstante
-    2. `src/render/day-night-overlay.ts`: visuelles Overlay über der Karte, das
-       sich abhängig von Tageszeit einfärbt/abdunkelt (weicher Übergang, kein
-       harter Schnitt zwischen Tag und Nacht)
-    3. UI-Anzeige der aktuellen Tageszeit (Grundlage für Task 10, hier nur die
-       Kern-Daten dafür bereitstellen)
+    1. `src/sim/state.ts` erweitern: `units: Unit[]` pro Spieler;
+       `Unit`: `id, typeId, col, row, hp, maxHp, side: "player" | "enemy"`
+    2. `src/content/units.ts`: Einheitentypen mit `id`, i18n-Key, HP, Schaden,
+       Reichweite (Nahkampf/Fernkampf), Bewegungsgeschwindigkeit (Ticks/Feld),
+       Rekrutierungskosten. Start-Set: Soldat (Nahkampf), Bogenschütze (Fernkampf),
+       Ritter (Nahkampf, stark). Werte aus `assets/data/units-raw.json` (Task 14).
+    3. Neue Befehle in `src/sim/commands.ts`:
+       - `{ type: "recruit", unitTypeId, col, row }` — rekrutiert Einheit,
+         kostet Ressourcen, platziert auf Karte
+    4. Neues Gebäude `Kaserne` in `src/content/buildings.ts` — Voraussetzung
+       für Rekrutierung (nur wenn Kaserne vorhanden)
+    5. UI: Kaserne-Gebäude auswählen → Einheiten-Menü zeigt verfügbare Typen
+       mit Kosten; Klick auf Feld platziert Einheit
 - **akzeptanzkriterien:** |
-    - [ ] `getTimeOfDay()` liefert über einen vollen Zyklus abwechselnd Tag/Nacht
-    - [ ] Übergang Tag→Nacht visuell weich (kein sprunghafter Farbwechsel)
-    - [ ] Zyklus-Länge ist eine benannte Konstante, kein Magic Number im Code verstreut
-    - [ ] Determinismus bleibt erhalten (Zeit ist reine Funktion von `tick`)
+    - [ ] Mindestens 3 Einheitentypen mit unterschiedlichen Werten
+    - [ ] Rekrutierung schlägt fehl ohne Kaserne (State unverändert)
+    - [ ] Rekrutierung schlägt fehl ohne Ressourcen (State unverändert)
+    - [ ] Einheiten-Sprites aus Soldat.bsh (Task 13/15) auf der Karte sichtbar
+    - [ ] Determinismus-Test weiterhin grün
+    - [ ] Einheitenwerte aus `src/content/units.ts`, nichts hartkodiert im Handler
 - **kontext:** |
-    Reine Erweiterung von `src/sim/tick.ts` (Task 3) um eine abgeleitete Größe —
-    kein neuer State nötig, `tick` ist bereits vorhanden.
+    Baut auf Task 3 (Commands/State), Task 6 (Ressourcen), Task 7 (Bausystem),
+    Task 14 (Einheitendaten), Task 15 (Sprites) auf. Kampflogik kommt erst
+    in Task 20/21 — hier nur Rekrutierung und Platzierung.
 - **dateien:** |
-    - NEU: `src/sim/time.ts`, `src/sim/time.test.ts`, `src/render/day-night-overlay.ts`
-    - ÄNDERN: `src/main.ts`
+    - ÄNDERN: `src/sim/state.ts`, `src/sim/commands.ts`, `src/content/buildings.ts`
+    - ÄNDERN: `src/content/units.ts` (aus Task 14 ergänzt)
+    - NEU: `src/sim/units.test.ts`
+    - ÄNDERN: `src/ui/hud.ts`, `src/ui/build-menu.ts`, `src/i18n/de.json`
 
 ---
 
-### Task 9: Platzhalter-Asset-Pipeline
-- **prio:** 9
-- **status:** done
+### Task 18: Defensive Gebäude (Mauern, Türme, Tore)
+- **prio:** 18
+- **status:** todo
 - **beschreibung:** |
-    Laut `spielkonzept.md` ist eine KI-Asset-Pipeline angestrebt, aber noch nicht
-    umgesetzt — bis dahin mit Platzhaltern arbeiten, damit der Aufbau-Loop nicht
-    blockiert. Dieser Task ersetzt die einfarbigen Platzhalter aus Task 5/7 durch
-    ein einheitliches, leicht austauschbares Platzhalter-System.
+    Verteidigungsinfrastruktur: der Spieler kann Mauern, Türme und Tore bauen,
+    die feindliche Einheiten aufhalten oder verlangsamen.
 
-    1. `src/render/placeholder-sprites.ts`: generiert einfache, unterscheidbare
-       Platzhalter-Grafiken PROGRAMMATISCH mit PixiJS-Graphics (Rauten für Kacheln,
-       einfache Formen mit Farbe + Buchstabe/Symbol für Gebäudetypen) — KEINE
-       externen Bilddateien aus dem Internet laden (Arbeitsregel: nichts ohne
-       Rückfrage herunterladen)
-    2. Jedes Gebäude aus dem Katalog (Task 7) bekommt eine unterscheidbare
-       Platzhalter-Darstellung (z. B. Farbe pro Gebäudetyp)
-    3. Struktur so anlegen, dass ein späterer Ersatz durch echte Sprites nur den
-       Inhalt von `placeholder-sprites.ts` (oder eine zentrale Asset-Zuordnung)
-       ändern muss, nicht die aufrufenden Stellen in `map-view.ts`
+    1. Neue Gebäudetypen in `src/content/buildings.ts`:
+       - `Stadtmauer` (1×1, kettenfähig — verbindet sich visuell mit Nachbar-
+         Mauern auf angrenzenden Feldern)
+       - `Wachturm` (1×1, gibt Bogenschützen-Reichweite im Autobattle)
+       - `Burgtor` (2×1, Durchlass für eigene Einheiten, blockiert Feinde)
+    2. Mauer-Rendering: `src/render/map-view.ts` prüft, welche Nachbarfelder
+       ebenfalls Mauer haben und wählt den passenden Mauer-Sprite
+       (Anno 1602 Stadtfld.bsh enthält Mauer-Segmente für alle Richtungen)
+    3. Im Kampfsystem (Task 21): Mauer erhöht Verteidigungswert, Türme feuern
+       automatisch auf Feinde in Reichweite. Hier nur: Gebäude existieren im State.
+    4. Neue Befehlstypen nicht nötig — `build`-Befehl aus Task 7 reicht.
 - **akzeptanzkriterien:** |
-    - [ ] Jeder Gebäudetyp aus dem Katalog ist visuell unterscheidbar
-    - [ ] Keine Bilddatei wird aus dem Internet nachgeladen
-    - [ ] Austausch gegen echte Assets würde nur eine Datei/Zuordnungsstelle betreffen
-          (kurz in SESSION_NOTES.md begründen, welche)
+    - [ ] Stadtmauer, Wachturm, Burgtor sind im Bau-Menü verfügbar
+    - [ ] Mauern verbinden sich visuell mit benachbarten Mauern
+    - [ ] Mauern blockieren das Feld (Einheiten können nicht dort platziert werden)
+    - [ ] Alle bestehenden Tests weiterhin grün
 - **kontext:** |
-    Bewusst spät im MVP platziert (nach Task 5 und 7), damit erst die Struktur
-    steht, die die Platzhalter befüllen.
+    Baut auf Task 7 (Bausystem) und Task 15 (Sprites) auf. Das Kampfverhalten
+    der Mauern/Türme folgt in Task 21 (Autobattle). Hier nur Bau und Darstellung.
 - **dateien:** |
-    - NEU: `src/render/placeholder-sprites.ts`
-    - ÄNDERN: `src/render/map-view.ts`
+    - ÄNDERN: `src/content/buildings.ts`, `src/render/map-view.ts`
+    - ÄNDERN: `src/content/sprite-mapping.json`, `src/i18n/de.json`
 
 ---
 
-### Task 10: HUD/UI-Grundgerüst
-- **prio:** 10
-- **status:** done
+### Task 19: Angriffs-Ereignisse
+- **prio:** 19
+- **status:** todo
 - **beschreibung:** |
-    Sichtbare Oberfläche über der Karte: Ressourcenanzeige, Bau-Menü, Zeit-Anzeige.
+    Feindliche Angriffswellen als Kern-Spielereignis: Nach einer konfigurierten
+    Anzahl Spieltage kündigt sich ein Angriff an; bei Nacht beginnt das Gefecht.
 
-    1. `src/ui/hud.ts`: Leiste mit aktuellem Bestand jeder Ressource (Task 6),
-       aktualisiert sich live pro Tick
-    2. `src/ui/build-menu.ts`: Liste der verfügbaren Gebäude aus dem Katalog
-       (Task 7) mit Kosten-Anzeige, Auswahl eines Gebäudes aktiviert den
-       Platzierungsmodus auf der Karte
-    3. `src/ui/time-display.ts`: zeigt aktuelle Tageszeit (Task 8) an, z. B. als
-       Symbol/Text, das sich mit dem Zyklus ändert
-    4. Alle sichtbaren UI-Texte über `t()` (Task 2), kein hartkodierter String
-    5. UI liest Daten NUR über eine Snapshot-Funktion aus `src/sim/`, löst bei
-       Interaktion Befehle aus (kein direktes State-Schreiben aus der UI)
+    1. `src/sim/events.ts`: Event-System — `GameEvent` Union-Type mit mindestens:
+       - `{ type: "attack-warning", waveTick: number, strength: number }`
+         (erscheint N Ticks vor dem Angriff)
+       - `{ type: "attack-start", enemies: EnemyGroup[] }` (Angriff beginnt)
+       - `{ type: "attack-result", won: boolean, losses: number }`
+    2. `GameState` um `pendingEvents: GameEvent[]` und `attackWave: number`
+       (Angriffswellen-Zähler) erweitern
+    3. `src/sim/tick.ts`: nach X Tagen (Konstante `TICKS_PER_ATTACK_CYCLE`)
+       `attack-warning` erzeugen, nach weiteren Y Ticks `attack-start`
+    4. Angriffs-Stärke skaliert mit `attackWave` (jede Welle stärker)
+    5. Gegnergruppen: Typen aus `units.ts`, aber mit `side: "enemy"`
+    6. UI: Event-Anzeige als Modal oder HUD-Banner ("Angriff in X Tagen!",
+       "Die Feinde kommen!"), Text über i18n
 - **akzeptanzkriterien:** |
-    - [ ] Ressourcenanzeige aktualisiert sich sichtbar nach jedem Tick
-    - [ ] Bau-Menü zeigt alle Gebäude aus dem Katalog mit korrekten Kosten
-    - [ ] Auswahl eines Gebäudes im Menü + Klick auf Karte platziert es (Task 7)
-    - [ ] Tageszeit-Anzeige ändert sich im Zyklus sichtbar
-    - [ ] Kein hartkodierter sichtbarer Text in `src/ui/`
+    - [ ] Nach konfigurierten Ticks erscheint `attack-warning` im State
+    - [ ] Warnung wird sichtbar in der UI angezeigt (Text, kein roher JSON-Dump)
+    - [ ] `attack-start` folgt nach weiterem Ablauf, enthält Gegnergruppe
+    - [ ] Angriffsstärke steigt mit `attackWave`
+    - [ ] Determinismus bleibt erhalten (Angriff-Timing rein aus `tick` abgeleitet)
+    - [ ] Vitest-Test: nach N Ticks sind erwartete Events im State
 - **kontext:** |
-    Verbindet Task 2 (i18n), 5 (Karte/Klick), 6 (Ressourcen), 7 (Bauen), 8 (Zeit)
-    zu einer benutzbaren Oberfläche — größtenteils Verdrahtung bestehender Bausteine.
+    Reine Sim-Kern-Erweiterung. Kampfauflösung folgt in Task 20/21.
+    Events sind im State — kein Seiteneffekt, keine Callbacks.
 - **dateien:** |
-    - NEU: `src/ui/hud.ts`, `src/ui/build-menu.ts`, `src/ui/time-display.ts`
+    - NEU: `src/sim/events.ts`, `src/sim/events.test.ts`
+    - ÄNDERN: `src/sim/state.ts`, `src/sim/tick.ts`
+    - ÄNDERN: `src/ui/hud.ts`, `src/i18n/de.json`
+
+---
+
+### Task 20: Aufstellungs-Phase
+- **prio:** 20
+- **status:** todo
+- **beschreibung:** |
+    Nach `attack-warning` hat der Spieler Zeit, Truppen auf Verteidigungspos-
+    itionen zu platzieren. Ein separater Modus (Phase) trennt Aufbau und Kampf.
+
+    1. Neuer State: `GameState.phase: "build" | "deployment" | "combat" | "result"`
+    2. Bei `attack-warning`: automatisch in `"deployment"` wechseln
+    3. Im Deployment-Modus:
+       - Spieler kann Einheiten aus der Kaserne auf Felder hinter der Mauerlinie
+         verschieben (neuer Befehl: `{ type: "move-unit", unitId, col, row }`)
+       - Bau neuer Gebäude/Einheiten weiterhin möglich
+       - Keine Ressourcenproduktion in dieser Phase (Kampfvorbereitung pausiert
+         den normalen Tick — oder Tick läuft weiter, beide Varianten akzeptabel,
+         in SESSION_NOTES.md begründen)
+    4. UI: visueller Hinweis auf Deployment-Phase; Bestätigen-Button ("Bereit!")
+       → Befehl `{ type: "deployment-ready" }` → Phase wechselt zu `"combat"`
+    5. Zeitlimit (optional): nach X Ticks automatisch zu Combat wechseln
+- **akzeptanzkriterien:** |
+    - [ ] Phase wechselt korrekt: build → deployment → combat
+    - [ ] Im Deployment-Modus können Einheiten umpositioniert werden
+    - [ ] "Bereit!"-Button löst Combat-Phase aus
+    - [ ] Phasenwechsel wird im HUD sichtbar angezeigt
+    - [ ] Determinismus: Phasenwechsel rein aus State/Commands ableitbar
+- **kontext:** |
+    Baut auf Task 17 (Einheiten), Task 19 (Events) auf. Die eigentliche
+    Kampfauflösung folgt in Task 21. Rendering-seitig: evtl. Einfärbung des
+    Deployment-Bereichs (grün = erlaubte Zone).
+- **dateien:** |
+    - ÄNDERN: `src/sim/state.ts`, `src/sim/commands.ts`, `src/sim/tick.ts`
+    - ÄNDERN: `src/ui/hud.ts`, `src/main.ts`, `src/i18n/de.json`
+    - NEU: `src/sim/phase.test.ts`
+
+---
+
+### Task 21: Autobattle-Kern
+- **prio:** 21
+- **status:** todo
+- **beschreibung:** |
+    Das Herzstück von Phase 2: deterministisches Kampfsystem, das pro Tick
+    automatisch abläuft, sobald die Combat-Phase beginnt.
+
+    1. `src/sim/combat.ts`: Funktion `resolveCombatTick(state: GameState):
+       GameState` — reiner State-In/State-Out, kein Seiteneffekt
+       Logik pro Tick:
+       a. Feinde bewegen sich auf nächste Spieler-Einheit oder Mauer zu
+          (einfacher A*-Pfadfinder oder Manhattan-Greedy reicht)
+       b. Einheiten in Reichweite greifen an (Schaden = Einheitenwert ± kleine
+          RNG-Variation via `rng.ts`)
+       c. Türme (Wachturm-Gebäude) feuern automatisch auf Feinde in Reichweite
+       d. HP ≤ 0 → Einheit aus State entfernen
+       e. Feinde erreichen Basis-Gebäude (Rathaus) → Schaden an Gebäude-HP
+       f. Alle Feinde tot → `attack-result` mit `won: true`
+       g. Rathaus-HP = 0 → `attack-result` mit `won: false` (Game-Over-Zustand)
+    2. `tick()` ruft in Combat-Phase `resolveCombatTick()` statt normaler
+       Ressourcen-Produktion auf
+    3. Einheiten-HP wird im State getrackt (bereits in Task 17 vorbereitet)
+    4. Nach Kampfende → Phase wechselt zu `"result"`, dann zurück zu `"build"`
+- **akzeptanzkriterien:** |
+    - [ ] Feinde bewegen sich pro Tick auf die Spieler-Basis zu
+    - [ ] Kampf endet mit Sieg wenn alle Feinde besiegt
+    - [ ] Kampf endet mit Niederlage wenn Rathaus-HP auf 0 fällt
+    - [ ] Türme greifen Feinde in Reichweite automatisch an
+    - [ ] Determinismus: gleicher Start-State + Seed → gleicher Kampfverlauf
+    - [ ] Vitest-Test: kleines Szenario (5 Feinde vs. 3 Soldaten) → erwartetes
+          Ergebnis nach N Ticks
+- **kontext:** |
+    Baut auf Task 3 (RNG, Determinismus), Task 17 (Einheiten), Task 18 (Türme/Mauern),
+    Task 19 (Events), Task 20 (Phasen) auf. Rendering des Kampfes folgt in Task 22.
+- **dateien:** |
+    - NEU: `src/sim/combat.ts`, `src/sim/combat.test.ts`
+    - ÄNDERN: `src/sim/tick.ts`, `src/sim/state.ts`
+
+---
+
+### Task 22: Kampf-Rendering & Audio
+- **prio:** 22
+- **status:** todo
+- **beschreibung:** |
+    Den in Task 21 berechneten Kampf sichtbar und hörbar machen.
+
+    1. Einheiten-Sprites auf der Karte: Soldat-Sprites aus `Soldat.bsh`
+       (Task 13/15), die sich je nach Bewegungsrichtung drehen (Anno 1602
+       Sprites haben 8 Richtungen × Animation-Frames)
+    2. Bewegungs-Animation: Einheiten gleiten flüssig zwischen Grid-Feldern
+       (Interpolation zwischen zwei Positionen über mehrere Render-Frames,
+       unabhängig vom Sim-Tick)
+    3. Angriffs-Animation: kurzer Ausschlag in Angriffsrichtung, dann zurück
+    4. Tod-Effekt: `Effekte.bsh` oder einfaches Ausblenden
+    5. Kampf-Sounds (Task 16): `sdtattk1-6.wav` bei Soldat-Angriff,
+       `Schwert1-5.wav` oder `Muskete1-3.wav` je Einheitentyp,
+       `Kanone5-8.wav` bei Turm-Beschuss
+    6. Ergebnis-Screen: nach Kampfende Modal mit Sieg/Niederlage-Text,
+       Verluste-Übersicht, "Weiter"-Button zurück in Build-Phase
+       (`Triumph.wav` bei Sieg)
+- **akzeptanzkriterien:** |
+    - [ ] Einheiten sind als Sprites sichtbar auf der Karte
+    - [ ] Bewegung zwischen Feldern ist animiert (kein Teleportieren)
+    - [ ] Kampfgeräusche ertönen bei Angriffen
+    - [ ] Nach Kampf erscheint Ergebnis-Screen
+    - [ ] Alle bestehenden Tests weiterhin grün
+- **kontext:** |
+    Reine Render-/Audio-Aufgabe über den Kern aus Task 21. Die Kampf-Animation
+    liest nur den State (Snapshots pro Tick) — schreibt nie in den Kern.
+- **dateien:** |
+    - ÄNDERN: `src/render/map-view.ts`, `src/render/sound-manager.ts`
+    - NEU: `src/render/unit-sprites.ts`, `src/ui/combat-result.ts`
     - ÄNDERN: `src/main.ts`, `src/i18n/de.json`
 
 ---
 
-### Task 11: Save/Load-UI
-- **prio:** 11
-- **status:** done
+### Task 23: Integrationstest Phase 2
+- **prio:** 23
+- **status:** todo
 - **beschreibung:** |
-    Sichtbare Bedienung für das Speichersystem aus Task 4: Speichern-Button
-    (löst Datei-Download aus) und Laden-Button (öffnet Datei-Auswahl, lädt
-    State, ersetzt aktuellen Spielstand).
+    Abschluss der Verteidigungs-Phase: vollständiger Loop end-to-end getestet.
 
-    1. `src/ui/save-load-menu.ts`: zwei Aktionen — "Speichern" ruft
-       `serialize()` + `downloadSave()` (Task 4) auf; "Laden" öffnet einen
-       Datei-Dialog, ruft `readSaveFile()` + `deserialize()` auf und ersetzt
-       den laufenden `GameState`
-    2. Erfolgreiches Laden setzt Kamera/UI korrekt auf den neuen State zurück
-       (kein Mischzustand aus altem und neuem Spielstand)
-    3. Fehler beim Laden (Task 4 Validierung) zeigt eine Nutzer-verständliche
-       Meldung über `t()`, Spiel läuft mit dem vorherigen Stand normal weiter
+    1. Vitest-Integrationstest: Aufbau-Phase → Kaserne bauen → Truppen rekrutieren
+       → Mauern bauen → Angriffswelle ausgelöst → Deployment → Kampf → Sieg/
+       Niederlage → Phase zurück auf Build → Speichern → Laden → State konsistent
+    2. Alle Phase-1-Tests (Task 12) weiterhin grün
+    3. Manueller Testbericht in SESSION_NOTES.md: was funktioniert, was ist
+       bekanntes WIP (z. B. Balancing nicht final, Animation-Timing)
+    4. Vorbereitung Phase 3 (Welt/Fog of War): kurze Notiz in SESSION_NOTES.md
+       welche State-Felder Phase 3 brauchen wird (Erkundungs-Grid, Nachbar-Fraktionen)
 - **akzeptanzkriterien:** |
-    - [ ] Speichern-Button erzeugt eine herunterladbare `.json`-Datei
-    - [ ] Laden einer zuvor gespeicherten Datei stellt exakt den gespeicherten
-          Zustand wieder her (Ressourcen, Gebäude, Tick-Stand)
-    - [ ] Laden einer ungültigen Datei zeigt Fehlermeldung, Spiel bleibt nutzbar
-    - [ ] Kein hartkodierter Text (alles über `t()`)
+    - [ ] Integrationstest deckt den vollen Phase-2-Loop ab
+    - [ ] Alle Vitest-Tests (Tasks 1–22) laufen grün
+    - [ ] `npm run build` erzeugt fehlerfreies Bundle
+    - [ ] SESSION_NOTES.md enthält Abnahme-Bericht Phase 2
 - **kontext:** |
-    Reine UI-Schicht über Task 4 (Speichersystem) — keine neue Logik im Kern nötig.
+    Entspricht Task 12 für Phase 2. Nach `done` ist Phase 2 aus `spielkonzept.md`
+    abgeschlossen — Phase 3 (Fog of War, Erkundung) folgt in Welle 4.
 - **dateien:** |
-    - NEU: `src/ui/save-load-menu.ts`
-    - ÄNDERN: `src/main.ts`, `src/i18n/de.json`
-
----
-
-### Task 12: Integrationstest MVP-Loop
-- **prio:** 12
-- **status:** done
-- **beschreibung:** |
-    Abschluss der MVP-Phase: Prüfen, dass der komplette Aufbau-Loop end-to-end
-    funktioniert und zusammenspielt — Abnahme für "der Aufbau-Loop macht allein
-    schon Spaß" (Ziel aus `spielkonzept.md`).
-
-    1. Automatisierter Integrationstest auf Kern-Ebene (Vitest, kein Browser
-       nötig): Start-State → mehrere Ticks vergehen lassen → Gebäude bauen →
-       weitere Ticks → Ressourcenstand plausibel prüfen → serialisieren →
-       deserialisieren → Zustand muss identisch sein
-    2. Falls im Projekt zu dem Zeitpunkt Playwright eingerichtet ist: ein
-       Smoke-Test, der im Browser klickt (Kamera pannen, Gebäude bauen, Speichern-
-       Button klicken) — NUR anlegen, wenn es den Aufwand wert ist, sonst reicht
-       Punkt 1 (Entscheidung dem Agenten überlassen, in SESSION_NOTES.md begründen)
-    3. Kurzer manueller Testbericht in SESSION_NOTES.md: Was wurde geprüft, was
-       funktioniert, was ist bekannt unvollständig (z. B. Balancing nicht final)
-- **akzeptanzkriterien:** |
-    - [ ] Integrationstest deckt den vollen Loop ab: Tick → Bauen → Tick →
-          Speichern → Laden → Zustand konsistent
-    - [ ] Alle bisherigen Vitest-Tests (Task 1–11) laufen weiterhin grün
-    - [ ] `npm run build` erzeugt weiterhin ein fehlerfreies Bundle
-    - [ ] SESSION_NOTES.md enthält kurzen Abnahme-Bericht für die MVP-Phase
-- **kontext:** |
-    Letzter Task der Welle 1 (MVP). Nach `done` ist Phase 1 aus `spielkonzept.md`
-    abgeschlossen — Phase 2 (Verteidigung/Autobattle) folgt in einer neuen Welle,
-    sobald Prioritäten/Feedback dazu vorliegen.
-- **dateien:** |
-    - NEU: `src/sim/mvp-loop.test.ts`
+    - NEU: `src/sim/phase2-loop.test.ts`
     - ÄNDERN: `SESSION_NOTES.md`
