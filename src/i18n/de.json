@@ -89,6 +89,10 @@
     "tower": {
       "name": "Wachturm",
       "description": "Erhöht die Verteidigungsreichweite der Garnison."
+    },
+    "gate": {
+      "name": "Burgtor",
+      "description": "Einlass durch die Stadtmauer für eigene Truppen."
     }
   },
   "unit": {

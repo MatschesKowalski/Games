@@ -9,6 +9,33 @@ type SpriteRef = { sheet: string; index: number }
 
 const TERRAIN = spriteMapping.terrain as Record<string, SpriteRef>
 const BUILDINGS = spriteMapping.buildings as Record<string, SpriteRef>
+const WALL_VARIANTS = spriteMapping.wallVariants as Record<string, number[]>
+
+// Building IDs that act as wall segments (connect visually to neighbors)
+const WALL_IDS = new Set(['wall', 'stone_wall'])
+
+function isWallAt(buildings: Building[], col: number, row: number): boolean {
+  return buildings.some(b => (WALL_IDS.has(b.buildingId) || b.buildingId === 'gate') && b.col === col && b.row === row)
+}
+
+// Returns a 4-bit mask: bit0=N, bit1=E, bit2=S, bit3=W
+function wallConnectionMask(buildings: Building[], col: number, row: number): number {
+  return (
+    (isWallAt(buildings, col, row - 1) ? 1 : 0) |
+    (isWallAt(buildings, col + 1, row) ? 2 : 0) |
+    (isWallAt(buildings, col, row + 1) ? 4 : 0) |
+    (isWallAt(buildings, col - 1, row) ? 8 : 0)
+  )
+}
+
+function resolveWallRef(b: Building, buildings: Building[]): SpriteRef | undefined {
+  const base = BUILDINGS[b.buildingId]
+  if (base == null || !WALL_IDS.has(b.buildingId)) return base
+  const variants = WALL_VARIANTS[b.buildingId]
+  if (variants == null) return base
+  const mask = wallConnectionMask(buildings, b.col, b.row)
+  return { sheet: base.sheet, index: variants[mask] ?? base.index }
+}
 
 const TILE_COLOR = 0x4a7c59
 const HOVER_COLOR = 0x72b583
@@ -129,7 +156,7 @@ export class MapView {
   updateBuildings(buildings: Building[]): void {
     this.buildingLayer.removeChildren()
     for (const b of buildings) {
-      const ref = BUILDINGS[b.buildingId]
+      const ref = resolveWallRef(b, buildings) ?? BUILDINGS[b.buildingId]
       if (ref != null && isAtlasReady(ref.sheet)) {
         const { x, y } = gridToScreen(b.col, b.row)
         const sprite = new Sprite(getSprite(ref.sheet, ref.index))

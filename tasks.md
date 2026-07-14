@@ -279,7 +279,7 @@
 
 ### Task 18: Defensive Gebäude (Mauern, Türme, Tore)
 - **prio:** 18
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Verteidigungsinfrastruktur: der Spieler kann Mauern, Türme und Tore bauen,
     die feindliche Einheiten aufhalten oder verlangsamen.

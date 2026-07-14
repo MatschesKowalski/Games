@@ -94,6 +94,14 @@ export const BUILDINGS: BuildingDef[] = [
     size: { cols: 2, rows: 2 },
     effects: [],
   },
+  {
+    // Burgtor — Einlass durch die Mauerlinie, Holz 3, Stein 4, Money 50
+    id: 'gate',
+    i18nKey: 'building.gate.name',
+    cost: { wood: 3, stone: 4, gold: 50 },
+    size: { cols: 1, rows: 1 },
+    effects: [],
+  },
 ]
 
 export function getBuildingDef(id: string): BuildingDef | undefined {
