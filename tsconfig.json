@@ -15,5 +15,23 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "ts-node": {
+    "skipProject": true,
+    "preferTsExts": true,
+    "moduleTypes": {
+      "scripts/**": "cjs"
+    },
+    "require": ["./scripts/ts-node-cjs-patch.js"],
+    "compilerOptions": {
+      "target": "ES2022",
+      "module": "CommonJS",
+      "moduleResolution": "node",
+      "lib": ["ES2022"],
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "noUnusedLocals": false,
+      "noUnusedParameters": false
+    }
+  }
 }

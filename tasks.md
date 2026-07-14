@@ -39,7 +39,7 @@
 
 ### Task 13: BSH+SCP-Parser — Sprite-Extraktion
 - **prio:** 13
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Anno 1602 speichert alle Spiel-Grafiken in `.bsh`-Dateien (proprietäres
     Sprite-Format) mit zugehörigen `.scp`-Paletten-Dateien (Farbtabellen).

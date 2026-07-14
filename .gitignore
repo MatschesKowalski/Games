@@ -1,8 +1,11 @@
 node_modules/
 dist/
+dist-scripts/
 .env
 *.log
 .DS_Store
 coverage/
 playwright-report/
 test-results/
+Anno 1602/
+assets/sprites/
