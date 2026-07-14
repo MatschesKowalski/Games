@@ -256,7 +256,7 @@
 
 ### Task 19: Sprite-Mapping korrigieren — richtige Anno 1602 Gebäude-Sprites
 - **prio:** 19
-- **status:** todo
+- **status:** in_progress
 - **beschreibung:** |
     Die aktuellen Gebäude-Sprites passen nicht zu den Gebäude-Typen:
     z. B. zeigt "Holzmauer" das Fischerei-Häuschen. Die Sprite-Indizes in
@@ -336,3 +336,142 @@
 - **dateien:** |
     - ÄNDERN: src/render/sprite-atlas.ts (scaleMode = 'nearest' nach Assets.load)
     - ÄNDERN: src/render/camera.ts (MAX_ZOOM = 8.0, ZOOM_FACTOR_IN = 1.15)
+
+---
+
+### Task 21: Terrain-System — Datenstruktur & Insel-Generator
+- **prio:** 21
+- **status:** todo
+- **beschreibung:** |
+    Die Karte ist derzeit ein einheitliches grünes Rechteck. Dieses Task fügt
+    ein echtes Terrain-System ein: jede Kachel bekommt einen Typ, und ein
+    prozeduraler Generator erzeugt eine Insel mit natürlich wirkender Landschaft.
+
+    1. `src/sim/terrain.ts`: `TerrainType`-Enum exportieren:
+       `ocean | coast | sand | grass | forest | mountain`
+       Hilfsfunktionen: `isPassable(t: TerrainType): boolean` (ocean/mountain
+       blockieren Gebäudebau), `isWater(t: TerrainType): boolean`
+
+    2. `src/sim/map-gen.ts`: Funktion `generateIslandTerrain(cols: number,
+       rows: number, seed: number): TerrainType[][]`
+       Algorithmus (kein externes Noise-Paket — nur rng.ts):
+       a. Distanzmaske: Wert 0–1 je nach Abstand vom Mittelpunkt. > 0.85 = ocean.
+       b. Geseedetes Rauschen addieren damit Küste wellig wird.
+       c. Terrain nach Distanz-Wert:
+          - 0.00–0.25: mountain
+          - 0.25–0.40: forest
+          - 0.40–0.65: grass
+          - 0.65–0.75: sand
+          - 0.75–0.85: coast
+          - > 0.85: ocean
+       d. 3–5 Berggruppen + 4–7 Waldflecken zufällig per Seed platzieren.
+
+    3. `GameState` um `terrain: TerrainType[][]` erweitern;
+       `createInitialState()` ruft Generator auf.
+       MAP_COLS / MAP_ROWS als Konstanten definieren (nicht hartkodiert).
+
+    4. Bau-Logik: Gebäude nur auf grass/sand/forest erlaubt
+       (ocean/coast/mountain ablehnen).
+
+    5. Speichern/Laden: terrain ins Save-State aufnehmen.
+
+- **akzeptanzkriterien:** |
+    - [ ] GameState.terrain enthält 2D-Matrix mit unterschiedlichen Typen
+    - [ ] Erkennbarer Insel-Umriss (ocean außen, land innen)
+    - [ ] Gebäudebau auf ocean/mountain schlägt fehl (Befehl abgelehnt)
+    - [ ] Speichern → Laden → terrain-Grid identisch
+    - [ ] Vitest-Test: generateIslandTerrain produziert ≥ 4 Terrain-Typen
+          und ≥ 20 % ocean-Felder
+    - [ ] Alle bestehenden Tests weiterhin grün
+- **kontext:** |
+    Reine Sim-Kern-Erweiterung. Das Rendering folgt in Task 22.
+    rng.ts (bereits vorhanden) für deterministischen Seed nutzen.
+    Kein Rendering-Code in diesem Task.
+- **dateien:** |
+    - NEU: `src/sim/terrain.ts`, `src/sim/map-gen.ts`, `src/sim/map-gen.test.ts`
+    - ÄNDERN: `src/sim/state.ts` (terrain-Feld, MAP_COLS/MAP_ROWS-Konstanten)
+    - ÄNDERN: `src/sim/commands.ts` oder `src/sim/tick.ts` (Bau-Validierung)
+
+---
+
+### Task 22: Terrain-Rendering — Anno 1602 Kacheln & Ozean-Hintergrund
+- **prio:** 22
+- **status:** todo
+- **beschreibung:** |
+    Das in Task 21 aufgebaute Terrain-Grid sichtbar machen: jede Kachel erhält
+    den passenden Anno 1602 Sprite, der Hintergrund wird zum Ozean, die Karte
+    sieht aus wie eine Insel.
+
+    1. Sprite-Indizes identifizieren: Auswahl von dist/sprites/stadtfld/sprite_N.png
+       öffnen (z. B. 100–120, 200–220, 800–820) um die richtigen Kachel-Indizes
+       für sand, coast, forest, mountain zu finden.
+       Bekannte Startwerte: grass=0, water/ocean=800.
+
+    2. `src/render/map-view.ts`: `buildBaseMap()` erhält terrain-Grid als
+       Parameter. Pro Kachel: Terrain-Typ → Sprite-Index → Anno-Sprite.
+       Fallback auf farbige Raute wenn Sprite nicht geladen.
+
+    3. Ozean-Hintergrund: PixiJS-Graphics hinter dem tile-layer, füllt den
+       Canvas in Ozean-Blau (0x1a6ea8). Ocean-Kacheln bekommen Wasser-Sprite.
+
+    4. Neue Methode `MapView.updateTerrain(terrain: TerrainType[]): void` —
+       einmalig nach State-Init und nach Save/Load aufgerufen.
+
+    5. `src/content/sprite-mapping.json`: terrain-Sektion um alle 6 Typen
+       erweitern.
+
+- **akzeptanzkriterien:** |
+    - [ ] Karte zeigt mindestens 4 optisch unterschiedliche Terrain-Sprites
+    - [ ] Ocean-Felder erscheinen als Wasser (blau / Wasser-Sprite)
+    - [ ] Hintergrund ist Ozean-Blau, nicht dunkel-navy
+    - [ ] Kein einheitliches grünes Viereck mehr sichtbar
+    - [ ] Gebäude stehen weiterhin korrekt über den Terrain-Kacheln
+    - [ ] `npm run build` fehlerfrei
+    - [ ] Alle bestehenden Tests weiterhin grün
+- **kontext:** |
+    Baut auf Task 21 (terrain im State) und Task 15 (sprite-atlas.ts) auf.
+    Ausschließlich Rendering — kein Sim-Kern-Code.
+    Übergangs-Kacheln folgen in Task 23.
+- **dateien:** |
+    - ÄNDERN: `src/render/map-view.ts`
+    - ÄNDERN: `src/content/sprite-mapping.json`
+    - ÄNDERN: `src/main.ts` (updateTerrain-Aufruf)
+
+---
+
+### Task 23: Terrain-Übergänge, Bäume & Berge
+- **prio:** 23
+- **status:** todo
+- **beschreibung:** |
+    Visueller Feinschliff der Karte: statt harter Kanten zwischen Terrain-Typen
+    werden Übergangs-Kacheln eingesetzt, Waldfelder bekommen Baum-Sprites,
+    Berge sehen wie echte Erhebungen aus.
+
+    1. Übergangs-Kacheln: Für jede Kachel ein 4-Bit-Nachbarmask berechnen
+       (analog Mauer-Varianten aus Task 18), passendes Übergangs-Sprite wählen.
+       Priorität: grass↔sand und sand↔coast/ocean.
+       Sprite-Indizes per Sichtprüfung der sprite_N.png-Dateien ermitteln
+       (Bereich 1–50 für Gras-Varianten, 107–160 für Sand/Küste).
+
+    2. Baum-Sprites auf ca. 70 % der Wald-Kacheln (deterministisch via Map-Seed).
+       Baum-Sprite-Indizes per Sichtprüfung finden (wahrsch. Bereich 1600–2000).
+
+    3. Berg-Sprites auf Bergkacheln (wahrsch. 107–160, per Inspektion bestätigen).
+
+    4. Küsten-Animation (optional): Wasser-Frames als AnimatedSprite wenn
+       Anno-Sprites dafür vorhanden.
+
+- **akzeptanzkriterien:** |
+    - [ ] Übergänge zwischen Gras und Sand sind weich (keine harten Kanten)
+    - [ ] Waldfelder zeigen Baum-Sprites
+    - [ ] Bergfelder zeigen Fels/Berg-Sprite
+    - [ ] Karte wirkt insgesamt abwechslungsreich
+    - [ ] Alle bestehenden Tests weiterhin grün
+    - [ ] `npm run build` fehlerfrei
+- **kontext:** |
+    Baut auf Task 22 (Terrain-Rendering) auf. Ausschließlich Rendering.
+    Transition-Logik analog zu Mauer-Varianten (Task 18): 4-Bit-Mask →
+    Sprite-Index aus Lookup-Tabelle.
+- **dateien:** |
+    - ÄNDERN: `src/render/map-view.ts`
+    - ÄNDERN: `src/content/sprite-mapping.json`
