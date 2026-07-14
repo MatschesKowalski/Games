@@ -60,8 +60,8 @@ describe('tick', () => {
     // noop-Befehle dürfen keine Gebäude verändern
     expect(next.buildings).toEqual(state.buildings)
     // Ressourcen ändern sich durch passive Produktion (applyProduction läuft jeden Tick)
-    expect(next.resources['wood']).toBe(12)    // 10 + 2.0 (lumbermill)
-    expect(next.resources['stone']).toBe(6.5)  // 5 + 1.5 (quarry)
+    expect(next.resources['wood']).toBe(11)    // 10 + 1.0 (lumbermill)
+    expect(next.resources['stone']).toBe(5.8)  // 5 + 0.8 (quarry)
   })
 
   it('Determinismus: identischer Start + identische Befehle → identischer End-State', () => {

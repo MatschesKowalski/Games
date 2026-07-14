@@ -66,13 +66,43 @@
       "name": "Kaserne",
       "description": "Bildet Soldaten für die Verteidigung aus."
     },
+    "hunters_hut": {
+      "name": "Jagdhütte",
+      "description": "Versorgt die Siedlung mit Fleisch aus dem Wald."
+    },
+    "bakery": {
+      "name": "Bäckerei",
+      "description": "Verarbeitet Korn zu Brot für die Bevölkerung."
+    },
     "wall": {
-      "name": "Mauer",
-      "description": "Schützt die Siedlung vor Angriffen."
+      "name": "Holzmauer",
+      "description": "Einfache Verteidigungsmauer aus Holz."
+    },
+    "stone_wall": {
+      "name": "Steinmauer",
+      "description": "Solide Verteidigungsmauer aus Stein."
     },
     "tower": {
       "name": "Wachturm",
-      "description": "Erhöht die Verteidigungsreichweite."
+      "description": "Erhöht die Verteidigungsreichweite der Garnison."
+    }
+  },
+  "unit": {
+    "swordsman": {
+      "name": "Schwertkämpfer",
+      "description": "Nahkämpfer mit Schwert und Schild."
+    },
+    "cavalry": {
+      "name": "Kavallerie",
+      "description": "Schnelle Reiter für Sturmangriffe."
+    },
+    "musketeer": {
+      "name": "Musketier",
+      "description": "Fernkämpfer mit langer Reichweite."
+    },
+    "cannoneer": {
+      "name": "Kanonier",
+      "description": "Artillerist mit hohem Schaden auf große Distanz."
     }
   },
   "faction": {

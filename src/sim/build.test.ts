@@ -34,12 +34,12 @@ describe('build command — Platzierung', () => {
   })
 
   it('Baukosten werden korrekt abgezogen', () => {
-    // lumbermill costs: wood 20, stone 5
-    const state = makeState({ resources: { wood: 50, stone: 20, food: 100, gold: 0 } })
+    // lumbermill costs: wood 5, gold 15
+    const state = makeState({ resources: { wood: 50, stone: 0, food: 100, gold: 50 } })
     const cmd: Command = { type: 'build', buildingId: 'lumbermill', col: 0, row: 0 }
     const next = applyCommand(state, cmd)
-    expect(next.resources['wood']).toBe(30)   // 50 - 20
-    expect(next.resources['stone']).toBe(15)  // 20 - 5
+    expect(next.resources['wood']).toBe(45)   // 50 - 5
+    expect(next.resources['gold']).toBe(35)   // 50 - 15
     expect(next.resources['food']).toBe(100)  // unverändert
   })
 
@@ -104,20 +104,20 @@ describe('build command — Kollisionsprüfung', () => {
 
 describe('build command — Ressourcenprüfung', () => {
   it('zu wenig Ressourcen → State unverändert', () => {
-    // lumbermill costs wood 20, stone 5 — wir haben nur stone 3
-    const state = makeState({ resources: { wood: 50, stone: 3, food: 0, gold: 0 } })
+    // lumbermill costs wood 5, gold 15 — wir haben nur gold 0
+    const state = makeState({ resources: { wood: 50, stone: 0, food: 0, gold: 0 } })
     const before = JSON.stringify(state)
     const next = applyCommand(state, { type: 'build', buildingId: 'lumbermill', col: 0, row: 0 })
     expect(JSON.stringify(next)).toBe(before)
   })
 
   it('exakt genug Ressourcen → Platzierung erfolgreich', () => {
-    // lumbermill: wood 20, stone 5
-    const state = makeState({ resources: { wood: 20, stone: 5, food: 0, gold: 0 } })
+    // lumbermill: wood 5, gold 15
+    const state = makeState({ resources: { wood: 5, stone: 0, food: 0, gold: 15 } })
     const next = applyCommand(state, { type: 'build', buildingId: 'lumbermill', col: 0, row: 0 })
     expect(next.buildings).toHaveLength(1)
     expect(next.resources['wood']).toBe(0)
-    expect(next.resources['stone']).toBe(0)
+    expect(next.resources['gold']).toBe(0)
   })
 
   it('kostenloses Gebäude (townhall) wird ohne Ressourcenabzug platziert', () => {
@@ -130,24 +130,24 @@ describe('build command — Ressourcenprüfung', () => {
 
 describe('build command — Produktionsintegration', () => {
   it('Gebäude beeinflusst ab nächstem Tick die Produktion', () => {
-    const state = makeState({ resources: { wood: 50, stone: 20, food: 100, gold: 0 } })
+    const state = makeState({ resources: { wood: 50, stone: 0, food: 100, gold: 50 } })
     // Ohne Gebäude: Holz bleibt bei 50
     const noBuilding = applyProduction(state)
     expect(noBuilding.resources['wood']).toBe(50)
 
-    // Mit Sägewerk: Holz steigt um 2.0
+    // Mit Sägewerk: Holz steigt um 1.0
     const withLumber = applyCommand(state, { type: 'build', buildingId: 'lumbermill', col: 0, row: 0 })
     const afterProd = applyProduction(withLumber)
-    expect(afterProd.resources['wood']).toBe(32) // (50 - 20) + 2.0
+    expect(afterProd.resources['wood']).toBe(46) // (50 - 5) + 1.0
   })
 
   it('mehrere Gebäude addieren ihre Effekte', () => {
-    const state = makeState({ resources: { wood: 100, stone: 100, food: 100, gold: 0 } })
+    const state = makeState({ resources: { wood: 100, stone: 0, food: 100, gold: 100 } })
     const after1 = applyCommand(state, { type: 'build', buildingId: 'lumbermill', col: 0, row: 0 })
     const after2 = applyCommand(after1, { type: 'build', buildingId: 'lumbermill', col: 1, row: 0 })
-    // 2 Sägewerke: wood -= 20 + 20 = 40 Kosten → 60 verbleibend, dann +4.0/Tick
+    // 2 Sägewerke: wood -= 5 + 5 = 10 Kosten → 90 verbleibend, dann +2.0/Tick
     const afterProd = applyProduction(after2)
-    expect(afterProd.resources['wood']).toBe(64) // (100 - 40) + 4.0
+    expect(afterProd.resources['wood']).toBe(92) // (100 - 10) + 2.0
   })
 })
 

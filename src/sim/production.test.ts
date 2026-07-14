@@ -28,16 +28,16 @@ function placed(buildingId: string, col = 0, row = 0): PartialBuilding {
 }
 
 describe('applyProduction', () => {
-  it('Holz steigt pro Tick durch Sägewerk (lumbermill = +2.0/Tick)', () => {
+  it('Holz steigt pro Tick durch Sägewerk (lumbermill = +1.0/Tick)', () => {
     const state = makeState({ wood: 50 }, [placed('lumbermill')])
     const next = applyProduction(state)
-    expect(next.resources['wood']).toBe(52)
+    expect(next.resources['wood']).toBe(51)
   })
 
-  it('Stein steigt pro Tick durch Steinbruch (quarry = +1.5/Tick)', () => {
+  it('Stein steigt pro Tick durch Steinbruch (quarry = +0.8/Tick)', () => {
     const state = makeState({ stone: 30 }, [placed('quarry')])
     const next = applyProduction(state)
-    expect(next.resources['stone']).toBe(31.5)
+    expect(next.resources['stone']).toBe(30.8)
   })
 
   it('Nahrung sinkt pro Tick um 0.2 (Bevölkerungsverbrauch — kein Gebäude nötig)', () => {
@@ -57,7 +57,7 @@ describe('applyProduction', () => {
     for (let i = 0; i < 10; i++) {
       state = applyProduction(state)
     }
-    expect(state.resources['wood']).toBe(70) // 50 + 10 * 2.0
+    expect(state.resources['wood']).toBe(60) // 50 + 10 * 1.0
   })
 
   it('Nahrung wird NICHT negativ — bleibt bei 0', () => {
@@ -117,7 +117,7 @@ describe('Produktion in tick()', () => {
   it('Holz wächst wenn tick() mit Sägewerk aufgerufen wird', () => {
     const state = makeState({ wood: 50 }, [placed('lumbermill')])
     const next = tick(state, noopCommands)
-    expect(next.resources['wood']).toBe(52)
+    expect(next.resources['wood']).toBe(51)
   })
 
   it('Nahrung sinkt wenn tick() aufgerufen wird (auch ohne Gebäude)', () => {

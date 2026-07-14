@@ -33,12 +33,12 @@ describe('MVP-Loop Integration', () => {
     expect(state.tick).toBe(16)
     expect(state.resources['gold']).toBeGreaterThan(goldBeforeLoop)
 
-    // 5. Sägewerk bauen (Kosten: Holz 20, Stein 5)
+    // 5. Sägewerk bauen (Kosten: Holz 5, Gold 15)
     state = tick(state, [{ type: 'build', buildingId: 'lumbermill', col: 0, row: 0 }])
     expect(state.tick).toBe(17)
     expect(state.buildings).toHaveLength(2)
 
-    // 6. 5 weitere Ticks — Holzproduktion durch Sägewerk (+2.0/Tick)
+    // 6. 5 weitere Ticks — Holzproduktion durch Sägewerk (+1.0/Tick)
     for (let i = 0; i < 5; i++) {
       state = tick(state, [])
     }
@@ -86,7 +86,7 @@ describe('MVP-Loop Integration', () => {
       resources: { wood: 0, stone: 0, food: 0, gold: 0 },
       buildings: [],
     }
-    // Sägewerk kostet wood:20, stone:5 — muss fehlschlagen
+    // Sägewerk kostet wood:5, gold:15 — muss fehlschlagen
     const nextState = tick(state, [{ type: 'build', buildingId: 'lumbermill', col: 0, row: 0 }])
     expect(nextState.buildings).toHaveLength(0)
   })
@@ -106,7 +106,7 @@ describe('MVP-Loop Integration', () => {
       for (let i = 0; i < 10; i++) {
         s = tick(s, [])
       }
-      // Farm bauen (2×2, kostet Holz:15)
+      // Farm bauen (2×2, kostet Holz:5, Gold:20)
       s = tick(s, [{ type: 'build', buildingId: 'farm', col: 10, row: 10 }])
       // 10 abschließende Ticks
       for (let i = 0; i < 10; i++) {

@@ -1,0 +1,54 @@
+[
+  {
+    "id": "swordsman",
+    "annoId": "FIGTYP_SCHWERT",
+    "name": "Schwertkämpfer",
+    "hp": 20,
+    "damage": 1,
+    "range": 1,
+    "speedTicks": 4,
+    "cost": {
+      "gold": 80
+    },
+    "combatType": "melee"
+  },
+  {
+    "id": "cavalry",
+    "annoId": "FIGTYP_KAVALERIE",
+    "name": "Kavallerie",
+    "hp": 18,
+    "damage": 1.6,
+    "range": 1,
+    "speedTicks": 3,
+    "cost": {
+      "gold": 130
+    },
+    "combatType": "melee"
+  },
+  {
+    "id": "musketeer",
+    "annoId": "FIGTYP_MUSKETIER",
+    "name": "Musketier",
+    "hp": 15,
+    "damage": 2.4,
+    "range": 4,
+    "speedTicks": 5,
+    "cost": {
+      "gold": 160
+    },
+    "combatType": "ranged"
+  },
+  {
+    "id": "cannoneer",
+    "annoId": "FIGTYP_KANONIER",
+    "name": "Kanonier",
+    "hp": 12,
+    "damage": 7,
+    "range": 7,
+    "speedTicks": 4,
+    "cost": {
+      "gold": 220
+    },
+    "combatType": "ranged"
+  }
+]

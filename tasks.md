@@ -104,7 +104,7 @@
 
 ### Task 14: COD-Parser — Gebäude- & Einheitendaten extrahieren
 - **prio:** 14
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Anno 1602 speichert alle Spielbalance-Daten in `.cod`-Dateien. Die wichtigsten
     für unser Spiel sind `haeuser.cod` (Gebäude: Kosten, Produktion, Bevölkerungsbedarf)

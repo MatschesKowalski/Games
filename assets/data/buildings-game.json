@@ -1,0 +1,159 @@
+[
+  {
+    "id": "lumbermill",
+    "annoId": "IDFORST+0",
+    "name": "Försterhaus",
+    "cost": {
+      "gold": 66
+    },
+    "size": [
+      2,
+      2
+    ],
+    "production": {
+      "resourceId": "wood",
+      "ratePerTick": 1
+    }
+  },
+  {
+    "id": "quarry",
+    "annoId": "IDMINE+6",
+    "name": "Steinbruch",
+    "cost": {
+      "gold": 198,
+      "wood": 2
+    },
+    "size": [
+      1,
+      2
+    ],
+    "production": null
+  },
+  {
+    "id": "farm",
+    "annoId": "IDFARM+2",
+    "name": "Getreide-Farm",
+    "cost": {
+      "gold": 116,
+      "wood": 5
+    },
+    "size": [
+      2,
+      2
+    ],
+    "production": {
+      "resourceId": "food",
+      "ratePerTick": 1
+    }
+  },
+  {
+    "id": "hunters_hut",
+    "annoId": "IDFORST+2",
+    "name": "Jagdhütte",
+    "cost": {
+      "gold": 66,
+      "wood": 2
+    },
+    "size": [
+      1,
+      1
+    ],
+    "production": {
+      "resourceId": "food",
+      "ratePerTick": 0.5
+    }
+  },
+  {
+    "id": "bakery",
+    "annoId": "IDHANDW+2",
+    "name": "Bäckerei",
+    "cost": {
+      "gold": 166,
+      "wood": 6
+    },
+    "size": [
+      2,
+      2
+    ],
+    "production": {
+      "resourceId": "food",
+      "ratePerTick": 0.8
+    }
+  },
+  {
+    "id": "toolsmith",
+    "annoId": "IDHANDW+14",
+    "name": "Werkzeug-Schmiede",
+    "cost": {
+      "gold": 174,
+      "wood": 2,
+      "stone": 10
+    },
+    "size": [
+      2,
+      2
+    ],
+    "production": {
+      "resourceId": "wood",
+      "ratePerTick": 0.1
+    }
+  },
+  {
+    "id": "watchtower",
+    "annoId": "IDMIL+4",
+    "name": "Wachturm",
+    "cost": {
+      "gold": 356,
+      "wood": 1,
+      "stone": 12
+    },
+    "size": [
+      1,
+      1
+    ],
+    "production": null
+  },
+  {
+    "id": "barracks",
+    "annoId": "IDMIL+10",
+    "name": "Festung",
+    "cost": {
+      "gold": 632,
+      "wood": 3,
+      "stone": 20
+    },
+    "size": [
+      2,
+      2
+    ],
+    "production": null
+  },
+  {
+    "id": "wall",
+    "annoId": "IDMAUER+20",
+    "name": "Holzmauer",
+    "cost": {
+      "wood": 2,
+      "gold": 10
+    },
+    "size": [
+      1,
+      1
+    ],
+    "production": null
+  },
+  {
+    "id": "stone_wall",
+    "annoId": "IDMAUER+0",
+    "name": "Steinmauer",
+    "cost": {
+      "stone": 4,
+      "gold": 18
+    },
+    "size": [
+      1,
+      1
+    ],
+    "production": null
+  }
+]
