@@ -8,4 +8,4 @@ coverage/
 playwright-report/
 test-results/
 Anno 1602/
-assets/sprites/
+assets/sprites/**/sprite_*.png
