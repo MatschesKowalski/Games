@@ -1,0 +1,308 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 49001
+    IDNIX       = 49201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Überschrift für Optionscreen---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 1
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+  ;---Untergrundtafel für Spielnamen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOPTION+6
+    Pos:        15, 403
+    Size:       226, 301
+
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOPTION+15
+    Pos:        15, 552
+    Size:       226, 152
+
+  ;---Scrollpfeile---;
+    @Nummer:    +1
+    Id:         IDHAUPT+10
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+16
+    Pressoff:   2
+    Pos:        164, 559
+    Size:       36, 23
+
+    @Nummer:    +1
+    Id:         IDHAUPT+11
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+17
+    Pressoff:   2
+    Pos:        200, 560
+    Size:       37, 24
+
+  ;---Lautstärke Musik---;
+    @Nummer:    +1
+    Id:         IDHAUPT+12    ; Minus
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+20
+    Pressoff:   2
+    Pos:        25, 618
+    Size:       26, 20
+
+    @Nummer:    +1
+    Id:         IDHAUPT+13    ; Plus
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+21
+    Pressoff:   2
+    Pos:        208, 609
+    Size:       35, 35
+
+    @Nummer:    +1
+    Id:         IDHAUPT+14    ; Kugel
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Gfxnr:      GFXKONT+16
+    Pressoff:   1
+    Pos:        58, 608
+    Size:       132, 34
+    Posoffs:    -13, 0
+
+  ;---Lautstärke Soundeffekte---;
+    @Nummer:    +1
+    Id:         IDHAUPT+15    ; Minus
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+20
+    Pressoff:   2
+    Pos:        25, 683
+    Size:       26, 20
+
+    @Nummer:    +1
+    Id:         IDHAUPT+16    ; Plus 
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+21
+    Pressoff:   2
+    Pos:        208, 674
+    Size:       35, 35
+
+    @Nummer:    +1
+    Id:         IDHAUPT+17    ; Kugel
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Gfxnr:      GFXKONT+16
+    Pressoff:   1
+    Pos:        58, 673
+    Size:       132, 34
+    Posoffs:    -13, 0
+
+  ;---Musik seriell/randomize, Test---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+24    ; Seriell
+    Basenr:     BASE
+    Reiheflg:   1
+    Pressoff:   3
+    Pos:        30, 709
+    Size:       55, 55
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+21      ; Randomize
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+25
+    Basenr:     BASE
+    Reiheflg:   1
+    Pressoff:   3
+    Pos:        90, 710
+    Size:       56, 55
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+22      ; Soundeffekte Test
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+26
+    Pressoff:   3
+    Pos:        157, 710
+    Size:       80, 49
+
+    @Nummer:    +1
+    Id:         IDHAUPT+23      ; Musik ein/aus
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+30
+    Pressoff:   1
+    Flipflg:    1
+    Pos:        21, 571
+    Size:       38, 45
+
+    @Nummer:    +1
+    Id:         IDHAUPT+24      ; Überschrift Musik
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        68, 580
+    Posoffs:    0, 27
+
+    @Nummer:    +1
+    Id:         IDHAUPT+25     ; Soundeffekte ein/aus
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+30
+    Pressoff:   1
+    Flipflg:    1
+    Pos:        21, 637
+    Size:       38, 45
+
+    @Nummer:    +1
+    Id:         IDHAUPT+26    ; Überschrift Soundeffekte
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        68, 646
+    Posoffs:    0, 27
+
+  ;---Musik-Select-Buttons---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+13
+    Pressoff:   1
+    Flipflg:    1
+    Pos:        15, 404
+    Posoffs:    9, 4
+    Size:       33, 25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+  ;---Musikstücke Namen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        15, 404
+    Size:       226, 25
+    Posoffs:    33, 27
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+  ;---Musik-Stück Gelber Rahmen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Gfxnr:      GFXOPTION+33
+    Pos:        40, 404
+    Posoffs:    -24, 1
+    Size:       201, 25
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +25
+ 
+  EndObj;

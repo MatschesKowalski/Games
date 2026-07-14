@@ -1,0 +1,71 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 54001
+    IDNIX       = 54901
+
+;================HAUPT-GADGETS==================;
+
+  ;---Überschrift für Piratenscreen---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 1
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+  ;---Gesicht des Piraten---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPIRAT+0
+    Pos:        50, 396
+    Size:       197, 197
+
+	;---Schutzgeld bzw. Auftrag---;
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPIRAT+1
+		Pressoff:		2
+    Pos:        34, 614
+    Size:       202, 52
+
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPIRAT+2
+		Pressoff:		2
+    Pos:        39, 672
+    Size:       192, 52
+
+  EndObj;

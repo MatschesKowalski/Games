@@ -1,0 +1,477 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOL  =   0
+  
+    COL_WHT =     255
+    COL_RED =     249
+    COL_BLK =     0
+    COL_BALK =    185
+
+    ZEINR =       0
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 38001
+    IDNIX       = 38901
+
+    GFXTAFEL    = 0
+    GFXPFEIL    = GFXTAFEL+1
+    GFXPLUS     = GFXPFEIL+4
+    GFXMAIN     = GFXPLUS+4
+		GFXMAP			= GFXMAIN+8
+		GFXHAUS     = GFXMAP+5
+    GFXPFEIL    = GFXHAUS+18
+    GFXBAUMAT   = GFXPFEIL+6
+    GFXBAUHAUS  = GFXBAUMAT+35
+    GFXMENU     = GFXBAUHAUS+86
+    GFXOVERHEAD = GFXMENU+3
+    GFXPFEILV   = GFXOVERHEAD+5
+    GFXMENGE    = GFXPFEILV+4
+    GFXWARELEER = GFXMENGE+8
+    GFXWARE     = GFXWARELEER+4
+    GFXKONT     = GFXWARE+41
+		GFXLEISTE   = GFXKONT+20
+		GFXSIED     = GFXLEISTE+55
+		GFXSIEDFACE	= GFXSIED+9
+		GFXSIEDINFR	= GFXSIEDFACE+4
+		GFXSIEDNAHR = GFXSIEDINFR+16
+		GFXPROD     = GFXSIEDNAHR+2
+		GFXSHIP			= GFXPROD+6
+		GFXWERFT		= GFXSHIP+39
+		GFXMILIT		= GFXWERFT+15
+		GFXSTADT		= GFXMILIT+18
+		GFXTRANS		= GFXSTADT+14
+    GFXOPTION   = GFXTRANS+12
+    GFXKAMPF    = GFXOPTION+52
+    GFXPIRAT    = GFXKAMPF+26
+    GFXVERTRAG  = GFXPIRAT+19
+    GFXINFO     = GFXVERTRAG+34
+    GFXROUTE    = GFXINFO+8
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name des Schiffes---;
+    @Nummer:    0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+1
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+	;---Reparatur, Verkauf, Handel und Kanone
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+		Flipflg:		1
+    Gfxnr:      GFXSHIP
+		Pressoff:		4
+    Pos:        22, 439
+    Size:       62, 67
+
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+		Flipflg:		1
+    Gfxnr:      GFXSHIP+1
+		Pressoff:		4
+		Pos:		    179, 572
+		Size:	      66, 68
+
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+	  Gfxnr:      GFXSHIP+2
+		Pressoff:		4
+		Pos:			  16, 577
+		Size:				64, 62
+
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+3
+		Pressoff:		4
+		Pos:				159, 403
+		Size:				74, 56
+
+    @Nummer:    +1
+    Id:         IDHAUPT+6
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        126, 414
+		Size:				30, 30
+    Posoffs:    30, 29
+
+  ;---Zustandsbalken---;
+    @Nummer:    +1
+    Id:         IDHAUPT+7
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSHIP+12
+    Pos:        89, 468
+    Size:       145, 21
+
+    @Nummer:    +1
+    Id:         IDHAUPT+8
+    Kind:       GAD_BALKEN
+    Slidhorflg: 1
+    Noselflg:   1
+    Color:      COL_BALK
+    Pos:        91, 471
+    Size:       141, 15
+
+    @Nummer:    +1
+    Id:         IDHAUPT+9
+    Kind:       GAD_NIX
+    Pos:        89, 468
+    Size:       145, 21
+
+  ;---Warenpreis Schieberegler---;
+    @Nummer:    +1
+    Id:         IDHAUPT+10    ; Untergrund!!
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSHIP+13
+    Pos:        47, 545
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+11    ; Kugel !!
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Gfxnr:      GFXKONT+16
+    Pressoff:   1
+    Pos:        60, 534
+    Size:       133, 36
+    Posoffs:    -13, 0
+
+  ;---Minus / Plus für Warenpreis---;
+    @Nummer:    +1
+    Id:         IDHAUPT+12
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+8
+    Pressoff:   2
+    Pos:        21, 538
+    Size:       25, 25
+    Posoffs:    5, 5
+
+    @Nummer:    +1
+    Id:         IDHAUPT+13
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+9
+    Pressoff:   2
+    Pos:        209, 534
+    Size:       30, 33
+
+    @Nummer:    +1
+    Id:         IDHAUPT+14
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        25, 507
+    Size:       210, 30
+    Posoffs:    0, 29
+
+    @Nummer:    +1
+    Id:         IDHAUPT+15
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+		Noselflg:		1
+    Color:      0, 0
+    Pos:        25, 507
+    Posoffs:    210, 29
+
+	;---Kontorerrichtung---;
+    @Nummer:    +1
+    Id:         IDHAUPT+16
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+14
+		Pressoff:		1
+    Pos:        16, 566
+    Size:       95, 79
+
+	;---Warenaustausch mit eigenen Kontor---;
+    @Nummer:    +1
+    Id:         IDHAUPT+17
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+16
+		Pressoff:		1
+		Pos:			  16, 577
+		Size:				64, 62
+
+  ;---Kontaktaufnahme mit Piraten---;
+    @Nummer:    +1
+    Id:         IDHAUPT+18
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+18
+		Pressoff:		1
+		Pos:			  18, 428
+		Size:				87, 78
+
+  ;---Ein -bzw. Ausschalten des Routenmodus---;
+    @Nummer:    +1
+    Id:         IDHAUPT+19
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+20
+    Flipflg:    1
+		Pressoff:		1
+		Pos:			  177, 499
+		Size:				56, 65
+
+  ;---Festlegen einer fixen Schiffsroute---;
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+22
+		Pressoff:		1
+		Pos:			  104, 557
+		Size:				68, 90
+
+  ;---Stoppen des Schiffes---;
+    @Nummer:    +1
+    Id:         IDHAUPT+21
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+24
+		Pressoff:		1
+		Pos:			  30, 570
+		Size:				56, 66
+
+  ;---Erkunden einer Insel---;
+    @Nummer:    +1
+    Id:         IDHAUPT+22
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+26
+		Pressoff:		1
+		Pos:			  18, 447
+		Size:				63, 71
+
+    @Nummer:    +1
+    Id:         IDHAUPT+23
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+28
+		Noselflg:		1
+		Pos:			  18, 447
+		Size:				63, 71
+
+  ;---Welcher Spieler ist derzeit aktiv??---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Reiheflg:   1
+    Basenr:     BASE
+    Gfxnr:      GFXPIRAT+5
+    Pressoff:   7
+    Pos:        23, 515
+    Size:       30, 33
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +35, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +35, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +35, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +35, +0
+
+  ;---Warengrafiken Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         20
+    Y =         649
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       48, 46
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+  ;---Lagermenge Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         62
+    Y =         651
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       4, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+  ;---Warengadgets Schiff---;
+    @Nummer:    +1
+    X =         18
+    Y =         648
+    BASE =      Nummer
+    Id:         IDHAUPT+90
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWARELEER+2
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       48, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +57, +0
+
+  ;---Slider für Mengenlimits links---;
+    @Nummer:    +1
+    X =         58
+    Y =         417
+    BASE =      Nummer
+    Id:         IDHAUPT+110
+    Kind:       GAD_GFX
+    Slidverflg: 1
+    Slidoffs:   0, 12
+    Slidsize:   0, 44
+    Gfxnr:      GFXROUTE+4
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       30, 66
+    Posoffs:    10, -12
+
+EndObj;

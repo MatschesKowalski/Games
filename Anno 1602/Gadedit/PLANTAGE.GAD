@@ -1,0 +1,157 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 41001
+    IDNIX       = 41201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name der Kontorstadt---;
+    @Nummer:    +0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+0
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+ 
+	;---Aktuelle Auslastung---;  
+    @Nummer:    +1
+    BASE =			Nummer
+    Id:         IDHAUPT+2
+    Kind:       GAD_TEXTL
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0
+    Pos:        25, 490
+    Size:       206, 25
+    Posoffs:    0, 25
+  
+    @Nummer:    +1
+		ObjFill:		BASE
+    Kind:       GAD_TEXTR
+    @Id:        +1
+    Noselflg:   1
+    Posoffs:    205, 25
+
+	;---Betriebskosten für Gebäude---;
+    @Nummer:    +1
+		BASE =			Nummer
+    Id:         IDHAUPT+4
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        25, 510
+    Size:       206, 25
+    Posoffs:    0, 27
+
+		@Nummer:		+1
+		ObjFill:		BASE
+		@Id:				+1
+		Kind:				GAD_TEXTR
+    Noselflg:   1
+		Posoffs:		186, 27
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        209, 510
+    Posoffs:    0, -4
+    Size:       30, 26
+
+	;---Gebäudebezeichnung---:
+    @Nummer:    +1
+    Id:         IDHAUPT+7
+    Kind:       GAD_TEXTZ
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0
+    Pos:        25, 405
+    Size:       206, 25
+    Posoffs:    103, 25
+
+	;---Produktion stilllegen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+8
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPROD+1
+		Flipflg:		1
+		Pressoff:		1
+		Pos:		    23, 683
+		Size:			  47, 57
+
+	;---Abholung vom Markt verbieten---;
+    @Nummer:    +1
+    Id:         IDHAUPT+9
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPROD+3
+		Flipflg:		1
+		Pressoff:		1
+		Pos:		    79, 683
+		Size:			  60, 63
+
+	;---Produktionskette---;
+		X = 100
+		Y = 429
+
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE					; Warengrafik
+    Pos:        X, Y
+    Posoffs:		2, 1
+    Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEILITTLE				; Warenmenge
+    Noselflg:   1
+    Color:      0, 0
+    Pos:        X, Y
+    Posoffs:    47, 47
+  
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWARELEER+2		; Warenitem
+    Pos:        X, Y
+    Size:       48, 46
+    
+EndObj;

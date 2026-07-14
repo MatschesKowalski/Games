@@ -1,0 +1,179 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 59001
+    IDNIX       = 59901
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name des Schiffes---;
+    @Nummer:    0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    ObjFill:    BASE
+    Gfxnr:      GFXOVERHEAD+3
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+	;---Handel mit fremden Kontor---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+	  Gfxnr:      GFXSHIP+2
+		Pressoff:		4
+		Pos:			  16, 627
+		Size:				64, 62
+
+	;---Warenaustausch mit eigenen Kontor---;
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+16
+		Pressoff:		1
+		Pos:			  16, 627
+		Size:				64, 62
+
+  ;---Festlegen einer fixen Schiffsroute---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Gfxnr:      GFXTRADER+0
+		Pressoff:		2
+		Pos:			  101, 621
+		Size:				68, 67
+
+  ;---Ein -bzw. Ausschalten des Routenmodus---;
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Gfxnr:      GFXTRADER+1
+    Flipflg:    1
+		Pressoff:		2
+		Pos:			  179, 624
+		Size:				57, 67
+
+  ;---Stoppen des Traders---;
+    @Nummer:    +1
+    Id:         IDHAUPT+6
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSHIP+24
+		Pressoff:		1
+		Pos:			  30, 624
+		Size:				56, 66
+
+  ;---Warengrafiken Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         28
+    Y =         701
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       48, 46
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Lagermenge Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         70
+    Y =         703
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       4, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Warengadgets Schiff---;
+    @Nummer:    +1
+    X =         26
+    Y =         700
+    BASE =      Nummer
+    Id:         IDHAUPT+90
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWARELEER+2
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       48, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+EndObj;

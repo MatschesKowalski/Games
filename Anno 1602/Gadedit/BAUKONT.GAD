@@ -1,0 +1,306 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 42001
+    IDNIX      = 42101
+
+;================HAUPT-GADGETS==================;
+
+  ;---Name des Schiffes---;
+    @Nummer:    0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 592
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+1
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 598
+    Size:       244, 30
+    Posoffs:    124, 29
+
+  ;---Pfeile links + rechts---;
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPFEILH
+    Pressoff:   3
+    Pos:        11, 413
+    Size:       40, 46
+    Posoffs:    5, 0
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+21
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPFEILH+1
+    Pressoff:   3
+    Pos:        210, 413
+    Size:       40, 60
+    Posoffs:    4, 0
+    
+	;---Gebäudebezeichnung---:
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+32
+    Kind:       GAD_TEXTZ
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+  ;---Aktuelles Hausgadget---;
+    @Nummer:    +1
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFXFILL
+    Blocknr:    BLK_BAUHAUS
+    Noselflg:   1
+    Pos:        48, 402
+    Size:       160, 110
+
+    @Nummer:    +1
+    Id:         IDHAUPT+31
+    Kind:       GAD_GFX
+    Blocknr:    BLK_BAUHAUS
+    Pos:        48, 390
+    Size:       160, 110
+
+  ;---Angaben über Baukosten (Symbole)---;
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+2
+    Pos:        16, 560
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        115, 560
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+3
+    Pos:        68, 560
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+6
+    Pos:        186, 560
+    Size:       1, 1
+
+  ;---Angaben über Baukosten (Beträge)---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        16, 560
+    Size:       50, 28
+    Posoffs:    30, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        115, 560
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        68, 560
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        186, 560
+
+  ;---Warengrafiken Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         28
+    Y =         649
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       48, 46
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Lagermenge Schiff (nicht wählbar)---;
+    @Nummer:    +1
+    X =         70
+    Y =         651
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       4, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Warengadgets Schiff---;
+    @Nummer:    +1
+    X =         26
+    Y =         648
+    BASE =      Nummer
+    Id:         IDHAUPT+90
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWARELEER+2
+    Pressoff:   0
+    Pos:        X, Y
+    Size:       48, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+EndObj;

@@ -1,0 +1,47 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 100001
+		IDNIX				= 101001
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets mit Leistengrafik---;
+    @Nummer:    0
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXMISSZIEL+44
+    Pos:        58, 692
+    Size:       618, 46
+
+  ;---Gadget mit rechtsbündigen Text---;
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      5
+    Pos:        58, 692
+    Size:       618, 34
+    Posoffs:    595, 32
+
+  EndObj;

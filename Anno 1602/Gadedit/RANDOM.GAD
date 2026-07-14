@@ -1,0 +1,390 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_EDIT
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 70001
+    IDNIX      = 70999
+
+;================HAUPT-GADGETS==================;
+
+  ;---Tafel mit Überschrift---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  ;---Wachstum Warengrafik (nicht wählbar)---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        23, 405
+    Size:       48, 48
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        23, 498
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Wachstum Warenrahmen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXMISSZIEL+4
+    Pressoff:   11
+    Pos:        23, 405
+    Size:       48, 48
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        23, 498
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Pfeile Warengrafik links---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+0
+    Pressoff:   2
+    Pos:        7, 455
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        7, 548
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Pfeile Warengrafik rechts---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+1
+    Pressoff:   2
+    Pos:        23, 455
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        23, 548
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Mengentext Warengrafik---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        41, 455
+    Size:       50, 30
+    Posoffs:    0, 29
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        41, 548
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Wachstum Erzvorkommen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+60
+    Kind:       GAD_GFX
+    Gfxnr:      GFXERZBERG+0
+    Pos:        23, 591
+    Size:       54, 49
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +82, +0
+    Posoffs:    0, -3
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    @Pos:       +82, +0
+    Posoffs:    0, -5
+
+  ;---Pfeile Erzvorkommen links---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+65
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+0
+    Pressoff:   2
+    Pos:        7, 628
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Pfeile Erzvorkommen rechts---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+1
+    Pressoff:   2
+    Pos:        23, 628
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Mengentext Erzvorkommen---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+75
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        41, 628
+    Size:       50, 30
+    Posoffs:    0, 29
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Wachstum Schätze+Natives---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+80
+    Kind:       GAD_GFX
+    Gfxnr:      GFXERZBERG+8
+    Pos:        23, 674
+    Size:       54, 49
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Gfxnr:      GFXWAPPEN+5
+    Pressoff:   7
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Gfxnr:      GFXERZBERG+10
+    Pressoff:   2
+    @Pos:       +82, +0
+    Posoffs:    0, 8
+
+  ;---Pfeile Schätze+Natives links---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+85
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+0
+    Pressoff:   2
+    Pos:        7, 721
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Pfeile Schätze+Natives rechts---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+90
+    Kind:       GAD_GFX
+    Gfxnr:      GFXRANDOM+1
+    Pressoff:   2
+    Pos:        23, 721
+    Size:       16, 28
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  ;---Mengentext Schätze+Natives---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+95
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        41, 721
+    Size:       50, 30
+    Posoffs:    0, 29
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +82, +0
+
+  EndObj;

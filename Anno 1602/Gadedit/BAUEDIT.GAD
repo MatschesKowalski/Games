@@ -1,0 +1,275 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOL  =   0
+    BLK_EDIT  =   2
+    BLK_BAUHAUS = 3
+  
+    ZEINR =       0
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_EDIT
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 31001
+    IDNIX      = 31101
+
+    GFXWARE =     0
+    GFXBAUHAUS  = GFXWARE+2
+    GFXHAUS     = GFXBAUHAUS+43
+    GFXPFEILH   = GFXHAUS+20
+    GFXBAUMAT   = GFXPFEILH+8
+    GFXMISSZIEL = GFXBAUMAT+21
+    GFXBGRUPPE  = GFXMISSZIEL+34
+    GFXOVERHEAD = GFXBGRUPPE+10
+    GFXINSELDAT = GFXOVERHEAD+1
+    GFXSOLDAT   = GFXINSELDAT+27
+    GFXSCHIFF   = GFXSOLDAT+10
+    GFXINSELTYP = GFXSCHIFF+10
+    GFXWAPPEN   = GFXINSELTYP+10
+
+;================HAUPT-GADGETS==================;
+
+  ;---Häusergadgets---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Basenr:     BASE
+    Gfxnr:      GFXHAUS
+    Menuflg:    1
+    Reiheflg:   1
+    Pressoff:   10
+    Pos:        17, 623
+    Size:       56, 64
+    Posoffs:    0, 0
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        72, 623
+    Size:       56, 64
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        129, 623
+    Size:       56, 64
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+  ;  Menuflg:    0
+    Pos:        185, 623
+    Size:       56, 64
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        17, 692
+    Size:       56, 64
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        72, 692
+    Size:       56, 64
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        129, 692
+    Size:       58, 64
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        188, 692
+    Size:       59, 64
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        17, 560
+    Size:       56, 64
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Gfxnr:     +1
+    Pos:        72, 560
+    Size:       56, 64
+    
+  ;---Pfeile links + rechts---;
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPFEILH
+    Pressoff:   3
+    Pos:        11, 413
+    Size:       40, 46
+    Posoffs:    5, 0
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+21
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPFEILH+1
+    Pressoff:   3
+    Pos:        210, 413
+    Size:       40, 60
+    Posoffs:    4, 0
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+22
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPFEILH+2
+    Pressoff:   3
+    Flipflg:    1
+    Pos:        10, 456
+    Size:       34, 40
+    Posoffs:    3, 0
+    
+	;---Gebäudebezeichnung---:
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+0
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+32
+    Kind:       GAD_TEXTZ
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    124, 29
+
+    @Nummer:    +1
+    Id:         IDHAUPT+23
+    Kind:       GAD_GFXRAST
+    Noselflg:   1
+    Gfxnr:      GFXWAPPEN
+    Pos:        215, 350
+    Posoffs:    5, 5
+
+    @Nummer:    +1
+    Id:         IDHAUPT+24
+    Kind:       GAD_GFX
+    Gfxnr:      GFXWAPPEN
+    Pressoff:   7
+    Pos:        215, 350
+		Size:       40, 32
+
+  ;---Aktuelles Hausgadget---;
+    @Nummer:    +1
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFXFILL
+    Blocknr:    BLK_BAUHAUS
+    Noselflg:   1
+    Pos:        48, 402
+    Size:       160, 110
+
+    @Nummer:    +1
+    Id:         IDHAUPT+31
+    Kind:       GAD_GFX
+    Blocknr:    BLK_BAUHAUS
+    Pos:        48, 390
+    Size:       160, 110
+
+  ;---Produktionskette (2 Rohstoffe)--;
+		X = 27
+		Y = 510
+
+    @Nummer:    +1
+    Id:         IDHAUPT+60
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE					; Workstoffgrafik
+    Pos:        X, Y
+    Posoffs:		2, 1
+		Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXMISSZIEL+4		; Workstoffitem
+    Pos:        X, Y
+    Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPFEILH+6		; Pfeil
+    Pos:        X, Y
+    Posoffs:		55, 7
+		Size:       48, 46
+
+		X = X+75
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE					; Rohstoffgrafik
+    Pos:        X, Y
+    Posoffs:		2, 1
+		Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXMISSZIEL+4		; Rohstoffitem
+    Pos:        X, Y
+    Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPFEILH+7 		; Pfeil
+    Pos:        X, Y
+    Posoffs:		55, 7
+		Size:       48, 46
+
+		X = X+75
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE					; Warengrafik
+    Pos:        X, Y
+    Posoffs:		2, 1
+    Size:       48, 46
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXMISSZIEL+4		; Warenitem
+    Pos:        X, Y
+    Size:       48, 46
+
+  EndObj;

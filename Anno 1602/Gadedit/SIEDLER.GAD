@@ -1,0 +1,456 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 36001
+    IDNIX       = 36201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets nur zur Zirde---;
+    @Nummer:    0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXKONT+11
+    Pos:        30, 542
+    Size:       1, 1
+    
+  ;---Name der Kontorstadt---;
+    @Nummer:    +0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+0
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+  
+  ;---Steuerquote Schieberegler---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+2     ; Untergrund!!
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSIED+6
+    Pos:        43, 521
+    Size:       1, 1
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+3     ; Kugel !!
+    Kind:       GAD_GFX
+    Basenr:     BASE
+    Baseflg:    1
+    Slidhorflg: 1
+    Gfxnr:      GFXKONT+16
+    Pressoff:   1
+    Pos:        59, 521
+    Size:       130, 34
+    Posoffs:    -13, 0
+
+  ;---Minus / Plus für Warenpreis---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSIED+2
+    Pressoff:   2
+    Pos:        18, 524
+    Size:       30, 25
+    Posoffs:    5, 5
+
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSIED+3
+    Pressoff:   2
+    Pos:        206, 520
+    Size:       30, 30
+
+	;---Gesamtversorgungquote---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+6     ; Untergrund!!
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSIED+7
+    Pos:        207, 567
+    Size:       21, 104
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+7
+    Kind:       GAD_BALKEN
+    Basenr:     BASE
+    Baseflg:    1
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        210, 569
+    Size:       15, 100
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+8
+    Kind:       GAD_GFX
+    Noselflg:		1
+		Slidverflg: 1
+    Gfxnr:      GFXSIED+8
+    Pos:        210, 569
+    Size:       15, 100
+
+	;---Siedlerkopf mit Stimmung---;
+    @Nummer:    +1
+    Id:         IDHAUPT+9
+    Kind:       GAD_GFX
+    Gfxnr:      GFXSIEDFACE
+    Pos:        50, 398
+    Size:       60, 90
+    Posoffs:    -20, 0
+
+	;---Steuersatz, Steuerertrag, Einwohnerzahl---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        20, 500
+    Size:       216, 20
+    Posoffs:    0, 20
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+11
+    Noselflg:   1
+    Kind:       GAD_TEXTR
+		Posoffs:		194, 20
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        20, 500
+    Posoffs:    192, -9
+
+    @Nummer:    +1
+    Id:         IDHAUPT+12
+    Kind:       GAD_TEXTR
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        15, 440
+    Size:       40, 20
+    Posoffs:    35, 20
+
+    @Nummer:    +1
+    Id:         IDHAUPT+13
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        120, 440
+    Size:       100, 20
+    Posoffs:    0, 20
+
+	;---Gesamtversorgungquote (nur Gadget)---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+14
+    Kind:       GAD_NIX
+    Pos:        207, 567
+    Size:       21, 104
+    
+	;---Nahrungsversorgungquote---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+15     ; Untergrund!!
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXSIEDNAHR
+    Pos:        123, 725
+    Size:       112, 21
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+16
+    Kind:       GAD_BALKEN
+    Basenr:     BASE
+    Baseflg:    1
+    Noselflg:   1
+    Slidhorflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        125, 728
+    Size:       108, 15
+    
+    @Nummer:    +1
+    Id:         IDHAUPT+17
+    Kind:       GAD_GFX
+    Noselflg:		1
+		Slidhorflg: 1
+    Gfxnr:      GFXSIEDNAHR+1
+    Pos:        125, 728
+    Size:       108, 15
+
+    @Nummer:    +1
+    Id:         IDHAUPT+18
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        25, 727
+    Size:       200, 20
+    Posoffs:    0, 22
+
+	;---Infrastruktur-Symbole---;
+    @Nummer:    +1
+    BASE =			Nummer
+		Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Noselflg:		1
+		Flipflg:		1
+    Gfxnr:      GFXSIEDINFR+0
+    Pressoff:   8
+    Pos:        25, 680
+    Size:       34, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:			+1
+    Pos:        60, 680
+    Size:       31, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:			+1
+    Pos:        92, 680
+    Size:       34, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:			+1
+    Pos:        127, 680
+    Size:       39, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:			+1
+    Pos:        169, 680
+    Size:       31, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:		  +1
+    Pos:        200, 680
+    Size:       35, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:		  +1
+    Pos:        200, 680
+    Size:       35, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    @Gfxnr:		  +1
+    Pos:        200, 680
+    Size:       35, 43
+
+	;---Infrastruktur-Symbole (nur Gadget)---;
+    @Nummer:    +1
+    BASE =			Nummer
+		Id:         IDHAUPT+90
+    Kind:       GAD_NIX
+    Pos:        25, 680
+    Size:       34, 43
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        59, 684
+    Size:       34, 37
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        94, 683
+    Size:       31, 37
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        127, 684
+    Size:       39, 36
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        169, 682
+    Size:       31, 40
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        200, 680
+    Size:       35, 41
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        200, 680
+    Size:       35, 41
+
+    @Nummer:    +1
+		ObjFill:		BASE
+    @Id:        +1
+    Pos:        200, 680
+    Size:       35, 41
+
+  ;---Warengrafiken Kontor (nicht wählbar)---;
+    @Nummer:    +1
+    X =         27
+    Y =         569
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       1, 1
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+  ;---Lagermenge Kontor (nicht wählbar)---;
+    @Nummer:    +1
+    X =         69
+    Y =         570
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       6, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+  ;---Warengadgets Kontor---;
+    @Nummer:    +1
+    X =         25
+    Y =         567
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_GFX
+		Reiheflg:   1
+    Basenr:     BASE
+    Gfxnr:      GFXSIED+0
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       53, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+56
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +61, +0
+
+EndObj;

@@ -1,0 +1,95 @@
+
+;---Spieler Definitionen---;
+  Objekt: GADGET
+
+    BLK_TOOLS =   0
+    BLK_BAUHAUS = 3
+
+    COL_RED =     249
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOLS
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 40001
+    IDNIX      = 40101
+
+    GFXTAFEL    = 0
+    GFXPFEIL    = GFXTAFEL+1
+    GFXPLUS     = GFXPFEIL+4
+	  GFXMAP			= GFXPLUS+4
+    GFXLEISTE   = GFXMAP+5
+    GFXWARE =     GFXLEISTE+1
+    GFXHAUS     = GFXWARE+41
+    GFXPFEILH   = GFXHAUS+18
+    GFXBAUMAT   = GFXPFEILH+8
+    GFXBAUHAUS  = GFXBAUMAT+21
+    GFXMISSZIEL = GFXBAUHAUS+86
+    GFXBGRUPPE  = GFXMISSZIEL+31
+    GFXOVERHEAD = GFXBGRUPPE+10
+
+;================HAUPT-GADGETS==================;
+
+  ;---Tafel mit Überschriften---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+0
+    Pos:        6, 284
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 288
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  ;---Tafel mit Überschriften---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+0
+    Pos:        6, 324
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+3
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 328
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  ;---Tafel mit Überschriften---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+0
+    Pos:        6, 364
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+5
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 368
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  EndObj;

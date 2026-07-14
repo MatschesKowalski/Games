@@ -1,0 +1,400 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 34001
+    IDWARE      = 34011
+    IDPREIS     = 34021
+    IDNIX       = 34201
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets nur zur Zirde---;
+    @Nummer:    0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXKONT+11
+    Pos:        30, 542
+    Size:       1, 1
+    
+  ;---Name der Kontorstadt---;
+    @Nummer:    +0
+    BASE =      Nummer
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    Id:         IDHAUPT+0
+    Gfxnr:      GFXOVERHEAD+0
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+  
+  ;---Ein- oder Verkaufsmodus---;
+    @Nummer:    +1
+    Id:         IDHAUPT+2
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Flipflg:    1
+    Gfxnr:      GFXKONT+0
+    Pressoff:   1
+    Pos:        171, 393
+    Size:       85, 106
+
+  ;---Ein- und Verkaufslimit---;
+    @Nummer:    +1
+    Id:         IDHAUPT+4     ; Pfeil !!
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Slidoffs:   11, 0
+    Slidsize:   134, 0
+    Gfxnr:      GFXKONT+13
+    Pressoff:   1
+    Pos:        15, 433
+    Size:       156, 37
+    Posoffs:    -10, 16
+
+  ;---Lagermengenbalken---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+5
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXKONT+8
+    Pos:        22, 433
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDHAUPT+6
+    Kind:       GAD_BALKEN
+    Slidhorflg: 1
+    Noselflg:   1
+    Color:      COL_BALK
+    Pos:        26, 436
+    Size:       134, 11
+
+    @Nummer:    +1
+    Id:         IDHAUPT+7
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Noselflg:   1
+    Gfxnr:      GFXKONT+15
+    Pos:        26, 434
+    Size:       134, 16
+    Posoffs:    -1, 0
+
+  ;---Warenbezeichnung und -preis---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDWARE+1
+    Kind:       GAD_TEXTL
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0
+    Pos:        24, 566
+		Posoffs:		0, 25
+    Size:       1, 1
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Kind:       GAD_TEXTR
+		Posoffs:		192, 25
+
+    @Nummer:    +1
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        24, 566
+    Posoffs:    190, -4
+
+  ;---Warenmengentext---;
+    @Nummer:    +1
+    Id:         IDWARE+3
+    Kind:       GAD_TEXTL
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0
+    Pos:        24, 429
+    Size:       1, 1
+
+    @Nummer:    +1
+    Id:         IDWARE+4
+    Kind:       GAD_TEXTR
+    Noselflg:   1
+    Blocknr:    ZEINR
+    Color:      0, 1
+    Pos:        162, 429
+    Size:       1, 1
+
+  ;---Mistkübel---;
+    @Nummer:    +1
+    Id:         IDWARE+5
+    Kind:       GAD_GFX
+    Gfxnr:      GFXKONT+6
+    Pressoff:   1
+    Pos:        198, 713
+    Size:       40, 49
+
+  ;---Warenpreis Schieberegler Grund---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDPREIS+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXKONT+18
+    Pos:        57, 533
+    Size:       1, 1
+    
+  ;---Minus / Plus für Warenpreis---;
+    @Nummer:    +1
+    Id:         IDPREIS+1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXKONT+2
+    Pressoff:   2
+    Pos:        21, 526
+    Size:       30, 25
+    Posoffs:    5, 5
+
+    @Nummer:    +1
+    Id:         IDPREIS+2
+    Kind:       GAD_GFX
+    Gfxnr:      GFXKONT+3
+    Pressoff:   2
+    Pos:        209, 522
+    Size:       30, 30
+
+  ;---Warenpreis Schieberegler---;
+    @Nummer:    +1
+    Id:         IDPREIS+3     ; Kugel !!
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Slidoffs:   15, 0
+    Slidsize:   130, 0
+    Gfxnr:      GFXKONT+16
+    Pressoff:   1
+    Pos:        47, 521
+    Size:       150, 34
+    Posoffs:    -13, 0
+
+  ;---Warengrafiken Kontor (nicht wählbar)---;
+    @Nummer:    +1
+    X =         28
+    Y =         595
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXWARE
+    Pos:        X, Y
+    Size:       48, 46
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+108
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Lagermenge Kontor (nicht wählbar)---;
+    @Nummer:    +1
+    X =         70
+    Y =         597
+    BASE =      Nummer
+    Id:         IDHAUPT+50
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        X, Y
+    Size:       4, 42
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+108
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+  ;---Warengadgets Kontor---;
+    @Nummer:    +1
+    X =         26
+    Y =         594
+    BASE =      Nummer
+    Id:         IDHAUPT+70
+    Kind:       GAD_GFX
+		Reiheflg:   1
+    Basenr:     BASE
+    Gfxnr:      GFXWARELEER+2
+    Pressoff:   1
+    Pos:        X, Y
+    Size:       48, 48
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+54
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    Pos:        X, Y+108
+    
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +53, +0
+
+EndObj;

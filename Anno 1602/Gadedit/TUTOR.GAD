@@ -1,0 +1,194 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_TOOL
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT     = 110001
+		IDNIX				= 111001
+
+;================HAUPT-GADGETS==================;
+
+  ;---Gadgets mit Fenstergrafik---;
+    @Nummer:    0
+    Id:         IDNIX
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXTUTOR
+    Pos:        0, 0
+    Size:       320, 400
+
+  ;---Gadgets für Fensterschließen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Gfxnr:      GFXTUTOR+1
+    Pressoff:   1
+    Pos:        0, 0
+    Size:       30, 27
+
+  ;---Gadget mit rechtsbündigen Text---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+10
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Noselflg:   1
+    Color:      7
+    Pos:        40, 8
+    Size:       720, 20
+    Posoffs:    0, 26
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +20
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +20
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +20
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +20
+
+    @Nummer:    +1
+    ObjFill:    BASE
+    @Id:        +1
+    @Pos:       +0, +20
+
+  ;---Gadgets für Zurückblättern---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+20
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXTUTOR+3
+    Pressoff:   1
+    Pos:        725, 97
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        725, 97
+    Size:       20, 20
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        725, 117
+    Size:       10, 10
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        735, 117
+    Size:       5, 5
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        745, 97
+    Size:       10, 10
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        745, 107
+    Size:       5, 5
+
+  ;---Gadgets für Vorblättern---;
+    @Nummer:    +1
+    BASE =      Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXTUTOR+5
+    Pressoff:   1
+    Pos:        725, 97
+    Size:       1, 1
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        746, 118
+    Size:       20, 20
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        736, 128
+    Size:       10, 10
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        731, 123
+    Size:       5, 5
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        756, 108
+    Size:       10, 10
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_NIX
+    Baseflg:    1
+    Baseselflg: 1
+    Basenr:     BASE
+    Pos:        751, 113
+    Size:       5, 5
+
+  EndObj;

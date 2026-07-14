@@ -1,0 +1,264 @@
+
+;==============INCLUDE-FILES====================;
+
+  Include: "TOOLS.INC"
+
+;===============================================;
+
+  Objekt: GADGET
+
+  ;---Default-Werte festlegen---;
+    @Nummer:    0
+    Id:         0
+    Blocknr:    BLK_EDIT
+    Gfxnr:      0
+    Kind:       GAD_UNUSED
+    ObjFill:    0,MAXGADGET
+	
+  ;========================================;
+  ;   Hier starten richtige Definitionen   ;
+  ;========================================;
+
+    IDHAUPT    = 71001
+    IDNIX      = 71999
+
+;================HAUPT-GADGETS==================;
+
+  ;---Tafel mit Überschrift---;
+    @Nummer:    +0
+    Id:         IDHAUPT+0
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXOVERHEAD+2
+    Pos:        6, 354
+    Size:       244, 30
+
+    @Nummer:    +1
+    Id:         IDHAUPT+1
+    Kind:       GAD_TEXTZ
+    Blocknr:    ZEINR
+    Color:      1, 0
+    Pos:        6, 358
+    Size:       244, 30
+    Posoffs:    122, 29
+
+  ;---Gadgets für Mindestzustand Spieler---;
+    @Nummer:    +1
+    Id:         IDHAUPT+10
+    Kind:       GAD_BALKEN
+    Color:      COL_GRN, COL_GRN
+    Noselflg:   1
+    Pos:        63, 478
+    Size:       14, 95
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_RED, COL_RED
+    Pos:        66, 480
+    Size:       8, 91
+    
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Slidverflg: 1
+    Slidoffs:   0, 11
+    Slidsize:   0, 91
+    Gfxnr:      GFXMISSZIEL+12
+    Pressoff:   11
+    Pos:        68, 469
+    Size:       30, 123
+    Posoffs:    10, -11
+    
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT
+    Pos:        63, 478
+    Size:       14, 95
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT+1
+    Pos:        25, 462
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT+2
+    Pos:        25, 550
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXVERTRAG+16
+    Pos:        25, 402
+    Pressoff:   1
+    Size:       66, 78
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_TEXTL
+    Noselflg:   1
+    Slidverflg: 1
+    Slidoffs:   0, 11
+    Slidsize:   0, 91
+    Blocknr:    ZEILITTLE
+    Pos:        68, 469
+    Size:       30, 123
+    Posoffs:    28, 11
+    
+  ;---Gadgets für Höchstzustand Gegner---;
+    @Nummer:    +1
+    Id:         IDHAUPT+20
+    Kind:       GAD_BALKEN
+    Color:      COL_RED, COL_RED
+    Noselflg:   1
+    Pos:        183, 478
+    Size:       14, 95
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_BALKEN
+    Noselflg:   1
+    Slidverflg: 1
+    Color:      COL_GRN, COL_GRN
+    Pos:        186, 480
+    Size:       8, 91
+    
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Slidverflg: 1
+    Slidoffs:   0, 11
+    Slidsize:   0, 91
+    Gfxnr:      GFXMISSZIEL+12
+    Pressoff:   11
+    Pos:        188, 469
+    Size:       30, 123
+    Posoffs:    10, -11
+    
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT
+    Pos:        183, 478
+    Size:       14, 95
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT+1
+    Pos:        145, 462
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXPLAYERDAT+2
+    Pos:        145, 550
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXVERTRAG+28
+    Pos:        145, 402
+    Pressoff:   1
+    Size:       66, 78
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_TEXTL
+    Noselflg:   1
+    Slidverflg: 1
+    Slidoffs:   0, 11
+    Slidsize:   0, 91
+    Blocknr:    ZEILITTLE
+    Pos:        188, 469
+    Size:       30, 123
+    Posoffs:    28, 11
+    
+  ;---Startkapital des Spielers---;
+    @Nummer:    +1
+		BASE =			Nummer
+    Id:         IDHAUPT+30
+    Kind:       GAD_TEXTL
+    Blocknr:    ZEINR
+    Color:      0, 0
+    Pos:        15, 646
+    Size:       198, 25
+    Posoffs:    0, 25
+
+		@Nummer:		+1
+		ObjFill:		BASE
+		@Id:				+1
+		Kind:				GAD_TEXTR
+    Noselflg:   1
+		Posoffs:		198, 25
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXBAUMAT+0
+    Pos:        214, 646
+    Posoffs:    0, -4
+    Size:       30, 26
+
+    @Nummer:    +1
+    BASE =      Nummer
+    @Id:        +1
+    Kind:       GAD_GFX
+    Noselflg:   1
+    Gfxnr:      GFXMISSSTRT+4
+		Pos:        46, 611
+		Size:       160, 26
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXINSELDAT+11
+    Pressoff:   3
+    Pos:        23, 615
+    Size:       26, 20
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Gfxnr:      GFXINSELDAT+12
+    Pressoff:   3
+    Pos:        206, 608
+    Size:       33, 38
+
+    @Nummer:    +1
+    @Id:        +1
+    Kind:       GAD_GFX
+    Slidhorflg: 1
+    Slidoffs:   15, 0
+    Slidsize:   130, 0
+    Baseflg:    1
+    Basenr:     BASE
+    Gfxnr:      GFXINSELDAT+13
+    Pressoff:   3
+    Pos:        47, 611
+    Size:       157, 26
+    Posoffs:    -13, 0
+
+  ;---Wird Spielerfarbe fix zugewiesen---;
+    @Nummer:    +1
+    Id:         IDHAUPT+40
+    Kind:       GAD_GFX
+    Gfxnr:      GFXPLAYERDAT+3
+    Pressoff:   4
+    Pos:        23, 690
+    Size:       32, 47
+
+  EndObj;
