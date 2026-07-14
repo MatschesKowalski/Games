@@ -240,7 +240,7 @@
 
 ### Task 17: Einheiten-System (Truppen-Typen, Rekrutierung)
 - **prio:** 17
-- **status:** todo
+- **status:** done
 - **beschreibung:** |
     Grundlage für das Kampfsystem: Truppen, die der Spieler rekrutieren und
     positionieren kann. Einheitenwerte aus Task 14 (COD-Parser).

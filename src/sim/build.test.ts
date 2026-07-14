@@ -5,12 +5,12 @@ import { tick } from './tick'
 import type { GameState } from './state'
 import type { Command } from './commands'
 
-/** Creates a clean test state with enough resources to build anything */
 function makeState(overrides: Partial<GameState> = {}): GameState {
   return {
     tick: 0,
     resources: { wood: 200, stone: 100, food: 100, gold: 50 },
     buildings: [],
+    units: [],
     ...overrides,
   }
 }

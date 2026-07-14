@@ -14,5 +14,11 @@
     "wall":         { "sheet": "stadtfld", "index": 1310 },
     "stone_wall":   { "sheet": "stadtfld", "index": 1340 },
     "barracks":     { "sheet": "stadtfld", "index": 1400 }
+  },
+  "units": {
+    "swordsman":  { "sheet": "soldat", "index": 72 },
+    "cavalry":    { "sheet": "soldat", "index": 352 },
+    "musketeer":  { "sheet": "soldat", "index": 632 },
+    "cannoneer":  { "sheet": "soldat", "index": 912 }
   }
 }

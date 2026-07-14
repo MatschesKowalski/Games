@@ -10,6 +10,7 @@ function makeState(): GameState {
     buildings: [
       { id: 'b1', buildingId: 'townhall', col: 5, row: 3 },
     ],
+    units: [],
   }
 }
 

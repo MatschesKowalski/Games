@@ -19,6 +19,7 @@ function makeState(
     tick: 0,
     resources: { ...resources, ...overrides },
     buildings,
+    units: [],
   }
 }
 

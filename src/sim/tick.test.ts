@@ -11,6 +11,7 @@ function makeState(tickNum = 0): GameState {
     tick: tickNum,
     resources: { wood: 10, stone: 5 },
     buildings: [],
+    units: [],
   }
 }
 
@@ -53,6 +54,7 @@ describe('tick', () => {
         { id: 'lumbermill-0-0', buildingId: 'lumbermill', col: 0, row: 0 },
         { id: 'quarry-1-0', buildingId: 'quarry', col: 1, row: 0 },
       ],
+      units: [],
     }
     const commands: Command[] = [{ type: 'noop' }, { type: 'noop' }]
     const next = tick(state, commands)

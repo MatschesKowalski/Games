@@ -1,11 +1,10 @@
 import type { GameState } from './state'
 import { getBuildingDef } from '../content/buildings'
+import { getUnitDef } from '../content/units'
 
-/**
- * Command — describes a player or game action for one tick.
- */
 export type BuildCommand = { type: 'build'; buildingId: string; col: number; row: number }
-export type Command = { type: 'noop' } | BuildCommand
+export type RecruitCommand = { type: 'recruit'; unitTypeId: string; col: number; row: number }
+export type Command = { type: 'noop' } | BuildCommand | RecruitCommand
 
 /**
  * Pure function: applies a single command and returns a new GameState.
@@ -78,8 +77,55 @@ export function applyCommand(state: GameState, command: Command): GameState {
       }
     }
 
+    case 'recruit': {
+      const def = getUnitDef(command.unitTypeId)
+      if (!def) return state
+
+      // Kaserne muss vorhanden sein
+      const hasBarracks = state.buildings.some(b => b.buildingId === 'barracks')
+      if (!hasBarracks) return state
+
+      // Ziel-Feld darf nicht von Gebäude oder Einheit belegt sein
+      const cellOccupied =
+        state.buildings.some(b => {
+          const bDef = getBuildingDef(b.buildingId)
+          const bCols = bDef?.size.cols ?? 1
+          const bRows = bDef?.size.rows ?? 1
+          for (let dc = 0; dc < bCols; dc++) {
+            for (let dr = 0; dr < bRows; dr++) {
+              if (b.col + dc === command.col && b.row + dr === command.row) return true
+            }
+          }
+          return false
+        }) ||
+        state.units.some(u => u.col === command.col && u.row === command.row)
+      if (cellOccupied) return state
+
+      // Ressourcenprüfung
+      for (const [resourceId, required] of Object.entries(def.cost)) {
+        if ((state.resources[resourceId] ?? 0) < required) return state
+      }
+
+      // Kosten abziehen
+      const nextResources = { ...state.resources }
+      for (const [resourceId, amount] of Object.entries(def.cost)) {
+        nextResources[resourceId] = (nextResources[resourceId] ?? 0) - amount
+      }
+
+      const newUnit = {
+        id: `unit-${command.unitTypeId}-${command.col}-${command.row}-${state.tick}`,
+        typeId: command.unitTypeId,
+        col: command.col,
+        row: command.row,
+        hp: def.hp,
+        maxHp: def.hp,
+        side: 'player' as const,
+      }
+
+      return { ...state, resources: nextResources, units: [...state.units, newUnit] }
+    }
+
     default: {
-      // Exhaustiveness guard — TypeScript will catch unhandled command types here.
       const unhandled: never = command
       throw new Error(`Unbekannter Befehlstyp: ${JSON.stringify(unhandled)}`)
     }

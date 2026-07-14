@@ -1,8 +1,8 @@
-import { Container, Graphics, Sprite } from 'pixi.js'
+import { Container, Graphics, Sprite, Text, TextStyle, Texture } from 'pixi.js'
 import { gridToScreen, TILE_WIDTH, TILE_HEIGHT } from './iso'
 import { createBuildingSprite } from './placeholder-sprites'
 import { getSprite, isAtlasReady, SPRITE_SCALE } from './sprite-atlas'
-import type { Building } from '../sim/state'
+import type { Building, Unit } from '../sim/state'
 import spriteMapping from '../content/sprite-mapping.json'
 
 type SpriteRef = { sheet: string; index: number }
@@ -25,10 +25,51 @@ function drawDiamond(g: Graphics, col: number, row: number, fillColor: number): 
     .stroke({ color: OUTLINE_COLOR, width: 1 })
 }
 
+const UNIT_LABEL_STYLE = new TextStyle({ fontSize: 9, fill: 0xffffff, fontFamily: 'monospace', fontWeight: 'bold' })
+const UNIT_COLOR_PLAYER = 0x3399ff
+const UNIT_COLOR_ENEMY = 0xff4444
+const UNIT_RADIUS = TILE_WIDTH / 5
+
+const UNITS_MAP = spriteMapping.units as Record<string, { sheet: string; index: number }>
+
+function createUnitSprite(unit: Unit): Container {
+  const { x, y } = gridToScreen(unit.col, unit.row)
+  const c = new Container()
+
+  const ref = UNITS_MAP[unit.typeId]
+  if (ref != null && isAtlasReady(ref.sheet)) {
+    const tex = getSprite(ref.sheet, ref.index)
+    if (tex !== Texture.EMPTY) {
+      const sprite = new Sprite(tex)
+      sprite.scale.set(SPRITE_SCALE)
+      sprite.anchor.set(0.5, 1.0)
+      sprite.x = x
+      sprite.y = y + TILE_HEIGHT / 2
+      // Blaue/rote Tönung je Seite
+      sprite.tint = unit.side === 'player' ? 0x88aaff : 0xff8888
+      c.addChild(sprite)
+      return c
+    }
+  }
+
+  // Platzhalter: farbiger Kreis mit Buchstabe
+  const g = new Graphics()
+  const color = unit.side === 'player' ? UNIT_COLOR_PLAYER : UNIT_COLOR_ENEMY
+  g.circle(x, y, UNIT_RADIUS).fill({ color, alpha: 0.9 }).stroke({ color: 0xffffff, width: 1 })
+  const label = new Text({ text: unit.typeId[0].toUpperCase(), style: UNIT_LABEL_STYLE })
+  label.anchor.set(0.5)
+  label.x = x
+  label.y = y
+  c.addChild(g)
+  c.addChild(label)
+  return c
+}
+
 export class MapView {
   readonly container: Container
   private readonly tileLayer: Container
   private readonly buildingLayer: Container
+  private readonly unitLayer: Container
   private readonly hoverGraphics: Graphics
   private readonly cols: number
   private readonly rows: number
@@ -41,10 +82,12 @@ export class MapView {
     this.container = new Container()
     this.tileLayer = new Container()
     this.buildingLayer = new Container()
+    this.unitLayer = new Container()
     this.hoverGraphics = new Graphics()
 
     this.container.addChild(this.tileLayer)
     this.container.addChild(this.buildingLayer)
+    this.container.addChild(this.unitLayer)
     this.container.addChild(this.hoverGraphics)
 
     this.buildBaseMap()
@@ -101,6 +144,13 @@ export class MapView {
     }
   }
 
+  updateUnits(units: Unit[]): void {
+    this.unitLayer.removeChildren()
+    for (const unit of units) {
+      this.unitLayer.addChild(createUnitSprite(unit))
+    }
+  }
+
   setHoveredTile(col: number, row: number): void {
     if (col === this.hoveredCol && row === this.hoveredRow) return
     this.hoveredCol = col
@@ -119,6 +169,7 @@ export class MapView {
   destroy(): void {
     this.tileLayer.destroy({ children: true })
     this.buildingLayer.destroy({ children: true })
+    this.unitLayer.destroy({ children: true })
     this.hoverGraphics.destroy()
     this.container.destroy()
   }

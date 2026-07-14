@@ -85,6 +85,7 @@ describe('MVP-Loop Integration', () => {
       tick: 0,
       resources: { wood: 0, stone: 0, food: 0, gold: 0 },
       buildings: [],
+      units: [],
     }
     // Sägewerk kostet wood:5, gold:15 — muss fehlschlagen
     const nextState = tick(state, [{ type: 'build', buildingId: 'lumbermill', col: 0, row: 0 }])

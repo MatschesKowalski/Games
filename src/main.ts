@@ -32,23 +32,18 @@ async function main() {
   let gameState = createInitialState()
   gameState = applyCommand(gameState, { type: 'build', buildingId: 'townhall', col: 5, row: 5 })
 
-  // selectedBuildingId wird vom BuildMenu über den Callback gesetzt.
-  // Der Wert wird im pointerup-Handler gelesen (Closure über die Variable).
   let selectedBuildingId: string | null = null
+  let selectedUnitTypeId: string | null = null
 
-  // Letzter bekannter Tages-Abschnitt für Ambient-Sound-Wechsel.
-  // null = noch kein Tick gelaufen, damit der erste Tick den Ambient startet.
   let prevPhase: TimeOfDay | null = null
 
-  // UI-Komponenten: DOM-Ebene über dem PixiJS-Canvas
   const hud = new Hud()
   const timeDisplay = new TimeDisplay()
-  // BuildMenu braucht keine lokale Referenz nach der Konstruktion —
-  // der Callback schreibt in selectedBuildingId, die DOM-Elemente bleiben
-  // im document.body und halten die Event-Listener am Leben.
-  new BuildMenu((id) => {
-    selectedBuildingId = id
-  })
+
+  const buildMenu = new BuildMenu(
+    (id) => { selectedBuildingId = id },
+    (unitTypeId) => { selectedUnitTypeId = unitTypeId },
+  )
 
   const mapView = new MapView(MAP_SIZE, MAP_SIZE)
   const overlay = new DayNightOverlay(window.innerWidth, window.innerHeight)
@@ -58,26 +53,28 @@ async function main() {
     (loadedState) => {
       gameState = loadedState
       mapView.updateBuildings(gameState.buildings)
+      mapView.updateUnits(gameState.units)
       const timeInfo = getTimeOfDay(gameState.tick)
       overlay.update(timeInfo)
       hud.update(gameState.resources)
       timeDisplay.update(timeInfo)
+      buildMenu.setBarracksAvailable(gameState.buildings.some(b => b.buildingId === 'barracks'))
     },
   )
 
   app.stage.addChild(mapView.container)
   app.stage.addChild(overlay.container)
 
-  // Initialer Render (Platzhalter, bis Atlas geladen)
   mapView.updateBuildings(gameState.buildings)
+  mapView.updateUnits(gameState.units)
   overlay.update(getTimeOfDay(gameState.tick))
   hud.update(gameState.resources)
   timeDisplay.update(getTimeOfDay(gameState.tick))
 
-  // Anno 1602 Sprites asynchron laden; bei Erfolg auf echte Kacheln umschalten
-  initSpriteAtlas(['stadtfld']).then(() => {
+  initSpriteAtlas(['stadtfld', 'soldat']).then(() => {
     mapView.enableRealSprites()
     mapView.updateBuildings(gameState.buildings)
+    mapView.updateUnits(gameState.units)
   }).catch((err: unknown) => {
     console.warn('Sprite-Atlas konnte nicht geladen werden, Platzhalter bleiben aktiv:', err)
   })
@@ -121,17 +118,27 @@ async function main() {
   })
 
   app.canvas.addEventListener('pointerup', (e: PointerEvent) => {
-    if (hasDragged || !selectedBuildingId) return
+    if (hasDragged) return
     const worldX = (e.clientX - camera.x) / camera.zoom
     const worldY = (e.clientY - camera.y) / camera.zoom
     const { col, row } = screenToGrid(worldX, worldY)
-    if (col >= 0 && col < MAP_SIZE && row >= 0 && row < MAP_SIZE) {
+    if (col < 0 || col >= MAP_SIZE || row < 0 || row >= MAP_SIZE) return
+
+    if (selectedBuildingId) {
       const prevCount = gameState.buildings.length
       gameState = applyCommand(gameState, { type: 'build', buildingId: selectedBuildingId, col, row })
       if (gameState.buildings.length > prevCount) {
         soundManager.playSound('building.built')
+        buildMenu.setBarracksAvailable(gameState.buildings.some(b => b.buildingId === 'barracks'))
       }
       mapView.updateBuildings(gameState.buildings)
+    } else if (selectedUnitTypeId) {
+      const prevCount = gameState.units.length
+      gameState = applyCommand(gameState, { type: 'recruit', unitTypeId: selectedUnitTypeId, col, row })
+      if (gameState.units.length > prevCount) {
+        soundManager.playSound('building.built')
+      }
+      mapView.updateUnits(gameState.units)
     }
   })
 

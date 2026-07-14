@@ -7,16 +7,23 @@ export type Building = {
   row: number
 }
 
+export type Unit = {
+  id: string
+  typeId: string
+  col: number
+  row: number
+  hp: number
+  maxHp: number
+  side: 'player' | 'enemy'
+}
+
 export type GameState = {
   tick: number
   resources: Record<string, number>
   buildings: Building[]
+  units: Unit[]
 }
 
-/**
- * Creates a fresh GameState for a new game.
- * Resource start values come from src/content/resources.ts.
- */
 export function createInitialState(): GameState {
-  return { tick: 0, resources: createInitialResources(), buildings: [] }
+  return { tick: 0, resources: createInitialResources(), buildings: [], units: [] }
 }
